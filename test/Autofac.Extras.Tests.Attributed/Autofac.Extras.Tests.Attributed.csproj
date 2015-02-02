@@ -75,7 +75,7 @@
     <Compile Include="WithAttributeFilterTestFixture.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\Autofac.Extras.Attributed\Autofac.Extras.Attributed.csproj">
+    <ProjectReference Include="..\..\src\Autofac.Extras.Attributed\Autofac.Extras.Attributed.csproj">
       <Project>{d8715248-94c1-4556-8a81-7e338d68fe96}</Project>
       <Name>Autofac.Extras.Attributed</Name>
     </ProjectReference>
