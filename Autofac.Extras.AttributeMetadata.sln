@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autofac.Extras.AttributeMetadata", "src\Autofac.Extras.AttributeMetadata\Autofac.Extras.AttributeMetadata.csproj", "{D8715248-94C1-4556-8A81-7E338D68FE96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autofac.Extras.AttributeMetadata.Test", "test\Autofac.Extras.AttributeMetadata.Test\Autofac.Extras.AttributeMetadata.Test.csproj", "{03A16C13-A683-4392-96B5-2EE786CEDA88}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D8715248-94C1-4556-8A81-7E338D68FE96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8715248-94C1-4556-8A81-7E338D68FE96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8715248-94C1-4556-8A81-7E338D68FE96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8715248-94C1-4556-8A81-7E338D68FE96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03A16C13-A683-4392-96B5-2EE786CEDA88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03A16C13-A683-4392-96B5-2EE786CEDA88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03A16C13-A683-4392-96B5-2EE786CEDA88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03A16C13-A683-4392-96B5-2EE786CEDA88}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
