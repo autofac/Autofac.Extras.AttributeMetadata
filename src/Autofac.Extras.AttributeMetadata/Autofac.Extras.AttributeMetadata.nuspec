@@ -13,8 +13,8 @@
     <projectUrl>http://autofac.org</projectUrl>
     <iconUrl>http://code.google.com/p/autofac/logo</iconUrl>
     <dependencies>
-      <dependency id="Autofac" version="[3.4.0,4.0.0)" />
-      <dependency id="Autofac.Mef" version="[3.0.3,4.0.0)" />
+      <dependency id="Autofac" version="[3.4.0,5.0.0)" />
+      <dependency id="Autofac.Mef" version="[4.0.0-CI-221,5.0.0)" />
     </dependencies>
   </metadata>
 </package>
