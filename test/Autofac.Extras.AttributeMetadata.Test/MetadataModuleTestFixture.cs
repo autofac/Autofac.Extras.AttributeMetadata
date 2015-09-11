@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
-using NUnit.Framework;
+using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test
 {
-    [TestFixture]
     public class MetadataModuleTestFixture
     {
-
-        [Test]
+        [Fact]
         public void metadata_module_scenario_validate_registration_content()
         {
             // arrange
@@ -22,15 +20,15 @@ namespace Autofac.Extras.AttributeMetadata.Test
             var items = builder.Build().Resolve<IEnumerable<Lazy<IMetadataModuleScenario, IMetadataModuleScenarioMetadata>>>();
 
             // assert
-            Assert.That(items.Where(p => p.Metadata.Name == "sid").Count(), Is.EqualTo(1));
-            Assert.That(items.Where(p => p.Metadata.Name == "nancy").Count(), Is.EqualTo(1));
-            Assert.That(items.Where(p => p.Metadata.Name == "the-cats").Count(), Is.EqualTo(1));
+            Assert.Equal(1, items.Where(p => p.Metadata.Name == "sid").Count());
+            Assert.Equal(1, items.Where(p => p.Metadata.Name == "nancy").Count());
+            Assert.Equal(1, items.Where(p => p.Metadata.Name == "the-cats").Count());
 
             // the following was not registered
-            Assert.That(items.Where(p => p.Metadata.Name == "the-dogs").Count(), Is.EqualTo(0));
+            Assert.Equal(0, items.Where(p => p.Metadata.Name == "the-dogs").Count());
         }
 
-        [Test]
+        [Fact]
         public void metadata_module_scenario_using_typeof_registration()
         {
             // arrange
@@ -42,13 +40,12 @@ namespace Autofac.Extras.AttributeMetadata.Test
             var items = builder.Build().Resolve<IEnumerable<Lazy<IMetadataModuleScenario, IMetadataModuleScenarioMetadata>>>();
 
             // assert
-            Assert.That(items.Where(p => p.Metadata.Name == "sid").Count(), Is.EqualTo(1));
-            Assert.That(items.Where(p => p.Metadata.Name == "nancy").Count(), Is.EqualTo(1));
-            Assert.That(items.Where(p => p.Metadata.Name == "the-cats").Count(), Is.EqualTo(1));
+            Assert.Equal(1, items.Where(p => p.Metadata.Name == "sid").Count());
+            Assert.Equal(1, items.Where(p => p.Metadata.Name == "nancy").Count());
+            Assert.Equal(1, items.Where(p => p.Metadata.Name == "the-cats").Count());
 
             // the following was not registered
-            Assert.That(items.Where(p => p.Metadata.Name == "the-dogs").Count(), Is.EqualTo(0));
-
+            Assert.Equal(0, items.Where(p => p.Metadata.Name == "the-dogs").Count());
         }
     }
 }

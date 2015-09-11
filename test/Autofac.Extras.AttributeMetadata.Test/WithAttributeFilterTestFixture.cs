@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using Autofac.Extras.AttributeMetadata;
 using Autofac.Features.Metadata;
 using Autofac.Features.OwnedInstances;
-using NUnit.Framework;
+using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test
 {
-    [TestFixture]
     public class WithAttributeFilterTestFixture
     {
-        [Test]
+        [Fact]
         public void multiple_filter_types_can_be_used_on_one_component()
         {
             var builder = new ContainerBuilder();
@@ -27,14 +25,14 @@ namespace Autofac.Extras.AttributeMetadata.Test
             var container = builder.Build();
 
             var allAdapters = container.Resolve<IEnumerable<IAdapter>>().Count();
-            Assert.AreEqual(3, allAdapters, "The wrong number of adapters were registered.");
+            Assert.Equal(3, allAdapters);
 
             var explorer = container.Resolve<SolutionExplorerMixed>();
-            Assert.AreEqual(2, explorer.Adapters.Count, "The wrong number of adapters were actually filtered into the consuming component.");
-            Assert.IsInstanceOf<ConsoleLogger>(explorer.Logger, "The logger was not the expected type.");
+            Assert.Equal(2, explorer.Adapters.Count);
+            Assert.IsType<ConsoleLogger>(explorer.Logger);
         }
 
-        [Test]
+        [Fact]
         public void verify_key_filter_is_applied_on_constructor_dependency_single()
         {
             var builder = new ContainerBuilder();
@@ -45,10 +43,10 @@ namespace Autofac.Extras.AttributeMetadata.Test
             var container = builder.Build();
             var explorer = container.Resolve<SolutionExplorerKeyed>();
 
-            Assert.IsInstanceOf<ConsoleLogger>(explorer.Logger, "The logger was not the expected type.");
+            Assert.IsType<ConsoleLogger>(explorer.Logger);
         }
 
-        [Test]
+        [Fact]
         public void verify_key_filter_is_applied_on_constructor_dependency_multiple()
         {
             var builder = new ContainerBuilder();
@@ -61,14 +59,14 @@ namespace Autofac.Extras.AttributeMetadata.Test
 
             var otherAdapters = container.ResolveKeyed<IEnumerable<IAdapter>>("Other").Count();
 
-            Assert.AreEqual(1, otherAdapters, "The wrong number of adapters were registered.");
+            Assert.Equal(1, otherAdapters);
 
             var explorer = container.Resolve<SolutionExplorerKeyed>();
 
-            Assert.AreEqual(2, explorer.Adapters.Count, "The wrong number of adapters were actually filtered into the consuming component.");
+            Assert.Equal(2, explorer.Adapters.Count);
         }
 
-        [Test]
+        [Fact]
         public void verify_key_filter_is_applied_on_constructor_dependency_single_with_lazy()
         {
             var builder = new ContainerBuilder();
@@ -79,10 +77,10 @@ namespace Autofac.Extras.AttributeMetadata.Test
             var container = builder.Build();
             var resolved = container.Resolve<ManagerWithLazySingle>();
 
-            Assert.IsInstanceOf<ConsoleLogger>(resolved.Logger.Value, "The logger was not the expected type.");
+            Assert.IsType<ConsoleLogger>(resolved.Logger.Value);
         }
 
-        [Test]
+        [Fact]
         public void verify_key_filter_is_applied_on_constructor_dependency_single_with_meta()
         {
             var builder = new ContainerBuilder();
@@ -93,10 +91,10 @@ namespace Autofac.Extras.AttributeMetadata.Test
             var container = builder.Build();
             var resolved = container.Resolve<ManagerWithMetaSingle>();
 
-            Assert.IsInstanceOf<ConsoleLogger>(resolved.Logger.Value, "The logger was not the expected type.");
+            Assert.IsType<ConsoleLogger>(resolved.Logger.Value);
         }
 
-        [Test]
+        [Fact]
         public void verify_key_filter_is_applied_on_constructor_dependency_single_with_owned()
         {
             var builder = new ContainerBuilder();
@@ -107,10 +105,10 @@ namespace Autofac.Extras.AttributeMetadata.Test
             var container = builder.Build();
             var resolved = container.Resolve<ManagerWithOwnedSingle>();
 
-            Assert.IsInstanceOf<ConsoleLogger>(resolved.Logger.Value, "The logger was not the expected type.");
+            Assert.IsType<ConsoleLogger>(resolved.Logger.Value);
         }
 
-        [Test]
+        [Fact]
         public void verify_key_filter_is_applied_on_constructor_dependency_many_with_lazy()
         {
             var builder = new ContainerBuilder();
@@ -122,10 +120,10 @@ namespace Autofac.Extras.AttributeMetadata.Test
             var container = builder.Build();
             var resolved = container.Resolve<ManagerWithLazyMany>();
 
-            Assert.AreEqual(2, resolved.Loggers.Count());
+            Assert.Equal(2, resolved.Loggers.Count());
         }
 
-        [Test]
+        [Fact]
         public void verify_key_filter_is_applied_on_constructor_dependency_many_with_meta()
         {
             var builder = new ContainerBuilder();
@@ -137,10 +135,10 @@ namespace Autofac.Extras.AttributeMetadata.Test
             var container = builder.Build();
             var resolved = container.Resolve<ManagerWithMetaMany>();
 
-            Assert.AreEqual(2, resolved.Loggers.Count());
+            Assert.Equal(2, resolved.Loggers.Count());
         }
 
-        [Test]
+        [Fact]
         public void verify_key_filter_is_applied_on_constructor_dependency_many_with_owned()
         {
             var builder = new ContainerBuilder();
@@ -152,10 +150,10 @@ namespace Autofac.Extras.AttributeMetadata.Test
             var container = builder.Build();
             var resolved = container.Resolve<ManagerWithOwnedMany>();
 
-            Assert.AreEqual(2, resolved.Loggers.Count());
+            Assert.Equal(2, resolved.Loggers.Count());
         }
 
-        [Test]
+        [Fact]
         public void verify_metadata_filter_is_applied_on_constructor_dependency_single()
         {
             var builder = new ContainerBuilder();
@@ -167,10 +165,10 @@ namespace Autofac.Extras.AttributeMetadata.Test
             var container = builder.Build();
             var explorer = container.Resolve<SolutionExplorerMetadata>();
 
-            Assert.IsInstanceOf<ConsoleLogger>(explorer.Logger, "The logger was not the expected type.");
+            Assert.IsType<ConsoleLogger>(explorer.Logger);
         }
 
-        [Test]
+        [Fact]
         public void verify_metadata_filter_is_applied_on_constructor_dependency_multiple()
         {
             var builder = new ContainerBuilder();
@@ -184,14 +182,14 @@ namespace Autofac.Extras.AttributeMetadata.Test
 
             var allAdapters = container.Resolve<IEnumerable<IAdapter>>().Count();
 
-            Assert.AreEqual(3, allAdapters, "The wrong number of adapters were registered.");
+            Assert.Equal(3, allAdapters);
 
             var explorer = container.Resolve<SolutionExplorerMetadata>();
 
-            Assert.AreEqual(2, explorer.Adapters.Count, "The wrong number of adapters were actually filtered into the consuming component.");
+            Assert.Equal(2, explorer.Adapters.Count);
         }
 
-        [Test]
+        [Fact]
         public void verify_components_that_are_not_used_do_not_get_activated()
         {
             int adapterActivationCount = 0;
@@ -204,24 +202,43 @@ namespace Autofac.Extras.AttributeMetadata.Test
 
             var container = builder.Build();
             container.Resolve<SolutionExplorerMetadata>();
-            Assert.AreEqual(2, adapterActivationCount, "Only the components actually used should be activated.");
+            Assert.Equal(2, adapterActivationCount);
         }
 
-        public interface ILogger { }
-        public class ConsoleLogger : ILogger { }
-        public class FileLogger : ILogger { }
-        public class SqlLogger : ILogger { }
+        public interface ILogger
+        {
+        }
 
-        public interface IAdapter { }
+        public class ConsoleLogger : ILogger
+        {
+        }
+
+        public class FileLogger : ILogger
+        {
+        }
+
+        public class SqlLogger : ILogger
+        {
+        }
+
+        public interface IAdapter
+        {
+        }
 
         [Adapter("Solution")]
-        public class MsBuildAdapter : IAdapter { }
+        public class MsBuildAdapter : IAdapter
+        {
+        }
 
         [Adapter("Solution")]
-        public class DteAdapter : IAdapter { }
+        public class DteAdapter : IAdapter
+        {
+        }
 
         [Adapter("Other")]
-        public class ToolWindowAdapter : IAdapter { }
+        public class ToolWindowAdapter : IAdapter
+        {
+        }
 
         public class ManagerWithLazySingle
         {
@@ -286,42 +303,45 @@ namespace Autofac.Extras.AttributeMetadata.Test
         public class SolutionExplorerKeyed
         {
             public SolutionExplorerKeyed(
-                [WithKey("Solution")] IEnumerable<IAdapter> adapters,
-                [WithKey("Solution")] ILogger logger)
+            [WithKey("Solution")] IEnumerable<IAdapter> adapters,
+            [WithKey("Solution")] ILogger logger)
             {
                 this.Adapters = adapters.ToList();
                 this.Logger = logger;
             }
 
             public List<IAdapter> Adapters { get; set; }
+
             public ILogger Logger { get; set; }
         }
 
         public class SolutionExplorerMetadata
         {
             public SolutionExplorerMetadata(
-                [WithMetadata("Target", "Solution")] IEnumerable<IAdapter> adapters,
-                [WithMetadata("LoggerName", "Solution")] ILogger logger)
+            [WithMetadata("Target", "Solution")] IEnumerable<IAdapter> adapters,
+            [WithMetadata("LoggerName", "Solution")] ILogger logger)
             {
                 this.Adapters = adapters.ToList();
                 this.Logger = logger;
             }
 
             public List<IAdapter> Adapters { get; set; }
+
             public ILogger Logger { get; set; }
         }
 
         public class SolutionExplorerMixed
         {
             public SolutionExplorerMixed(
-                [WithMetadata("Target", "Solution")] IEnumerable<IAdapter> adapters,
-                [WithKey("Solution")] ILogger logger)
+            [WithMetadata("Target", "Solution")] IEnumerable<IAdapter> adapters,
+            [WithKey("Solution")] ILogger logger)
             {
                 this.Adapters = adapters.ToList();
                 this.Logger = logger;
             }
 
             public List<IAdapter> Adapters { get; set; }
+
             public ILogger Logger { get; set; }
         }
 
@@ -342,6 +362,8 @@ namespace Autofac.Extras.AttributeMetadata.Test
         }
 
         [MetadataAttribute]
-        public class EmptyMetadataAttribute : Attribute { }
+        public class EmptyMetadataAttribute : Attribute
+        {
+        }
     }
 }

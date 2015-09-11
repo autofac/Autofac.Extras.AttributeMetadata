@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Autofac;
-using Autofac.Extras.AttributeMetadata;
 using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
-using NUnit.Framework;
 using Autofac.Integration.Mef;
+using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test
 {
-    [TestFixture]
     public class CombinationalWeakTypedAttributeScenarioTestFixture
     {
         /// <summary>
         /// This is a test that demonstrates the ability to combine multiple weak-typed attributes to
         /// constitute a single strongly-typed metadata instance resolved from the container
         /// </summary>
-        [Test]
+        [Fact]
         public void validate_wireup_of_generic_attributes_to_strongly_typed_metadata_on_resolve()
         {
             // arrange
@@ -32,9 +30,9 @@ namespace Autofac.Extras.AttributeMetadata.Test
             var items = builder.Build().Resolve<IEnumerable<Lazy<ICombinationalWeakTypedScenario, ICombinationalWeakTypedScenarioMetadata>>>();
 
             // assert
-            Assert.That(items.Count(), Is.EqualTo(1));
-            Assert.That(items.Where(p => p.Metadata.Name == "Hello").Count(), Is.EqualTo(1));
-            Assert.That(items.Where(p => p.Metadata.Age == 42).Count(), Is.EqualTo(1));
+            Assert.Equal(1, items.Count());
+            Assert.Equal(1, items.Where(p => p.Metadata.Name == "Hello").Count());
+            Assert.Equal(1, items.Where(p => p.Metadata.Age == 42).Count());
         }
     }
 }

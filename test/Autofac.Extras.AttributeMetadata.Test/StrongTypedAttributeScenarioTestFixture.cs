@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Autofac.Extras.AttributeMetadata;
 using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
 using Autofac.Integration.Mef;
-using NUnit.Framework;
+using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test
 {
-    [TestFixture]
     public class StrongTypedAttributeScenarioTestFixture
     {
-        [Test]
+        [Fact]
         public void validate_wireup_of_typed_attributes_to_strongly_typed_metadata_on_resolve()
         {
             // arrange
@@ -27,14 +25,12 @@ namespace Autofac.Extras.AttributeMetadata.Test
             var items = builder.Build().Resolve<IEnumerable<Lazy<IStrongTypedScenario, IStrongTypedScenarioMetadata>>>();
 
             // assert
-            Assert.That(items.Count(), Is.EqualTo(2));
-            Assert.That(items.Where(p => p.Metadata.Name == "Hello" && p.Metadata.Age == 42).Count(), Is.EqualTo(1));
-            Assert.That(items.Where(p => p.Metadata.Name == "Goodbye" && p.Metadata.Age == 24).Count(), Is.EqualTo(1));
+            Assert.Equal(2, items.Count());
+            Assert.Equal(1, items.Where(p => p.Metadata.Name == "Hello" && p.Metadata.Age == 42).Count());
+            Assert.Equal(1, items.Where(p => p.Metadata.Name == "Goodbye" && p.Metadata.Age == 24).Count());
 
-            Assert.That(items.Where(p => p.Metadata.Name == "Hello" && p.Metadata.Age == 42).First().Value, Is.TypeOf<StrongTypedScenario>());
-            Assert.That(items.Where(p => p.Metadata.Name == "Goodbye" && p.Metadata.Age == 24).First().Value, Is.TypeOf<AlternateStrongTypedScenario>());
-
+            Assert.IsType<StrongTypedScenario>(items.Where(p => p.Metadata.Name == "Hello" && p.Metadata.Age == 42).First().Value);
+            Assert.IsType<AlternateStrongTypedScenario>(items.Where(p => p.Metadata.Name == "Goodbye" && p.Metadata.Age == 24).First().Value);
         }
-
     }
 }

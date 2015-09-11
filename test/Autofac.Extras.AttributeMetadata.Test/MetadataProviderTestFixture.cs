@@ -1,18 +1,13 @@
-﻿using Autofac.Extras.AttributeMetadata;
+﻿using System.Linq;
 using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
 using Autofac.Features.Metadata;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test
 {
-    [TestFixture]
     public class MetadataProviderTestFixture
     {
-        [Test]
+        [Fact]
         public void load_provided_into_weak_metadata()
         {
             var builder = new ContainerBuilder();
@@ -23,14 +18,14 @@ namespace Autofac.Extras.AttributeMetadata.Test
             var container = builder.Build();
             var withMetadata = container.Resolve<Meta<IMetadataProviderScenario>>();
 
-            Assert.That(withMetadata, Is.Not.Null);
+            Assert.NotNull(withMetadata);
             var value1 = withMetadata.Metadata.Where(kv => kv.Key == "Key1").FirstOrDefault();
             var value2 = withMetadata.Metadata.Where(kv => kv.Key == "Key2").FirstOrDefault();
 
-            Assert.That(value1, Is.Not.Null);
-            Assert.That(value2, Is.Not.Null);
-            Assert.That(value1.Value, Is.EqualTo("Value1"));
-            Assert.That(value2.Value, Is.EqualTo("Value2"));
+            Assert.NotNull(value1);
+            Assert.NotNull(value2);
+            Assert.Equal("Value1", value1.Value);
+            Assert.Equal("Value2", value2.Value);
         }
 
         public void load_provided_into_strong_metadata()
@@ -43,10 +38,10 @@ namespace Autofac.Extras.AttributeMetadata.Test
             var container = builder.Build();
             var withMetadata = container.Resolve<Meta<IMetadataProviderScenario, ProvidedMetadata>>();
 
-            Assert.That(withMetadata, Is.Not.Null);
-            Assert.That(withMetadata.Metadata, Is.Not.Null);
-            Assert.That(withMetadata.Metadata.Key1, Is.EqualTo("Value1"));
-            Assert.That(withMetadata.Metadata.Key2, Is.EqualTo("Value2"));
+            Assert.NotNull(withMetadata);
+            Assert.NotNull(withMetadata.Metadata);
+            Assert.Equal("Value1", withMetadata.Metadata.Key1);
+            Assert.Equal("Value2", withMetadata.Metadata.Key2);
         }
     }
 }

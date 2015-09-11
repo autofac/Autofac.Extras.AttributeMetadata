@@ -1,57 +1,54 @@
 ﻿using System.Linq;
-using Autofac.Extras.AttributeMetadata;
 using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
-using NUnit.Framework;
+using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test
 {
-    [TestFixture]
     public class MetadataHelperTestFixture
     {
-        [Test]
+        [Fact]
         public void scan_multiple_attributes_into_one_enumerable_set()
         {
             var metadata = MetadataHelper.GetMetadata(typeof (CombinationalWeakTypedScenario));
 
-            Assert.That(metadata.Count(), Is.EqualTo(2));
-            Assert.That(metadata.Where(p => p.Key == "Name").FirstOrDefault().Value, Is.EqualTo("Hello"));
-            Assert.That(metadata.Where(p => p.Key == "Age").FirstOrDefault().Value, Is.EqualTo(42));
+            Assert.Equal(2, metadata.Count());
+            Assert.Equal("Hello", metadata.Where(p => p.Key == "Name").FirstOrDefault().Value);
+            Assert.Equal(42, metadata.Where(p => p.Key == "Age").FirstOrDefault().Value);
         }
 
-        [Test]
+        [Fact]
         public void scan_single_attribute_into_an_enumerable_set()
         {
             var metadata = MetadataHelper.GetMetadata(typeof (WeakTypedScenario));
 
-            Assert.That(metadata.Count(), Is.EqualTo(1));
-            Assert.That(metadata.Where(p => p.Key == "Name").FirstOrDefault().Value, Is.EqualTo("Hello"));
+            Assert.Equal(1, metadata.Count());
+            Assert.Equal("Hello", metadata.Where(p => p.Key == "Name").FirstOrDefault().Value);
         }
 
-        [Test]
+        [Fact]
         public void scan_strongly_typed_attribute_into_an_enumerable_set()
         {
             var metadata = MetadataHelper.GetMetadata<IStrongTypedScenarioMetadata>(typeof (StrongTypedScenario));
 
-            Assert.That(metadata.Count(), Is.EqualTo(2));
-            Assert.That(metadata.Where(p => p.Key == "Name").FirstOrDefault().Value, Is.EqualTo("Hello"));
-            Assert.That(metadata.Where(p => p.Key == "Age").FirstOrDefault().Value, Is.EqualTo(42));
+            Assert.Equal(2, metadata.Count());
+            Assert.Equal("Hello", metadata.Where(p => p.Key == "Name").FirstOrDefault().Value);
+            Assert.Equal(42, metadata.Where(p => p.Key == "Age").FirstOrDefault().Value);
         }
 
-        [Test]
+        [Fact]
         public void verify_that_unfound_strong_typed_attribute_results_in_empty_property_set()
         {
             var metadata = MetadataHelper.GetMetadata<IMetadataModuleScenarioMetadata>(typeof (MetadataModuleScenario));
 
-            Assert.That(metadata.Count(), Is.EqualTo(0));
+            Assert.Equal(0, metadata.Count());
         }
 
-        [Test]
+        [Fact]
         public void verify_that_unfound_weakly_typed_attribute_results_in_empty_property_set()
         {
             var metadata = MetadataHelper.GetMetadata(typeof(MetadataModuleScenario));
 
-            Assert.That(metadata.Count(), Is.EqualTo(0));
+            Assert.Equal(0, metadata.Count());
         }
-
     }
 }

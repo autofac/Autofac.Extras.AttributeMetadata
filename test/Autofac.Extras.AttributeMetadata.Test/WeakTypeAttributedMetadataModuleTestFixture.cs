@@ -1,14 +1,12 @@
 ﻿using System;
-using Autofac;
 using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
-using NUnit.Framework;
+using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test
 {
-    [TestFixture]
     public class WeakTypeAttributedMetadataModuleTestFixture
     {
-        [Test]
+        [Fact]
         public void verify_automatic_scanning_with_the_attributed_metadata_module()
         {
             var builder = new ContainerBuilder();
@@ -18,10 +16,10 @@ namespace Autofac.Extras.AttributeMetadata.Test
 
             var weakTyped = container.Resolve < Lazy<IWeakTypedScenario, IWeakTypedScenarioMetadata>>();
 
-            Assert.That(weakTyped.Metadata.Name, Is.EqualTo("Hello"));
+            Assert.Equal("Hello", weakTyped.Metadata.Name);
         }
 
-        [Test]
+        [Fact]
         public void verify_automatic_scanning_with_the_multiple_attributions_by_the_module()
         {
             var builder = new ContainerBuilder();
@@ -31,9 +29,8 @@ namespace Autofac.Extras.AttributeMetadata.Test
 
             var weakTyped = container.Resolve<Lazy<ICombinationalWeakTypedScenario, ICombinationalWeakTypedScenarioMetadata>>();
 
-            Assert.That(weakTyped.Metadata.Name, Is.EqualTo("Hello"));
-            Assert.That(weakTyped.Metadata.Age, Is.EqualTo(42));
+            Assert.Equal("Hello", weakTyped.Metadata.Name);
+            Assert.Equal(42, weakTyped.Metadata.Age);
         }
-
     }
 }
