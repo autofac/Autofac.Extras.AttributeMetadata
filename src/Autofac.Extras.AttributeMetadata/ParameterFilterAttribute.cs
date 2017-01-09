@@ -31,6 +31,7 @@ namespace Autofac.Extras.AttributeMetadata
     /// <seealso cref="Autofac.Extras.AttributeMetadata.WithMetadataAttribute"/>
     /// <seealso cref="Autofac.Extras.AttributeMetadata.WithKeyAttribute"/>
     [AttributeUsage(AttributeTargets.Parameter)]
+    [Obsolete("Use the Autofac.Features.AttributeFilters.ParameterFilterAttribute from the core Autofac library instead.")]
     public abstract class ParameterFilterAttribute : Attribute
     {
         /// <summary>

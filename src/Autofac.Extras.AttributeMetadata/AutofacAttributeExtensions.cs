@@ -24,7 +24,6 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Autofac.Builder;
 using Autofac.Features.Scanning;
@@ -54,10 +53,8 @@ namespace Autofac.Extras.AttributeMetadata
                         (this IRegistrationBuilder<TLimit, TScanningActivatorData, TRegistrationStyle> builder)
                                         where TScanningActivatorData : ScanningActivatorData
         {
-            if (builder == null)
-            {
-                throw new ArgumentNullException("builder");
-            }
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+
             builder.ActivatorData.ConfigurationActions.Add(
                 (t, rb) => rb.WithMetadata(MetadataHelper.GetMetadata(t)));
 
@@ -79,10 +76,8 @@ namespace Autofac.Extras.AttributeMetadata
         public static IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle>
             WithAttributedMetadata<TMetadata>(this IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> builder)
         {
-            if (builder == null)
-            {
-                throw new ArgumentNullException("builder");
-            }
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+
             builder.ActivatorData.ConfigurationActions.Add(
                 (t, rb) => rb.WithMetadata(MetadataHelper.GetMetadata<TMetadata>(t)));
 
@@ -112,15 +107,15 @@ namespace Autofac.Extras.AttributeMetadata
         /// </para>
         /// </remarks>
         /// <seealso cref="Autofac.Extras.AttributeMetadata.WithMetadataAttribute"/>
+        [Obsolete("Use Autofac.Features.AttributeFilters.RegistrationExtensions.WithAttributeFiltering from the core Autofac library instead.")]
         public static IRegistrationBuilder<TLimit, TReflectionActivatorData, TRegistrationStyle>
             WithAttributeFilter<TLimit, TReflectionActivatorData, TRegistrationStyle>(
                 this IRegistrationBuilder<TLimit, TReflectionActivatorData, TRegistrationStyle> builder)
             where TReflectionActivatorData : ReflectionActivatorData
         {
-            if (builder == null)
-            {
-                throw new ArgumentNullException("builder");
-            }
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+
+#pragma warning disable CS0618
             return builder.WithParameter(
                 (p, c) => p.GetCustomAttributes(true).OfType<ParameterFilterAttribute>().Any(),
                 (p, c) =>
@@ -128,6 +123,7 @@ namespace Autofac.Extras.AttributeMetadata
                     var filter = p.GetCustomAttributes(true).OfType<ParameterFilterAttribute>().First();
                     return filter.ResolveParameter(p, c);
                 });
+#pragma warning restore CS0618
         }
     }
 }

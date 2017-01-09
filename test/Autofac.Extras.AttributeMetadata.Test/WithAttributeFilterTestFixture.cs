@@ -6,6 +6,8 @@ using Autofac.Features.Metadata;
 using Autofac.Features.OwnedInstances;
 using Xunit;
 
+#pragma warning disable CS0618
+
 namespace Autofac.Extras.AttributeMetadata.Test
 {
     public class WithAttributeFilterTestFixture
@@ -367,3 +369,5 @@ namespace Autofac.Extras.AttributeMetadata.Test
         }
     }
 }
+
+#pragma warning restore CS0618

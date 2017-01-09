@@ -100,6 +100,7 @@ namespace Autofac.Extras.AttributeMetadata
     /// </code>
     /// </example>
     [SuppressMessage("Microsoft.Design", "CA1018:MarkAttributesWithAttributeUsage", Justification = "Allowing the inherited AttributeUsageAttribute to be used avoids accidental override or conflict at this level.")]
+    [Obsolete("Use the Autofac.Features.AttributeFilters.KeyFilterAttribute from the core Autofac library instead.")]
     public sealed class WithKeyAttribute : ParameterFilterAttribute
     {
         /// <summary>

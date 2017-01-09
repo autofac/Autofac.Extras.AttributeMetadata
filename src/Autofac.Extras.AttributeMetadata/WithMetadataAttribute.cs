@@ -100,6 +100,7 @@ namespace Autofac.Extras.AttributeMetadata
     /// </code>
     /// </example>
     [SuppressMessage("Microsoft.Design", "CA1018:MarkAttributesWithAttributeUsage", Justification = "Allowing the inherited AttributeUsageAttribute to be used avoids accidental override or conflict at this level.")]
+    [Obsolete("Use the Autofac.Features.AttributeFilters.MetadataFilterAttribute from the core Autofac library instead.")]
     public sealed class WithMetadataAttribute : ParameterFilterAttribute
     {
         /// <summary>
@@ -159,14 +160,8 @@ namespace Autofac.Extras.AttributeMetadata
         /// </exception>
         public override object ResolveParameter(ParameterInfo parameter, IComponentContext context)
         {
-            if (parameter == null)
-            {
-                throw new ArgumentNullException("parameter");
-            }
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            if (parameter == null) throw new ArgumentNullException(nameof(parameter));
+            if (context == null) throw new ArgumentNullException(nameof(context));
 
             // GetElementType currently is the effective equivalent of "Determine if the type
             // is in IEnumerable and if it is, get the type being enumerated." This doesn't support
