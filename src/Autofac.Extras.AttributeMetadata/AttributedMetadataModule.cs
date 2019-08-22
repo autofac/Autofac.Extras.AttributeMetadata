@@ -47,8 +47,10 @@ namespace Autofac.Extras.AttributeMetadata
             {
                 throw new ArgumentNullException("registration");
             }
+
             foreach (var property in MetadataHelper.GetMetadata(registration.Activator.LimitType))
-                registration.Metadata.Add(property);
+                if (!registration.Metadata.ContainsKey(property.Key))
+                    registration.Metadata.Add(property);
         }
     }
 }
