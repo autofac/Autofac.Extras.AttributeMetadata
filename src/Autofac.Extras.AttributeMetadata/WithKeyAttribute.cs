@@ -104,10 +104,12 @@ namespace Autofac.Extras.AttributeMetadata
     public sealed class WithKeyAttribute : ParameterFilterAttribute
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WithMetadataAttribute"/> class,
-        /// specifying the <paramref name="key"/> that the
-        /// dependency should have in order to satisfy the parameter.
+        /// Initializes a new instance of the <see cref="Autofac.Extras.AttributeMetadata.WithKeyAttribute" /> class.
         /// </summary>
+        /// <param name="key">
+        /// The <paramref name="key"/> that the
+        /// dependency should have in order to satisfy the parameter.
+        /// </param>
         public WithKeyAttribute(object key)
         {
             this.Key = key;
@@ -138,12 +140,14 @@ namespace Autofac.Extras.AttributeMetadata
         {
             if (parameter == null)
             {
-                throw new ArgumentNullException("parameter");
+                throw new ArgumentNullException(nameof(parameter));
             }
+
             if (context == null)
             {
-                throw new ArgumentNullException("context");
+                throw new ArgumentNullException(nameof(context));
             }
+
             object value;
             context.TryResolveKeyed(this.Key, parameter.ParameterType, out value);
             return value;

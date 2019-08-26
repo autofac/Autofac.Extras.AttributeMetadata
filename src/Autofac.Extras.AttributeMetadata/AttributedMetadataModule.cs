@@ -29,7 +29,7 @@ using Autofac.Core;
 namespace Autofac.Extras.AttributeMetadata
 {
     /// <summary>
-    /// this module will scan all registrations for metadata and associate them if found
+    /// this module will scan all registrations for metadata and associate them if found.
     /// </summary>
     public class AttributedMetadataModule : Module
     {
@@ -45,12 +45,16 @@ namespace Autofac.Extras.AttributeMetadata
         {
             if (registration == null)
             {
-                throw new ArgumentNullException("registration");
+                throw new ArgumentNullException(nameof(registration));
             }
 
             foreach (var property in MetadataHelper.GetMetadata(registration.Activator.LimitType))
+            {
                 if (!registration.Metadata.ContainsKey(property.Key))
+                {
                     registration.Metadata.Add(property);
+                }
+            }
         }
     }
 }

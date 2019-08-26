@@ -1,8 +1,6 @@
-﻿using Autofac;
-using Autofac.Extras.AttributeMetadata;
-using Autofac.Integration.Mef;
+﻿using Autofac.Integration.Mef;
 
-namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes
+namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.CombinationalWeakTypedAttributeScenario
 {
     public class WeakTypeAttributedMetadataModule : AttributedMetadataModule
     {

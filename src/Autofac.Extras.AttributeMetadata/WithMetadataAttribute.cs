@@ -107,19 +107,25 @@ namespace Autofac.Extras.AttributeMetadata
         /// Reference to the <see cref="Autofac.Extras.AttributeMetadata.WithMetadataAttribute.FilterOne{T}"/>
         /// method used in creating a closed generic reference during registration.
         /// </summary>
-        private static readonly MethodInfo filterOne = typeof(WithMetadataAttribute).GetMethod("FilterOne", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.InvokeMethod);
+        private static readonly MethodInfo FilterOneInfo = typeof(WithMetadataAttribute).GetMethod("FilterOne", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.InvokeMethod);
 
         /// <summary>
         /// Reference to the <see cref="Autofac.Extras.AttributeMetadata.WithMetadataAttribute.FilterAll{T}"/>
         /// method used in creating a closed generic reference during registration.
         /// </summary>
-        private static readonly MethodInfo filterAll = typeof(WithMetadataAttribute).GetMethod("FilterAll", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.InvokeMethod);
+        private static readonly MethodInfo FilterAllInfo = typeof(WithMetadataAttribute).GetMethod("FilterAll", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.InvokeMethod);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WithMetadataAttribute"/> class,
         /// specifying the <paramref name="key"/> and <paramref name="value"/> that the
         /// dependency should have in order to satisfy the parameter.
         /// </summary>
+        /// <param name="key">
+        /// The key the dependency is expected to have to satisfy the parameter.
+        /// </param>
+        /// <param name="value">
+        /// The value the dependency is expected to have to satisfy the parameter.
+        /// </param>
         public WithMetadataAttribute(string key, object value)
         {
             this.Key = key;
@@ -160,8 +166,15 @@ namespace Autofac.Extras.AttributeMetadata
         /// </exception>
         public override object ResolveParameter(ParameterInfo parameter, IComponentContext context)
         {
-            if (parameter == null) throw new ArgumentNullException(nameof(parameter));
-            if (context == null) throw new ArgumentNullException(nameof(context));
+            if (parameter == null)
+            {
+                throw new ArgumentNullException(nameof(parameter));
+            }
+
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
 
             // GetElementType currently is the effective equivalent of "Determine if the type
             // is in IEnumerable and if it is, get the type being enumerated." This doesn't support
@@ -172,16 +185,18 @@ namespace Autofac.Extras.AttributeMetadata
 
             if (hasMany)
             {
-                return filterAll.MakeGenericMethod(elementType).Invoke(null, new object[] { context, this.Key, this.Value });
+                return FilterAllInfo.MakeGenericMethod(elementType).Invoke(null, new object[] { context, this.Key, this.Value });
             }
 
-            return filterOne.MakeGenericMethod(elementType).Invoke(null, new object[] { context, this.Key, this.Value });
+            return FilterOneInfo.MakeGenericMethod(elementType).Invoke(null, new object[] { context, this.Key, this.Value });
         }
 
         private static Type GetElementType(Type type)
         {
             if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+            {
                 return type.GetGenericArguments()[0];
+            }
 
             return type;
         }

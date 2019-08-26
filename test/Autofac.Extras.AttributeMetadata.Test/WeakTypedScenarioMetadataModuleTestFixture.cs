@@ -9,7 +9,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
     public class WeakTypedScenarioMetadataModuleTestFixture
     {
         [Fact]
-        public void verify_single_attribute_scan_results_from_test_fixture()
+        public void Verify_single_attribute_scan_results_from_test_fixture()
         {
             // arrange
             var builder = new ContainerBuilder();
@@ -20,12 +20,12 @@ namespace Autofac.Extras.AttributeMetadata.Test
             var items = builder.Build().Resolve<IEnumerable<Lazy<IWeakTypedScenario, IWeakTypedScenarioMetadata>>>();
 
             // assert
-            Assert.Equal(1, items.Count());
-            Assert.Equal(1, items.Where(p => p.Metadata.Name == "Hello").Count());
+            Assert.Single(items);
+            Assert.Single(items.Where(p => p.Metadata.Name == "Hello"));
         }
 
         [Fact]
-        public void verify_single_attribute_scan_results_from_test_fixture_using_non_generic()
+        public void Verify_single_attribute_scan_results_from_test_fixture_using_non_generic()
         {
             // arrange
             var builder = new ContainerBuilder();
@@ -36,8 +36,8 @@ namespace Autofac.Extras.AttributeMetadata.Test
             var items = builder.Build().Resolve<IEnumerable<Lazy<IWeakTypedScenario, IWeakTypedScenarioMetadata>>>();
 
             // assert
-            Assert.Equal(1, items.Count());
-            Assert.Equal(1, items.Where(p => p.Metadata.Name == "Hello").Count());
+            Assert.Single(items);
+            Assert.Single(items.Where(p => p.Metadata.Name == "Hello"));
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
     public class MetadataProviderTestFixture
     {
         [Fact]
-        public void load_provided_into_weak_metadata()
+        public void Load_provided_into_weak_metadata()
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule<AttributedMetadataModule>();
@@ -22,13 +22,12 @@ namespace Autofac.Extras.AttributeMetadata.Test
             var value1 = withMetadata.Metadata.Where(kv => kv.Key == "Key1").FirstOrDefault();
             var value2 = withMetadata.Metadata.Where(kv => kv.Key == "Key2").FirstOrDefault();
 
-            Assert.NotNull(value1);
-            Assert.NotNull(value2);
             Assert.Equal("Value1", value1.Value);
             Assert.Equal("Value2", value2.Value);
         }
 
-        public void load_provided_into_strong_metadata()
+        [Fact]
+        public void Load_provided_into_strong_metadata()
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule<AttributedMetadataModule>();

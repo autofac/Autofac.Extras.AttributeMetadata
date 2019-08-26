@@ -1,5 +1,4 @@
-﻿
-namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes
+﻿namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes
 {
     public class MetadataModuleScenario : IMetadataModuleScenario
     {
@@ -13,14 +12,10 @@ namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes
     {
         public MetadataModuleScenarioMetadata(string name)
         {
-            Name = name;
+            this.Name = name;
         }
 
-        #region IExportScenario4Metadata Members
-
-        public string Name { get; private set;}
-
-        #endregion
+        // IExportScenario4Metadata Members
+        public string Name { get; private set; }
     }
-
 }

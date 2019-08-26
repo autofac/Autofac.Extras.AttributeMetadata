@@ -12,7 +12,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
     public class WeakTypedAttributeScenarioTestFixture
     {
         [Fact]
-        public void validate_wireup_of_generic_attributes_to_strongly_typed_metadata_on_resolve()
+        public void Validate_wireup_of_generic_attributes_to_strongly_typed_metadata_on_resolve()
         {
             // arrange
             var builder = new ContainerBuilder();
@@ -26,8 +26,8 @@ namespace Autofac.Extras.AttributeMetadata.Test
             var items = builder.Build().Resolve<IEnumerable<Lazy<IWeakTypedScenario, IWeakTypedScenarioMetadata>>>();
 
             // assert
-            Assert.Equal(1, items.Count());
-            Assert.Equal(1, items.Where(p => p.Metadata.Name == "Hello").Count());
+            Assert.Single(items);
+            Assert.Single(items.Where(p => p.Metadata.Name == "Hello"));
         }
     }
 }

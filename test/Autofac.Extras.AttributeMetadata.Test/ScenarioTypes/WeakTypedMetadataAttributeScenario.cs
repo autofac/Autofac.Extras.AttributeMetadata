@@ -3,19 +3,14 @@ using System.ComponentModel.Composition;
 
 namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes
 {
-    #region interfaces
-
     public interface IWeakTypedScenarioMetadata
     {
         string Name { get; }
     }
 
     public interface IWeakTypedScenario
-    { }
-
-    #endregion
-
-    #region attribute
+    {
+    }
 
     [MetadataAttribute]
     public class WeakTypedScenarioMetadataAttribute : Attribute
@@ -28,8 +23,8 @@ namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes
         }
     }
 
-    #endregion
-
     [WeakTypedScenarioMetadata("Hello")]
-    public class WeakTypedScenario : IWeakTypedScenario { }
+    public class WeakTypedScenario : IWeakTypedScenario
+    {
+    }
 }

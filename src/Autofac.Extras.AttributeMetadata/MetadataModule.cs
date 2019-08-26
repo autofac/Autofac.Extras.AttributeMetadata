@@ -30,86 +30,92 @@ using Autofac.Integration.Mef;
 namespace Autofac.Extras.AttributeMetadata
 {
     /// <summary>
-    /// Provides a mechanism to separate metadata registrations from compile-time attributes
+    /// Provides a mechanism to separate metadata registrations from compile-time attributes.
     /// </summary>
-    /// <typeparam name="TInterface">interface used on concrete types of metadata decorated instances</typeparam>
-    /// <typeparam name="TMetadata">strongly typed metadata definition</typeparam>
+    /// <typeparam name="TInterface">interface used on concrete types of metadata decorated instances.</typeparam>
+    /// <typeparam name="TMetadata">strongly typed metadata definition.</typeparam>
     public interface IMetadataRegistrar<in TInterface, in TMetadata>
     {
         /// <summary>
-        /// registers provided metadata on the declared type
+        /// registers provided metadata on the declared type.
         /// </summary>
-        /// <typeparam name="TInstance">concrete instance type</typeparam>
-        /// <param name="metadata">metadata instance</param>
-        /// <returns>container builder</returns>
-        IRegistrationBuilder<TInstance, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterType
-            <TInstance>(TMetadata metadata) where TInstance : TInterface;
+        /// <typeparam name="TInstance">concrete instance type.</typeparam>
+        /// <param name="metadata">metadata instance.</param>
+        /// <returns>
+        /// The registration for continued configuration.
+        /// </returns>
+        IRegistrationBuilder<TInstance, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterType<TInstance>(TMetadata metadata)
+            where TInstance : TInterface;
 
         /// <summary>
-        /// registers provided metadata on the declared type
+        /// registers provided metadata on the declared type.
         /// </summary>
         /// <param name="instanceType">Type of the instance.</param>
         /// <param name="metadata">The metadata.</param>
-        /// <returns>registration builder</returns>
-        IRegistrationBuilder<object, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterType
-            (Type instanceType, TMetadata metadata);
+        /// <returns>
+        /// The registration for continued configuration.
+        /// </returns>
+        IRegistrationBuilder<object, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterType(Type instanceType, TMetadata metadata);
 
         /// <summary>
-        /// registers the provided concrete instance and scans it for generic MetadataAttribute data
+        /// registers the provided concrete instance and scans it for generic MetadataAttribute data.
         /// </summary>
-        /// <typeparam name="TInstance">concrete instance type</typeparam>
-        /// <returns></returns>
-        IRegistrationBuilder<TInstance, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterAttributedType
-            <TInstance>() where TInstance : TInterface;
+        /// <typeparam name="TInstance">concrete instance type.</typeparam>
+        /// <returns>
+        /// The registration for continued configuration.
+        /// </returns>
+        IRegistrationBuilder<TInstance, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterAttributedType<TInstance>()
+            where TInstance : TInterface;
 
         /// <summary>
-        /// registers the provided concrrete instance type and scans it for generate metadata data
+        /// registers the provided concrrete instance type and scans it for generate metadata data.
         /// </summary>
         /// <param name="instanceType">Type of the instance.</param>
-        /// <returns></returns>
-        IRegistrationBuilder<object, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterAttributedType
-            (Type instanceType);
+        /// <returns>
+        /// The registration for continued configuration.
+        /// </returns>
+        IRegistrationBuilder<object, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterAttributedType(Type instanceType);
 
         /// <summary>
-        /// Used to build an <see cref="IContainer"/> from component registrations.
+        /// Gets the builder used to build an <see cref="IContainer"/> from component registrations.
         /// </summary>
         ContainerBuilder ContainerBuilder { get; }
     }
 
-
     /// <summary>
-    /// Provides a mechanism to separate metadata registrations from compile-time attributes
+    /// Provides a mechanism to separate metadata registrations from compile-time attributes.
     /// </summary>
-    /// <typeparam name="TInterface">interface used on concrete types of metadata decorated instances</typeparam>
-    /// <typeparam name="TMetadata">strongly typed metadata definition</typeparam>
+    /// <typeparam name="TInterface">Interface used on concrete types of metadata decorated instances.</typeparam>
+    /// <typeparam name="TMetadata">Strongly typed metadata definition.</typeparam>
     public abstract class MetadataModule<TInterface, TMetadata> : Module, IMetadataRegistrar<TInterface, TMetadata>
     {
         /// <summary>
-        /// client overrided method where metadata registration is performed
+        /// Override this method to execute metadata registration operations.
         /// </summary>
-        /// <param name="registrar">wrapped metadata registry interface</param>
+        /// <param name="registrar">Wrapped metadata registry interface.</param>
         public abstract void Register(IMetadataRegistrar<TInterface, TMetadata> registrar);
 
         /// <summary>
-        /// standard module method being overloaded and sealed to provide wrapped metadata registration
+        /// Standard module method being overridden and sealed to provide wrapped metadata registration.
         /// </summary>
-        /// <param name="builder">container builder</param>
-        sealed protected override void Load(ContainerBuilder builder)
+        /// <param name="builder">Container builder.</param>
+        protected sealed override void Load(ContainerBuilder builder)
         {
             ContainerBuilder = builder;
             builder.RegisterMetadataRegistrationSources();
             Register(this);
         }
 
-        #region IMetadataRegistrar<TInterface,TMetadata> Members
-
         /// <summary>
-        /// registers provided metadata on the declared type
+        /// Registers provided metadata on the declared type.
         /// </summary>
-        /// <typeparam name="TInstance">concrete instance type</typeparam>
-        /// <param name="metadata">metadata instance</param>
-        /// <returns>container builder</returns>
-        public IRegistrationBuilder<TInstance, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterType<TInstance>(TMetadata metadata) where TInstance : TInterface
+        /// <typeparam name="TInstance">Concrete instance type.</typeparam>
+        /// <param name="metadata">Metadata instance.</param>
+        /// <returns>
+        /// The registration for continued configuration.
+        /// </returns>
+        public IRegistrationBuilder<TInstance, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterType<TInstance>(TMetadata metadata)
+            where TInstance : TInterface
         {
             return
                 ContainerBuilder.RegisterType<TInstance>().As<TInterface>().WithMetadata(
@@ -117,11 +123,14 @@ namespace Autofac.Extras.AttributeMetadata
         }
 
         /// <summary>
-        /// registers the provided concrete instance and scans it for generic MetadataAttribute data
+        /// Registers the provided concrete instance and scans it for generic metadata attribute data.
         /// </summary>
-        /// <typeparam name="TInstance">concrete instance type</typeparam>
-        /// <returns></returns>
-        public IRegistrationBuilder<TInstance, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterAttributedType<TInstance>() where TInstance : TInterface
+        /// <typeparam name="TInstance">Concrete instance type.</typeparam>
+        /// <returns>
+        /// The registration for continued configuration.
+        /// </returns>
+        public IRegistrationBuilder<TInstance, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterAttributedType<TInstance>()
+            where TInstance : TInterface
         {
             return
                 ContainerBuilder.RegisterType<TInstance>().As<TInterface>().WithMetadata(
@@ -129,11 +138,13 @@ namespace Autofac.Extras.AttributeMetadata
         }
 
         /// <summary>
-        /// registers provided metadata on the declared type
+        /// registers provided metadata on the declared type.
         /// </summary>
         /// <param name="instanceType">Type of the instance.</param>
         /// <param name="metadata">The metadata.</param>
-        /// <returns>registration builder</returns>
+        /// <returns>
+        /// The registration for continued configuration.
+        /// </returns>
         public IRegistrationBuilder<object, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterType(Type instanceType, TMetadata metadata)
         {
             return
@@ -142,10 +153,12 @@ namespace Autofac.Extras.AttributeMetadata
         }
 
         /// <summary>
-        /// registers the provided concrrete instance type and scans it for generate metadata data
+        /// Registers the provided concrete instance type and scans it for generate metadata data.
         /// </summary>
         /// <param name="instanceType">Type of the instance.</param>
-        /// <returns></returns>
+        /// <returns>
+        /// The registration for continued configuration.
+        /// </returns>
         public IRegistrationBuilder<object, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterAttributedType(Type instanceType)
         {
             return
@@ -154,10 +167,8 @@ namespace Autofac.Extras.AttributeMetadata
         }
 
         /// <summary>
-        /// Used to build an <see cref="IContainer"/> from component registrations.
+        /// Gets the builder used to build an <see cref="IContainer"/> from component registrations.
         /// </summary>
         public ContainerBuilder ContainerBuilder { get; private set; }
-
-        #endregion
     }
 }

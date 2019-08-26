@@ -12,7 +12,5 @@ namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes
             // in addition, we'll register an additional metadata variant of the alternate scenario 4 type
             registrar.RegisterType(typeof(MetadataModuleScenarioAlternate), new MetadataModuleScenarioMetadata("the-cats"));
         }
-
-
     }
 }

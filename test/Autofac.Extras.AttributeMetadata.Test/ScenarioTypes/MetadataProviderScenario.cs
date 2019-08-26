@@ -22,6 +22,7 @@ namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes
     public class ProvidedMetadata
     {
         public string Key1 { get; set; }
+
         public string Key2 { get; set; }
     }
 
@@ -30,5 +31,7 @@ namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes
     }
 
     [ProvidedMetadata]
-    public class MetadataProviderScenario : IMetadataProviderScenario { }
+    public class MetadataProviderScenario : IMetadataProviderScenario
+    {
+    }
 }

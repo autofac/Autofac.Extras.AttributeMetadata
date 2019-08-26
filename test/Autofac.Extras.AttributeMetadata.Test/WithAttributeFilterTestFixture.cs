@@ -13,7 +13,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
     public class WithAttributeFilterTestFixture
     {
         [Fact]
-        public void multiple_filter_types_can_be_used_on_one_component()
+        public void Multiple_filter_types_can_be_used_on_one_component()
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule(new AttributedMetadataModule());
@@ -35,7 +35,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
         }
 
         [Fact]
-        public void verify_key_filter_is_applied_on_constructor_dependency_single()
+        public void Verify_key_filter_is_applied_on_constructor_dependency_single()
         {
             var builder = new ContainerBuilder();
             builder.RegisterType<ConsoleLogger>().Keyed<ILogger>("Solution");
@@ -49,7 +49,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
         }
 
         [Fact]
-        public void verify_key_filter_is_applied_on_constructor_dependency_multiple()
+        public void Verify_key_filter_is_applied_on_constructor_dependency_multiple()
         {
             var builder = new ContainerBuilder();
             builder.RegisterType<MsBuildAdapter>().Keyed<IAdapter>("Solution");
@@ -69,7 +69,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
         }
 
         [Fact]
-        public void verify_key_filter_is_applied_on_constructor_dependency_single_with_lazy()
+        public void Verify_key_filter_is_applied_on_constructor_dependency_single_with_lazy()
         {
             var builder = new ContainerBuilder();
             builder.RegisterType<ConsoleLogger>().Keyed<ILogger>("Manager");
@@ -83,7 +83,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
         }
 
         [Fact]
-        public void verify_key_filter_is_applied_on_constructor_dependency_single_with_meta()
+        public void Verify_key_filter_is_applied_on_constructor_dependency_single_with_meta()
         {
             var builder = new ContainerBuilder();
             builder.RegisterType<ConsoleLogger>().Keyed<ILogger>("Manager");
@@ -97,7 +97,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
         }
 
         [Fact]
-        public void verify_key_filter_is_applied_on_constructor_dependency_single_with_owned()
+        public void Verify_key_filter_is_applied_on_constructor_dependency_single_with_owned()
         {
             var builder = new ContainerBuilder();
             builder.RegisterType<ConsoleLogger>().Keyed<ILogger>("Manager");
@@ -111,7 +111,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
         }
 
         [Fact]
-        public void verify_key_filter_is_applied_on_constructor_dependency_many_with_lazy()
+        public void Verify_key_filter_is_applied_on_constructor_dependency_many_with_lazy()
         {
             var builder = new ContainerBuilder();
             builder.RegisterType<ConsoleLogger>().Keyed<ILogger>("Manager");
@@ -126,7 +126,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
         }
 
         [Fact]
-        public void verify_key_filter_is_applied_on_constructor_dependency_many_with_meta()
+        public void Verify_key_filter_is_applied_on_constructor_dependency_many_with_meta()
         {
             var builder = new ContainerBuilder();
             builder.RegisterType<ConsoleLogger>().Keyed<ILogger>("Manager");
@@ -141,7 +141,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
         }
 
         [Fact]
-        public void verify_key_filter_is_applied_on_constructor_dependency_many_with_owned()
+        public void Verify_key_filter_is_applied_on_constructor_dependency_many_with_owned()
         {
             var builder = new ContainerBuilder();
             builder.RegisterType<ConsoleLogger>().Keyed<ILogger>("Manager");
@@ -156,7 +156,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
         }
 
         [Fact]
-        public void verify_metadata_filter_is_applied_on_constructor_dependency_single()
+        public void Verify_metadata_filter_is_applied_on_constructor_dependency_single()
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule(new AttributedMetadataModule());
@@ -171,7 +171,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
         }
 
         [Fact]
-        public void verify_metadata_filter_is_applied_on_constructor_dependency_multiple()
+        public void Verify_metadata_filter_is_applied_on_constructor_dependency_multiple()
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule(new AttributedMetadataModule());
@@ -192,7 +192,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
         }
 
         [Fact]
-        public void verify_components_that_are_not_used_do_not_get_activated()
+        public void Verify_components_that_are_not_used_do_not_get_activated()
         {
             int adapterActivationCount = 0;
             var builder = new ContainerBuilder();

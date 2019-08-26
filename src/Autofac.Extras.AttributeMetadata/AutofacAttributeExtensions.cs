@@ -49,11 +49,13 @@ namespace Autofac.Extras.AttributeMetadata
         /// Thrown if <paramref name="builder" /> is <see langword="null" />.
         /// </exception>
         public static IRegistrationBuilder<TLimit, TScanningActivatorData, TRegistrationStyle>
-            WithAttributedMetadata<TLimit, TScanningActivatorData, TRegistrationStyle>
-                        (this IRegistrationBuilder<TLimit, TScanningActivatorData, TRegistrationStyle> builder)
-                                        where TScanningActivatorData : ScanningActivatorData
+            WithAttributedMetadata<TLimit, TScanningActivatorData, TRegistrationStyle>(this IRegistrationBuilder<TLimit, TScanningActivatorData, TRegistrationStyle> builder)
+                where TScanningActivatorData : ScanningActivatorData
         {
-            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
 
             builder.ActivatorData.ConfigurationActions.Add(
                 (t, rb) => rb.WithMetadata(MetadataHelper.GetMetadata(t)));
@@ -61,11 +63,10 @@ namespace Autofac.Extras.AttributeMetadata
             return builder;
         }
 
-
         /// <summary>
         /// This method can be invoked with the assembly scanner to register strongly typed metadata attributes. The
         /// attributes are scanned for one that is derived from the metadata interface.  If one is found, the metadata
-        /// contents are extracted and registered with the instance registration
+        /// contents are extracted and registered with the instance registration.
         /// </summary>
         /// <typeparam name="TMetadata">Metadata type to search for.</typeparam>
         /// <param name="builder">The registration builder containing registration data.</param>
@@ -76,7 +77,10 @@ namespace Autofac.Extras.AttributeMetadata
         public static IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle>
             WithAttributedMetadata<TMetadata>(this IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> builder)
         {
-            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
 
             builder.ActivatorData.ConfigurationActions.Add(
                 (t, rb) => rb.WithMetadata(MetadataHelper.GetMetadata<TMetadata>(t)));
@@ -113,7 +117,10 @@ namespace Autofac.Extras.AttributeMetadata
                 this IRegistrationBuilder<TLimit, TReflectionActivatorData, TRegistrationStyle> builder)
             where TReflectionActivatorData : ReflectionActivatorData
         {
-            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
 
 #pragma warning disable CS0618
             return builder.WithParameter(

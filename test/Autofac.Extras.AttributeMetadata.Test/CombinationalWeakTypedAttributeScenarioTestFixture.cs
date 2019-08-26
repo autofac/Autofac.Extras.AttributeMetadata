@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Autofac;
 using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
+using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.CombinationalWeakTypedAttributeScenario;
 using Autofac.Integration.Mef;
 using Xunit;
 
@@ -13,10 +14,10 @@ namespace Autofac.Extras.AttributeMetadata.Test
     {
         /// <summary>
         /// This is a test that demonstrates the ability to combine multiple weak-typed attributes to
-        /// constitute a single strongly-typed metadata instance resolved from the container
+        /// constitute a single strongly-typed metadata instance resolved from the container.
         /// </summary>
         [Fact]
-        public void validate_wireup_of_generic_attributes_to_strongly_typed_metadata_on_resolve()
+        public void Validate_wireup_of_generic_attributes_to_strongly_typed_metadata_on_resolve()
         {
             // arrange
             var builder = new ContainerBuilder();
@@ -30,9 +31,9 @@ namespace Autofac.Extras.AttributeMetadata.Test
             var items = builder.Build().Resolve<IEnumerable<Lazy<ICombinationalWeakTypedScenario, ICombinationalWeakTypedScenarioMetadata>>>();
 
             // assert
-            Assert.Equal(1, items.Count());
-            Assert.Equal(1, items.Where(p => p.Metadata.Name == "Hello").Count());
-            Assert.Equal(1, items.Where(p => p.Metadata.Age == 42).Count());
+            Assert.Single(items);
+            Assert.Single(items.Where(p => p.Metadata.Name == "Hello"));
+            Assert.Single(items.Where(p => p.Metadata.Age == 42));
         }
     }
 }

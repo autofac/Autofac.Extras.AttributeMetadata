@@ -27,12 +27,12 @@ namespace Autofac.Extras.AttributeMetadata
         {
             if (target == null)
             {
-                throw new ArgumentNullException("target");
+                throw new ArgumentNullException(nameof(target));
             }
 
             if (instanceType == null)
             {
-                throw new ArgumentNullException("instanceType");
+                throw new ArgumentNullException(nameof(instanceType));
             }
 
             var asProvider = target as IMetadataProvider;
@@ -51,7 +51,6 @@ namespace Autofac.Extras.AttributeMetadata
                                   new KeyValuePair<string, object>(propertyInfo.Name, propertyInfo.GetValue(target, null)));
         }
 
-
         /// <summary>
         /// Given a component type, interrogates the metadata attributes to retrieve a set of property name/value metadata pairs.
         /// </summary>
@@ -64,13 +63,16 @@ namespace Autofac.Extras.AttributeMetadata
         {
             if (targetType == null)
             {
-                throw new ArgumentNullException("targetType");
+                throw new ArgumentNullException(nameof(targetType));
             }
+
             var propertyList = new List<KeyValuePair<string, object>>();
 
             foreach (var attribute in targetType.GetCustomAttributes(true)
                                                 .Where(p => p.GetType().GetCustomAttributes(typeof(MetadataAttributeAttribute), true).Any()))
+            {
                 propertyList.AddRange(GetProperties(attribute, targetType));
+            }
 
             return propertyList;
         }
@@ -90,8 +92,9 @@ namespace Autofac.Extras.AttributeMetadata
         {
             if (targetType == null)
             {
-                throw new ArgumentNullException("targetType");
+                throw new ArgumentNullException(nameof(targetType));
             }
+
             var attribute =
                 (from p in targetType.GetCustomAttributes(typeof(TMetadataType), true) select p).FirstOrDefault();
 

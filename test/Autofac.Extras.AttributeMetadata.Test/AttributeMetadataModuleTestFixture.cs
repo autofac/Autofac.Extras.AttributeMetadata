@@ -7,7 +7,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
     public class AttributeMetadataModuleTestFixture
     {
         [Fact]
-        public void does_not_throw_in_nested_lifetimeScope_builders()
+        public void Does_not_throw_in_nested_lifetimeScope_builders()
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule<AttributedMetadataModule>();
