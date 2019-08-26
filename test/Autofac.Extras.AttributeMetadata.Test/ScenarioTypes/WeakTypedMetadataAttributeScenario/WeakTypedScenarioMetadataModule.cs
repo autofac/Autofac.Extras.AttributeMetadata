@@ -1,6 +1,4 @@
-﻿using Autofac.Extras.AttributeMetadata;
-
-namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes
+﻿namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.WeakTypedMetadataAttributeScenario
 {
     /// <summary>
     /// This class demonstrates the ability to search for metadata based on metadata attributes instead of

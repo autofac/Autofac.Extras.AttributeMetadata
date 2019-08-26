@@ -1,17 +1,8 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 
-namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes
+namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.WeakTypedMetadataAttributeScenario
 {
-    public interface IWeakTypedScenarioMetadata
-    {
-        string Name { get; }
-    }
-
-    public interface IWeakTypedScenario
-    {
-    }
-
     [MetadataAttribute]
     public class WeakTypedScenarioMetadataAttribute : Attribute
     {
@@ -21,10 +12,5 @@ namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes
         {
             Name = name;
         }
-    }
-
-    [WeakTypedScenarioMetadata("Hello")]
-    public class WeakTypedScenario : IWeakTypedScenario
-    {
     }
 }

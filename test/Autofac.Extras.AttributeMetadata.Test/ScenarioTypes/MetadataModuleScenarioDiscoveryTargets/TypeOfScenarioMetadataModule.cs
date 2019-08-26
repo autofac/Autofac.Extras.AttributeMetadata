@@ -1,6 +1,6 @@
 ﻿using Autofac.Extras.AttributeMetadata;
 
-namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes
+namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.MetadataModuleScenarioDiscoveryTargets
 {
     public class TypeOfScenarioMetadataModule : MetadataModule<IMetadataModuleScenario, IMetadataModuleScenarioMetadata>
     {

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -16,7 +16,7 @@
     <AssemblyOriginatorKeyFile>..\..\Autofac.snk</AssemblyOriginatorKeyFile>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <CodeAnalysisRuleSet>../../build/Analyzers.ruleset</CodeAnalysisRuleSet>
@@ -62,16 +62,31 @@
     <Compile Include="ScenarioTypes\CombinationalWeakTypedAttributeScenario\CombinationalWeakTypedScenario.cs" />
     <Compile Include="ScenarioTypes\CombinationalWeakTypedAttributeScenario\ICombinationalWeakTypedScenario.cs" />
     <Compile Include="ScenarioTypes\CombinationalWeakTypedAttributeScenario\ICombinationalWeakTypedScenarioMetadata.cs" />
-    <Compile Include="ScenarioTypes\MetadataModuleScenarioDiscoveryTargets.cs" />
-    <Compile Include="ScenarioTypes\MetadataModuleScenarioInterfaces.cs" />
-    <Compile Include="ScenarioTypes\MetadataProviderScenario.cs" />
-    <Compile Include="ScenarioTypes\NestedLifetimeScopeRegistrationScenario.cs" />
-    <Compile Include="ScenarioTypes\StrongTypedScenarioMetadataModule.cs" />
-    <Compile Include="ScenarioTypes\StrongTypedMetadataAttributeScenario.cs" />
-    <Compile Include="ScenarioTypes\TypeOfScenarioMetadataModule.cs" />
+    <Compile Include="ScenarioTypes\MetadataModuleScenarioDiscoveryTargets\IMetadataModuleScenarioMetadata.cs" />
+    <Compile Include="ScenarioTypes\MetadataModuleScenarioDiscoveryTargets\MetadataModuleScenario.cs" />
+    <Compile Include="ScenarioTypes\MetadataModuleScenarioDiscoveryTargets\MetadataModuleScenarioAlternate.cs" />
+    <Compile Include="ScenarioTypes\MetadataModuleScenarioDiscoveryTargets\MetadataModuleScenarioMetadata.cs" />
+    <Compile Include="ScenarioTypes\MetadataModuleScenarioDiscoveryTargets\IMetadataModuleScenario.cs" />
+    <Compile Include="ScenarioTypes\MetadataProviderScenario\IMetadataProviderScenario.cs" />
+    <Compile Include="ScenarioTypes\MetadataProviderScenario\MetadataProviderScenario.cs" />
+    <Compile Include="ScenarioTypes\MetadataProviderScenario\ProvidedMetadata.cs" />
+    <Compile Include="ScenarioTypes\MetadataProviderScenario\ProvidedMetadataAttribute.cs" />
+    <Compile Include="ScenarioTypes\NestedLifetimeScopeRegistrationScenario\ILifetimeScopeRegistrationInstance.cs" />
+    <Compile Include="ScenarioTypes\NestedLifetimeScopeRegistrationScenario\NestedLifetimeScopeRegistrationInstance.cs" />
+    <Compile Include="ScenarioTypes\NestedLifetimeScopeRegistrationScenario\NestedLifetimeScopeRegistrationMetadataAttribute.cs" />
+    <Compile Include="ScenarioTypes\MetadataModuleScenarioDiscoveryTargets\StrongTypedScenarioMetadataModule.cs" />
+    <Compile Include="ScenarioTypes\StrongTypedMetadataAttributeScenario\AlternateStrongTypedScenario.cs" />
+    <Compile Include="ScenarioTypes\StrongTypedMetadataAttributeScenario\IStrongTypedScenario.cs" />
+    <Compile Include="ScenarioTypes\StrongTypedMetadataAttributeScenario\IStrongTypedScenarioMetadata.cs" />
+    <Compile Include="ScenarioTypes\MetadataModuleScenarioDiscoveryTargets\TypeOfScenarioMetadataModule.cs" />
     <Compile Include="ScenarioTypes\CombinationalWeakTypedAttributeScenario\WeakTypeAttributedMetadataModule.cs" />
-    <Compile Include="ScenarioTypes\WeakTypedMetadataAttributeScenario.cs" />
-    <Compile Include="ScenarioTypes\WeakTypedScenarioMetadataModule.cs" />
+    <Compile Include="ScenarioTypes\StrongTypedMetadataAttributeScenario\StrongTypedScenario.cs" />
+    <Compile Include="ScenarioTypes\StrongTypedMetadataAttributeScenario\StrongTypedScenarioMetadataAttribute.cs" />
+    <Compile Include="ScenarioTypes\WeakTypedMetadataAttributeScenario\IWeakTypedScenario.cs" />
+    <Compile Include="ScenarioTypes\WeakTypedMetadataAttributeScenario\IWeakTypedScenarioMetadata.cs" />
+    <Compile Include="ScenarioTypes\WeakTypedMetadataAttributeScenario\WeakTypedScenario.cs" />
+    <Compile Include="ScenarioTypes\WeakTypedMetadataAttributeScenario\WeakTypedScenarioMetadataAttribute.cs" />
+    <Compile Include="ScenarioTypes\WeakTypedMetadataAttributeScenario\WeakTypedScenarioMetadataModule.cs" />
     <Compile Include="StrongTypedAttributeScenarioTestFixture.cs" />
     <Compile Include="WeakTypeAttributedMetadataModuleTestFixture.cs" />
     <Compile Include="WeakTypedAttributeScenarioTestFixture.cs" />

@@ -32,59 +32,6 @@ namespace Autofac.Extras.AttributeMetadata
     /// <summary>
     /// Provides a mechanism to separate metadata registrations from compile-time attributes.
     /// </summary>
-    /// <typeparam name="TInterface">interface used on concrete types of metadata decorated instances.</typeparam>
-    /// <typeparam name="TMetadata">strongly typed metadata definition.</typeparam>
-    public interface IMetadataRegistrar<in TInterface, in TMetadata>
-    {
-        /// <summary>
-        /// registers provided metadata on the declared type.
-        /// </summary>
-        /// <typeparam name="TInstance">concrete instance type.</typeparam>
-        /// <param name="metadata">metadata instance.</param>
-        /// <returns>
-        /// The registration for continued configuration.
-        /// </returns>
-        IRegistrationBuilder<TInstance, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterType<TInstance>(TMetadata metadata)
-            where TInstance : TInterface;
-
-        /// <summary>
-        /// registers provided metadata on the declared type.
-        /// </summary>
-        /// <param name="instanceType">Type of the instance.</param>
-        /// <param name="metadata">The metadata.</param>
-        /// <returns>
-        /// The registration for continued configuration.
-        /// </returns>
-        IRegistrationBuilder<object, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterType(Type instanceType, TMetadata metadata);
-
-        /// <summary>
-        /// registers the provided concrete instance and scans it for generic MetadataAttribute data.
-        /// </summary>
-        /// <typeparam name="TInstance">concrete instance type.</typeparam>
-        /// <returns>
-        /// The registration for continued configuration.
-        /// </returns>
-        IRegistrationBuilder<TInstance, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterAttributedType<TInstance>()
-            where TInstance : TInterface;
-
-        /// <summary>
-        /// registers the provided concrrete instance type and scans it for generate metadata data.
-        /// </summary>
-        /// <param name="instanceType">Type of the instance.</param>
-        /// <returns>
-        /// The registration for continued configuration.
-        /// </returns>
-        IRegistrationBuilder<object, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterAttributedType(Type instanceType);
-
-        /// <summary>
-        /// Gets the builder used to build an <see cref="IContainer"/> from component registrations.
-        /// </summary>
-        ContainerBuilder ContainerBuilder { get; }
-    }
-
-    /// <summary>
-    /// Provides a mechanism to separate metadata registrations from compile-time attributes.
-    /// </summary>
     /// <typeparam name="TInterface">Interface used on concrete types of metadata decorated instances.</typeparam>
     /// <typeparam name="TMetadata">Strongly typed metadata definition.</typeparam>
     public abstract class MetadataModule<TInterface, TMetadata> : Module, IMetadataRegistrar<TInterface, TMetadata>

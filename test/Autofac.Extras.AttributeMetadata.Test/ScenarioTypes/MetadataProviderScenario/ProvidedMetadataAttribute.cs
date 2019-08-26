@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using Autofac.Extras.AttributeMetadata;
 
-namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes
+namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.MetadataProviderScenarioTypes
 {
     [MetadataAttribute]
     [AttributeUsage(AttributeTargets.Class)]
@@ -17,21 +17,5 @@ namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes
                 { "Key2", "Value2" }
             };
         }
-    }
-
-    public class ProvidedMetadata
-    {
-        public string Key1 { get; set; }
-
-        public string Key2 { get; set; }
-    }
-
-    public interface IMetadataProviderScenario
-    {
-    }
-
-    [ProvidedMetadata]
-    public class MetadataProviderScenario : IMetadataProviderScenario
-    {
     }
 }

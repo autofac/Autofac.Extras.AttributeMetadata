@@ -1,13 +1,5 @@
-﻿namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes
+﻿namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.MetadataModuleScenarioDiscoveryTargets
 {
-    public class MetadataModuleScenario : IMetadataModuleScenario
-    {
-    }
-
-    public class MetadataModuleScenarioAlternate : IMetadataModuleScenario
-    {
-    }
-
     public class MetadataModuleScenarioMetadata : IMetadataModuleScenarioMetadata
     {
         public MetadataModuleScenarioMetadata(string name)

@@ -1,4 +1,5 @@
-﻿using Autofac.Integration.Mef;
+﻿using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.WeakTypedMetadataAttributeScenario;
+using Autofac.Integration.Mef;
 
 namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.CombinationalWeakTypedAttributeScenario
 {

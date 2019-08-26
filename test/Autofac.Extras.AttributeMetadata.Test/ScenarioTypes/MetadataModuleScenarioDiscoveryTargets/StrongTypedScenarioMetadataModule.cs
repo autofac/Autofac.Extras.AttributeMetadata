@@ -1,6 +1,6 @@
 ﻿using Autofac.Extras.AttributeMetadata;
 
-namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes
+namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.MetadataModuleScenarioDiscoveryTargets
 {
     /// <summary>
     /// This class demonstrates programmatic or non-attribute based discovery of metadata types.  This could also be

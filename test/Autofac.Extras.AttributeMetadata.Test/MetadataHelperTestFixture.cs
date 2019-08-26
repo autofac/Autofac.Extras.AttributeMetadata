@@ -1,6 +1,9 @@
 ﻿using System.Linq;
 using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
 using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.CombinationalWeakTypedAttributeScenario;
+using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.MetadataModuleScenarioDiscoveryTargets;
+using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.StrongTypedMetadataAttributeScenario;
+using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.WeakTypedMetadataAttributeScenario;
 using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test

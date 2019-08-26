@@ -1,4 +1,4 @@
-using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
+using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.NestedLifetimeScopeRegistrationScenario;
 using Autofac.Features.Metadata;
 using Xunit;
 
@@ -16,10 +16,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
 
             using (var lifetimeScope = container.BeginLifetimeScope(x => builder.RegisterType<int>()))
             {
-                var ex = Record.Exception(() =>
-                    lifetimeScope
-                        .Resolve<Meta<ILifetimeScopeRegistrationInstance,
-                            NestedLifetimeScopeRegistrationMetadataAttribute>>());
+                var ex = Record.Exception(() => lifetimeScope.Resolve<Meta<ILifetimeScopeRegistrationInstance, NestedLifetimeScopeRegistrationMetadataAttribute>>());
                 Assert.Null(ex);
             }
         }

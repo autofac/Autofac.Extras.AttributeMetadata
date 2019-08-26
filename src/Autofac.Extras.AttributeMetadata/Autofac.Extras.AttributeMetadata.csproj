@@ -56,7 +56,8 @@
     <Compile Include="AutofacAttributeExtensions.cs" />
     <Compile Include="IMetadataProvider.cs" />
     <Compile Include="MetadataHelper.cs" />
-    <Compile Include="MetadataModule.cs" />
+    <Compile Include="IMetadataRegistrar{TInterface,TMetadata}.cs" />
+    <Compile Include="MetadataModule{TInterface,TMetadata}.cs" />
     <Compile Include="ParameterFilterAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WithKeyAttribute.cs" />
