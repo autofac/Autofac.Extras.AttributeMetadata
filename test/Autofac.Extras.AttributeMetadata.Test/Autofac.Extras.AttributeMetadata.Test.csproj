@@ -72,6 +72,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttributeMetadataModuleTestFixture.cs" />
     <Compile Include="CombinationalWeakTypedAttributeScenarioTestFixture.cs" />
     <Compile Include="MetadataHelperTestFixture.cs" />
     <Compile Include="MetadataModuleTestFixture.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="ScenarioTypes\MetadataModuleScenarioDiscoveryTargets.cs" />
     <Compile Include="ScenarioTypes\MetadataModuleScenarioInterfaces.cs" />
     <Compile Include="ScenarioTypes\MetadataProviderScenario.cs" />
+    <Compile Include="ScenarioTypes\NestedLifetimeScopeRegistrationScenario.cs" />
     <Compile Include="ScenarioTypes\StrongTypedScenarioMetadataModule.cs" />
     <Compile Include="ScenarioTypes\StrongTypedMetadataAttributeScenario.cs" />
     <Compile Include="ScenarioTypes\TypeOfScenarioMetadataModule.cs" />
