@@ -1,27 +1,25 @@
+version: 4.1.0.{build}
+
 configuration: Release
 
 os: Visual Studio 2017
 
 environment:
-  package_semantic_version: 4.0.2
-  assembly_semantic_version: 4.0.0
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  NUGET_XMLDOC_MODE: skip
 
-version: $(package_semantic_version).{build}
+skip_tags: true
 
-assembly_info:
-  patch: true
-  file: '**\AssemblyInfo.*'
-  assembly_version: '$(assembly_semantic_version).0'
-  assembly_file_version: '$(appveyor_build_version)'
-  assembly_informational_version: '$(package_semantic_version)-CI-{build}'
+clone_depth: 1
 
-before_build:
-- nuget restore
+test: off
 
-build:
-  verbosity: minimal
-  publish_nuget: true
-  publish_nuget_symbols: false
+build_script:
+- ps: .\build.ps1
+
+artifacts:
+- path: artifacts\packages\**\*.nupkg
+  name: MyGet
 
 deploy:
 - provider: NuGet
@@ -30,3 +28,4 @@ deploy:
     secure: rCUEY75fXN0wxtMy6QL4jCrLdaYbxIBzIXWeN+wEu/XDpyqimzreOc5AH5jMd5ah
   skip_symbols: true
   symbol_server: https://www.myget.org/F/autofac/symbols/api/v2/package
+  artifact: MyGet
