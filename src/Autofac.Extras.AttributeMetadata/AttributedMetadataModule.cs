@@ -43,10 +43,7 @@ namespace Autofac.Extras.AttributeMetadata
         /// <param name="registration">The registration to attach functionality to.</param>
         protected override void AttachToComponentRegistration(IComponentRegistry componentRegistry, IComponentRegistration registration)
         {
-            if (registration == null)
-            {
-                throw new ArgumentNullException(nameof(registration));
-            }
+            if (registration == null) throw new ArgumentNullException(nameof(registration));
 
             foreach (var property in MetadataHelper.GetMetadata(registration.Activator.LimitType))
             {

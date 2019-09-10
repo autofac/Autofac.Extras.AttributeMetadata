@@ -79,7 +79,7 @@ namespace Autofac.Extras.AttributeMetadata
     /// <para>
     /// When registering your components, the associated metadata on the
     /// dependencies will be used. Be sure to specify the
-    /// <see cref="Autofac.Extras.AttributeMetadata.AutofacAttributeExtensions.WithAttributeFilter{TLimit, TReflectionActivatorData, TStyle}" />
+    /// <see cref="AutofacAttributeExtensions.WithAttributeFilter{TLimit, TReflectionActivatorData, TStyle}" />
     /// extension on the type with the filtered constructor parameters.
     /// </para>
     /// <code lang="C#">
@@ -104,13 +104,13 @@ namespace Autofac.Extras.AttributeMetadata
     public sealed class WithMetadataAttribute : ParameterFilterAttribute
     {
         /// <summary>
-        /// Reference to the <see cref="Autofac.Extras.AttributeMetadata.WithMetadataAttribute.FilterOne{T}"/>
+        /// Reference to the <see cref="FilterOne{T}"/>
         /// method used in creating a closed generic reference during registration.
         /// </summary>
         private static readonly MethodInfo FilterOneInfo = typeof(WithMetadataAttribute).GetMethod("FilterOne", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.InvokeMethod);
 
         /// <summary>
-        /// Reference to the <see cref="Autofac.Extras.AttributeMetadata.WithMetadataAttribute.FilterAll{T}"/>
+        /// Reference to the <see cref="FilterAll{T}"/>
         /// method used in creating a closed generic reference during registration.
         /// </summary>
         private static readonly MethodInfo FilterAllInfo = typeof(WithMetadataAttribute).GetMethod("FilterAll", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.InvokeMethod);
@@ -128,30 +128,30 @@ namespace Autofac.Extras.AttributeMetadata
         /// </param>
         public WithMetadataAttribute(string key, object value)
         {
-            this.Key = key;
-            this.Value = value;
+            Key = key;
+            Value = value;
         }
 
         /// <summary>
         /// Gets the key the dependency is expected to have to satisfy the parameter.
         /// </summary>
         /// <value>
-        /// The <see cref="System.String"/> corresponding to a registered metadata
+        /// The <see cref="string"/> corresponding to a registered metadata
         /// key on a component. Resolved components must have this metadata key to
         /// satisfy the filter.
         /// </value>
-        public string Key { get; private set; }
+        public string Key { get; }
 
         /// <summary>
         /// Gets the value the dependency is expected to have to satisfy the parameter.
         /// </summary>
         /// <value>
-        /// The <see cref="System.Object"/> corresponding to a registered metadata
+        /// The <see cref="object"/> corresponding to a registered metadata
         /// value on a component. Resolved components must have the metadata
-        /// <see cref="Autofac.Extras.AttributeMetadata.WithMetadataAttribute.Key"/> with
+        /// <see cref="Key"/> with
         /// this value to satisfy the filter.
         /// </value>
-        public object Value { get; private set; }
+        public object Value { get; }
 
         /// <summary>
         /// Resolves a constructor parameter based on metadata requirements.
@@ -161,20 +161,13 @@ namespace Autofac.Extras.AttributeMetadata
         /// <returns>
         /// The instance of the object that should be used for the parameter value.
         /// </returns>
-        /// <exception cref="System.ArgumentNullException">
+        /// <exception cref="ArgumentNullException">
         /// Thrown if <paramref name="parameter" /> or <paramref name="context" /> is <see langword="null" />.
         /// </exception>
         public override object ResolveParameter(ParameterInfo parameter, IComponentContext context)
         {
-            if (parameter == null)
-            {
-                throw new ArgumentNullException(nameof(parameter));
-            }
-
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            if (parameter == null) throw new ArgumentNullException(nameof(parameter));
+            if (context == null) throw new ArgumentNullException(nameof(context));
 
             // GetElementType currently is the effective equivalent of "Determine if the type
             // is in IEnumerable and if it is, get the type being enumerated." This doesn't support
@@ -183,40 +176,28 @@ namespace Autofac.Extras.AttributeMetadata
             var elementType = GetElementType(parameter.ParameterType);
             var hasMany = elementType != parameter.ParameterType;
 
-            if (hasMany)
-            {
-                return FilterAllInfo.MakeGenericMethod(elementType).Invoke(null, new object[] { context, this.Key, this.Value });
-            }
-
-            return FilterOneInfo.MakeGenericMethod(elementType).Invoke(null, new object[] { context, this.Key, this.Value });
+            return hasMany
+                ? FilterAllInfo.MakeGenericMethod(elementType).Invoke(null, new[] { context, Key, Value })
+                : FilterOneInfo.MakeGenericMethod(elementType).Invoke(null, new[] { context, Key, Value });
         }
 
-        private static Type GetElementType(Type type)
-        {
-            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IEnumerable<>))
-            {
-                return type.GetGenericArguments()[0];
-            }
+        private static Type GetElementType(Type type) =>
+            type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IEnumerable<>)
+                ? type.GetGenericArguments()[0]
+                : type;
 
-            return type;
-        }
-
-        private static T FilterOne<T>(IComponentContext context, string metadataKey, object metadataValue)
-        {
-            // Using Lazy<T> to ensure components that aren't actually used won't get activated.
-            return context.Resolve<IEnumerable<Meta<Lazy<T>>>>()
+        // Using Lazy<T> to ensure components that aren't actually used won't get activated.
+        private static T FilterOne<T>(IComponentContext context, string metadataKey, object metadataValue) =>
+            context.Resolve<IEnumerable<Meta<Lazy<T>>>>()
                 .Where(m => m.Metadata.ContainsKey(metadataKey) && metadataValue.Equals(m.Metadata[metadataKey]))
                 .Select(m => m.Value.Value)
                 .FirstOrDefault();
-        }
 
-        private static IEnumerable<T> FilterAll<T>(IComponentContext context, string metadataKey, object metadataValue)
-        {
-            // Using Lazy<T> to ensure components that aren't actually used won't get activated.
-            return context.Resolve<IEnumerable<Meta<Lazy<T>>>>()
+        // Using Lazy<T> to ensure components that aren't actually used won't get activated.
+        private static IEnumerable<T> FilterAll<T>(IComponentContext context, string metadataKey, object metadataValue) =>
+            context.Resolve<IEnumerable<Meta<Lazy<T>>>>()
                 .Where(m => m.Metadata.ContainsKey(metadataKey) && metadataValue.Equals(m.Metadata[metadataKey]))
                 .Select(m => m.Value.Value)
                 .ToArray();
-        }
     }
 }

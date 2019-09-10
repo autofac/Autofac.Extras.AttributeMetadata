@@ -24,11 +24,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Reflection;
-using Autofac.Features.Metadata;
 
 namespace Autofac.Extras.AttributeMetadata
 {
@@ -79,7 +76,7 @@ namespace Autofac.Extras.AttributeMetadata
     /// <para>
     /// When registering your components, the associated key on the
     /// dependencies will be used. Be sure to specify the
-    /// <see cref="Autofac.Extras.AttributeMetadata.AutofacAttributeExtensions.WithAttributeFilter{TLimit, TReflectionActivatorData, TStyle}" />
+    /// <see cref="AutofacAttributeExtensions.WithAttributeFilter{TLimit, TReflectionActivatorData, TStyle}" />
     /// extension on the type with the filtered constructor parameters.
     /// </para>
     /// <code lang="C#">
@@ -104,26 +101,23 @@ namespace Autofac.Extras.AttributeMetadata
     public sealed class WithKeyAttribute : ParameterFilterAttribute
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Autofac.Extras.AttributeMetadata.WithKeyAttribute" /> class.
+        /// Initializes a new instance of the <see cref="WithKeyAttribute" /> class.
         /// </summary>
         /// <param name="key">
         /// The <paramref name="key"/> that the
         /// dependency should have in order to satisfy the parameter.
         /// </param>
-        public WithKeyAttribute(object key)
-        {
-            this.Key = key;
-        }
+        public WithKeyAttribute(object key) => Key = key;
 
         /// <summary>
         /// Gets the key the dependency is expected to have to satisfy the parameter.
         /// </summary>
         /// <value>
-        /// The <see cref="System.Object"/> corresponding to a registered service
+        /// The <see cref="object"/> corresponding to a registered service
         /// key on a component. Resolved components must be keyed with this value to
         /// satisfy the filter.
         /// </value>
-        public object Key { get; private set; }
+        public object Key { get; }
 
         /// <summary>
         /// Resolves a constructor parameter based on keyed service requirements.
@@ -138,18 +132,10 @@ namespace Autofac.Extras.AttributeMetadata
         /// </exception>
         public override object ResolveParameter(ParameterInfo parameter, IComponentContext context)
         {
-            if (parameter == null)
-            {
-                throw new ArgumentNullException(nameof(parameter));
-            }
+            if (parameter == null) throw new ArgumentNullException(nameof(parameter));
+            if (context == null) throw new ArgumentNullException(nameof(context));
 
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
-            object value;
-            context.TryResolveKeyed(this.Key, parameter.ParameterType, out value);
+            context.TryResolveKeyed(Key, parameter.ParameterType, out var value);
             return value;
         }
     }

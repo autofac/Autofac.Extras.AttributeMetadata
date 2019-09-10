@@ -1,142 +1,38 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="Current" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{03A16C13-A683-4392-96B5-2EE786CEDA88}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Autofac.Extras.AttributeMetadata.Test</RootNamespace>
-    <AssemblyName>Autofac.Extras.AttributeMetadata.Test</AssemblyName>
-    <FileAlignment>512</FileAlignment>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyOriginatorKeyFile>../../Autofac.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\..\Autofac.snk</AssemblyOriginatorKeyFile>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
     <CodeAnalysisRuleSet>../../build/Analyzers.ruleset</CodeAnalysisRuleSet>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Autofac.Extras.AttributeMetadata.Test.xml</DocumentationFile>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Autofac.Extras.AttributeMetadata.Test.xml</DocumentationFile>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.Core" />
-    <Reference Include="Microsoft.CSharp" />
+    <ProjectReference Include="..\..\src\Autofac.Extras.AttributeMetadata\Autofac.Extras.AttributeMetadata.csproj" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="AttributeMetadataModuleTestFixture.cs" />
-    <Compile Include="CombinationalWeakTypedAttributeScenarioTestFixture.cs" />
-    <Compile Include="MetadataHelperTestFixture.cs" />
-    <Compile Include="MetadataModuleTestFixture.cs" />
-    <Compile Include="MetadataProviderTestFixture.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScenarioTypes\CombinationalWeakTypedAttributeScenario\CombinationalWeakAgeMetadataAttribute.cs" />
-    <Compile Include="ScenarioTypes\CombinationalWeakTypedAttributeScenario\CombinationalWeakNameMetadataAttribute.cs" />
-    <Compile Include="ScenarioTypes\CombinationalWeakTypedAttributeScenario\CombinationalWeakTypedScenario.cs" />
-    <Compile Include="ScenarioTypes\CombinationalWeakTypedAttributeScenario\ICombinationalWeakTypedScenario.cs" />
-    <Compile Include="ScenarioTypes\CombinationalWeakTypedAttributeScenario\ICombinationalWeakTypedScenarioMetadata.cs" />
-    <Compile Include="ScenarioTypes\MetadataModuleScenarioDiscoveryTargets\IMetadataModuleScenarioMetadata.cs" />
-    <Compile Include="ScenarioTypes\MetadataModuleScenarioDiscoveryTargets\MetadataModuleScenario.cs" />
-    <Compile Include="ScenarioTypes\MetadataModuleScenarioDiscoveryTargets\MetadataModuleScenarioAlternate.cs" />
-    <Compile Include="ScenarioTypes\MetadataModuleScenarioDiscoveryTargets\MetadataModuleScenarioMetadata.cs" />
-    <Compile Include="ScenarioTypes\MetadataModuleScenarioDiscoveryTargets\IMetadataModuleScenario.cs" />
-    <Compile Include="ScenarioTypes\MetadataProviderScenario\IMetadataProviderScenario.cs" />
-    <Compile Include="ScenarioTypes\MetadataProviderScenario\MetadataProviderScenario.cs" />
-    <Compile Include="ScenarioTypes\MetadataProviderScenario\ProvidedMetadata.cs" />
-    <Compile Include="ScenarioTypes\MetadataProviderScenario\ProvidedMetadataAttribute.cs" />
-    <Compile Include="ScenarioTypes\NestedLifetimeScopeRegistrationScenario\ILifetimeScopeRegistrationInstance.cs" />
-    <Compile Include="ScenarioTypes\NestedLifetimeScopeRegistrationScenario\NestedLifetimeScopeRegistrationInstance.cs" />
-    <Compile Include="ScenarioTypes\NestedLifetimeScopeRegistrationScenario\NestedLifetimeScopeRegistrationMetadataAttribute.cs" />
-    <Compile Include="ScenarioTypes\MetadataModuleScenarioDiscoveryTargets\StrongTypedScenarioMetadataModule.cs" />
-    <Compile Include="ScenarioTypes\StrongTypedMetadataAttributeScenario\AlternateStrongTypedScenario.cs" />
-    <Compile Include="ScenarioTypes\StrongTypedMetadataAttributeScenario\IStrongTypedScenario.cs" />
-    <Compile Include="ScenarioTypes\StrongTypedMetadataAttributeScenario\IStrongTypedScenarioMetadata.cs" />
-    <Compile Include="ScenarioTypes\MetadataModuleScenarioDiscoveryTargets\TypeOfScenarioMetadataModule.cs" />
-    <Compile Include="ScenarioTypes\CombinationalWeakTypedAttributeScenario\WeakTypeAttributedMetadataModule.cs" />
-    <Compile Include="ScenarioTypes\StrongTypedMetadataAttributeScenario\StrongTypedScenario.cs" />
-    <Compile Include="ScenarioTypes\StrongTypedMetadataAttributeScenario\StrongTypedScenarioMetadataAttribute.cs" />
-    <Compile Include="ScenarioTypes\WeakTypedMetadataAttributeScenario\IWeakTypedScenario.cs" />
-    <Compile Include="ScenarioTypes\WeakTypedMetadataAttributeScenario\IWeakTypedScenarioMetadata.cs" />
-    <Compile Include="ScenarioTypes\WeakTypedMetadataAttributeScenario\WeakTypedScenario.cs" />
-    <Compile Include="ScenarioTypes\WeakTypedMetadataAttributeScenario\WeakTypedScenarioMetadataAttribute.cs" />
-    <Compile Include="ScenarioTypes\WeakTypedMetadataAttributeScenario\WeakTypedScenarioMetadataModule.cs" />
-    <Compile Include="StrongTypedAttributeScenarioTestFixture.cs" />
-    <Compile Include="WeakTypeAttributedMetadataModuleTestFixture.cs" />
-    <Compile Include="WeakTypedAttributeScenarioTestFixture.cs" />
-    <Compile Include="WeakTypedScenarioMetadataModuleTestFixture.cs" />
-    <Compile Include="WithAttributeFilterTestFixture.cs" />
+    <Compile Remove="TestResults\**" />
+    <EmbeddedResource Remove="TestResults\**" />
+    <None Remove="TestResults\**" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Autofac.Extras.AttributeMetadata\Autofac.Extras.AttributeMetadata.csproj">
-      <Project>{d8715248-94c1-4556-8a81-7e338d68fe96}</Project>
-      <Name>Autofac.Extras.AttributeMetadata</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Autofac">
-      <Version>4.9.4</Version>
-    </PackageReference>
-    <PackageReference Include="Autofac.Mef">
-      <Version>4.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="StyleCop.Analyzers">
-      <Version>1.1.118</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
+    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
       <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="xunit">
-      <Version>2.4.1</Version>
-    </PackageReference>
-    <PackageReference Include="xunit.core">
-      <Version>2.4.1</Version>
-    </PackageReference>
-    <PackageReference Include="xunit.runner.console">
-      <Version>2.4.1</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="xunit.runner.visualstudio">
-      <Version>2.4.1</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>All</PrivateAssets>
     </PackageReference>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

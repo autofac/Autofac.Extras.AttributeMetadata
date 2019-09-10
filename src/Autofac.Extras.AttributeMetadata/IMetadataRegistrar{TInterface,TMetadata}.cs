@@ -25,7 +25,6 @@
 
 using System;
 using Autofac.Builder;
-using Autofac.Integration.Mef;
 
 namespace Autofac.Extras.AttributeMetadata
 {
@@ -36,6 +35,11 @@ namespace Autofac.Extras.AttributeMetadata
     /// <typeparam name="TMetadata">Strongly typed metadata definition.</typeparam>
     public interface IMetadataRegistrar<in TInterface, in TMetadata>
     {
+        /// <summary>
+        /// Gets the builder used to build an <see cref="IContainer"/> from component registrations.
+        /// </summary>
+        ContainerBuilder ContainerBuilder { get; }
+
         /// <summary>
         /// Registers provided metadata on the declared type.
         /// </summary>
@@ -75,10 +79,5 @@ namespace Autofac.Extras.AttributeMetadata
         /// The registration for continued configuration.
         /// </returns>
         IRegistrationBuilder<object, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterAttributedType(Type instanceType);
-
-        /// <summary>
-        /// Gets the builder used to build an <see cref="IContainer"/> from component registrations.
-        /// </summary>
-        ContainerBuilder ContainerBuilder { get; }
     }
 }

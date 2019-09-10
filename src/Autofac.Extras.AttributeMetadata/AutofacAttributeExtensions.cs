@@ -45,17 +45,14 @@ namespace Autofac.Extras.AttributeMetadata
         /// <typeparam name="TRegistrationStyle">Registration style type.</typeparam>
         /// <param name="builder">The registration builder containing registration data.</param>
         /// <returns>Registration builder allowing the registration to be configured.</returns>
-        /// <exception cref="System.ArgumentNullException">
+        /// <exception cref="ArgumentNullException">
         /// Thrown if <paramref name="builder" /> is <see langword="null" />.
         /// </exception>
         public static IRegistrationBuilder<TLimit, TScanningActivatorData, TRegistrationStyle>
             WithAttributedMetadata<TLimit, TScanningActivatorData, TRegistrationStyle>(this IRegistrationBuilder<TLimit, TScanningActivatorData, TRegistrationStyle> builder)
                 where TScanningActivatorData : ScanningActivatorData
         {
-            if (builder == null)
-            {
-                throw new ArgumentNullException(nameof(builder));
-            }
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
 
             builder.ActivatorData.ConfigurationActions.Add(
                 (t, rb) => rb.WithMetadata(MetadataHelper.GetMetadata(t)));
@@ -71,16 +68,13 @@ namespace Autofac.Extras.AttributeMetadata
         /// <typeparam name="TMetadata">Metadata type to search for.</typeparam>
         /// <param name="builder">The registration builder containing registration data.</param>
         /// <returns>Registration builder allowing the registration to be configured.</returns>
-        /// <exception cref="System.ArgumentNullException">
+        /// <exception cref="ArgumentNullException">
         /// Thrown if <paramref name="builder" /> is <see langword="null" />.
         /// </exception>
         public static IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle>
             WithAttributedMetadata<TMetadata>(this IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> builder)
         {
-            if (builder == null)
-            {
-                throw new ArgumentNullException(nameof(builder));
-            }
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
 
             builder.ActivatorData.ConfigurationActions.Add(
                 (t, rb) => rb.WithMetadata(MetadataHelper.GetMetadata<TMetadata>(t)));
@@ -90,37 +84,34 @@ namespace Autofac.Extras.AttributeMetadata
 
         /// <summary>
         /// Applies attribute-based filtering on constructor dependencies for use with attributes
-        /// derived from the <see cref="Autofac.Extras.AttributeMetadata.ParameterFilterAttribute"/>.
+        /// derived from the <see cref="ParameterFilterAttribute"/>.
         /// </summary>
         /// <typeparam name="TLimit">The type of the registration limit.</typeparam>
         /// <typeparam name="TReflectionActivatorData">Activator data type.</typeparam>
         /// <typeparam name="TRegistrationStyle">Registration style type.</typeparam>
         /// <param name="builder">The registration builder containing registration data.</param>
         /// <returns>Registration builder allowing the registration to be configured.</returns>
-        /// <exception cref="System.ArgumentNullException">
+        /// <exception cref="ArgumentNullException">
         /// Thrown if <paramref name="builder" /> is <see langword="null" />.
         /// </exception>
         /// <remarks>
         /// <para>
         /// Apply this extension to component registrations that use attributes
-        /// that derive from the <see cref="Autofac.Extras.AttributeMetadata.ParameterFilterAttribute"/>
-        /// like the <see cref="Autofac.Extras.AttributeMetadata.WithMetadataAttribute"/>
+        /// that derive from the <see cref="ParameterFilterAttribute"/>
+        /// like the <see cref="WithMetadataAttribute"/>
         /// in their constructors. Doing so will allow the attribute-based filtering to occur. See
-        /// <see cref="Autofac.Extras.AttributeMetadata.WithMetadataAttribute"/> for an
+        /// <see cref="WithMetadataAttribute"/> for an
         /// example on how to use the filter and attribute together.
         /// </para>
         /// </remarks>
-        /// <seealso cref="Autofac.Extras.AttributeMetadata.WithMetadataAttribute"/>
+        /// <seealso cref="WithMetadataAttribute"/>
         [Obsolete("Use Autofac.Features.AttributeFilters.RegistrationExtensions.WithAttributeFiltering from the core Autofac library instead.")]
         public static IRegistrationBuilder<TLimit, TReflectionActivatorData, TRegistrationStyle>
             WithAttributeFilter<TLimit, TReflectionActivatorData, TRegistrationStyle>(
                 this IRegistrationBuilder<TLimit, TReflectionActivatorData, TRegistrationStyle> builder)
             where TReflectionActivatorData : ReflectionActivatorData
         {
-            if (builder == null)
-            {
-                throw new ArgumentNullException(nameof(builder));
-            }
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
 
 #pragma warning disable CS0618
             return builder.WithParameter(
