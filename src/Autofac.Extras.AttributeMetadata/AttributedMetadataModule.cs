@@ -25,6 +25,7 @@
 
 using System;
 using Autofac.Core;
+using Autofac.Core.Registration;
 
 namespace Autofac.Extras.AttributeMetadata
 {
@@ -39,9 +40,9 @@ namespace Autofac.Extras.AttributeMetadata
         /// </summary>
         /// <remarks>This method will be called for all existing <i>and future</i> component
         /// registrations - ordering is not important.</remarks>
-        /// <param name="componentRegistry">The component registry.</param>
+        /// <param name="componentRegistry">The component registry builder.</param>
         /// <param name="registration">The registration to attach functionality to.</param>
-        protected override void AttachToComponentRegistration(IComponentRegistry componentRegistry, IComponentRegistration registration)
+        protected override void AttachToComponentRegistration(IComponentRegistryBuilder componentRegistry, IComponentRegistration registration)
         {
             if (registration == null) throw new ArgumentNullException(nameof(registration));
 
