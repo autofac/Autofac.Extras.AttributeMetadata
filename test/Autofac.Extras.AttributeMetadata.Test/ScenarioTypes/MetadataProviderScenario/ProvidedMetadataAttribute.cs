@@ -14,7 +14,7 @@ namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.MetadataProviderSc
             return new Dictionary<string, object>()
             {
                 { "Key1", "Value1" },
-                { "Key2", "Value2" }
+                { "Key2", "Value2" },
             };
         }
     }
