@@ -246,7 +246,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
         {
             public ManagerWithLazySingle([WithKey("Manager")] Lazy<ILogger> logger)
             {
-                this.Logger = logger;
+                Logger = logger;
             }
 
             public Lazy<ILogger> Logger { get; set; }
@@ -254,10 +254,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
 
         public class ManagerWithMetaSingle
         {
-            public ManagerWithMetaSingle([WithKey("Manager")] Meta<ILogger, EmptyMetadataAttribute> logger)
-            {
-                this.Logger = logger;
-            }
+            public ManagerWithMetaSingle([WithKey("Manager")] Meta<ILogger, EmptyMetadataAttribute> logger) => Logger = logger;
 
             public Meta<ILogger, EmptyMetadataAttribute> Logger { get; set; }
         }
@@ -266,7 +263,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
         {
             public ManagerWithOwnedSingle([WithKey("Manager")] Owned<ILogger> logger)
             {
-                this.Logger = logger;
+                Logger = logger;
             }
 
             public Owned<ILogger> Logger { get; set; }
@@ -276,7 +273,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
         {
             public ManagerWithLazyMany([WithKey("Manager")] IEnumerable<Lazy<ILogger>> loggers)
             {
-                this.Loggers = loggers;
+                Loggers = loggers;
             }
 
             public IEnumerable<Lazy<ILogger>> Loggers { get; set; }
@@ -286,7 +283,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
         {
             public ManagerWithMetaMany([WithKey("Manager")] IEnumerable<Meta<ILogger, EmptyMetadataAttribute>> loggers)
             {
-                this.Loggers = loggers;
+                Loggers = loggers;
             }
 
             public IEnumerable<Meta<ILogger, EmptyMetadataAttribute>> Loggers { get; set; }
@@ -296,7 +293,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
         {
             public ManagerWithOwnedMany([WithKey("Manager")] IEnumerable<Owned<ILogger>> loggers)
             {
-                this.Loggers = loggers;
+                Loggers = loggers;
             }
 
             public IEnumerable<Owned<ILogger>> Loggers { get; set; }
@@ -308,8 +305,8 @@ namespace Autofac.Extras.AttributeMetadata.Test
             [WithKey("Solution")] IEnumerable<IAdapter> adapters,
             [WithKey("Solution")] ILogger logger)
             {
-                this.Adapters = adapters.ToList();
-                this.Logger = logger;
+                Adapters = adapters.ToList();
+                Logger = logger;
             }
 
             public List<IAdapter> Adapters { get; set; }
@@ -323,8 +320,8 @@ namespace Autofac.Extras.AttributeMetadata.Test
             [WithMetadata("Target", "Solution")] IEnumerable<IAdapter> adapters,
             [WithMetadata("LoggerName", "Solution")] ILogger logger)
             {
-                this.Adapters = adapters.ToList();
-                this.Logger = logger;
+                Adapters = adapters.ToList();
+                Logger = logger;
             }
 
             public List<IAdapter> Adapters { get; set; }
@@ -338,8 +335,8 @@ namespace Autofac.Extras.AttributeMetadata.Test
             [WithMetadata("Target", "Solution")] IEnumerable<IAdapter> adapters,
             [WithKey("Solution")] ILogger logger)
             {
-                this.Adapters = adapters.ToList();
-                this.Logger = logger;
+                Adapters = adapters.ToList();
+                Logger = logger;
             }
 
             public List<IAdapter> Adapters { get; set; }
@@ -352,12 +349,12 @@ namespace Autofac.Extras.AttributeMetadata.Test
         {
             public AdapterAttribute(string target)
             {
-                this.Target = target;
+                Target = target;
             }
 
             public AdapterAttribute(IDictionary<string, object> metadata)
             {
-                this.Target = (string)metadata["Target"];
+                Target = (string)metadata["Target"];
             }
 
             public string Target { get; set; }

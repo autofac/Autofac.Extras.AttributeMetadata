@@ -4,7 +4,7 @@
     {
         public MetadataModuleScenarioMetadata(string name)
         {
-            this.Name = name;
+            Name = name;
         }
 
         // IExportScenario4Metadata Members
