@@ -37,8 +37,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="6.0.0-develop-01132" />
-    <PackageReference Include="Autofac.Mef" Version="5.0.0" />
+    <PackageReference Include="Autofac" Version="6.0.0-develop-01134" />
+    <PackageReference Include="Autofac.Mef" Version="6.0.0-develop-00247" />
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.0">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
