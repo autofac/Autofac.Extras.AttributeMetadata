@@ -4,10 +4,10 @@
       "args": [
       ],
       "console": "internalConsole",
-      "cwd": "${workspaceFolder}/test/Autofac.Configuration.Test",
+      "cwd": "${workspaceFolder}/test/Autofac.Extras.AttributeMetadata.Test",
       "name": ".NET Core Launch (console)",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/test/Autofac.Extras.AttributeMetadata.Test/bin/Debug/netcoreapp2.1/Autofac.Extras.AttributeMetadata.Test.dll",
+      "program": "${workspaceFolder}/test/Autofac.Extras.AttributeMetadata.Test/bin/Debug/netcoreapp3.1/Autofac.Extras.AttributeMetadata.Test.dll",
       "request": "launch",
       "stopAtEntry": false,
       "type": "coreclr"
