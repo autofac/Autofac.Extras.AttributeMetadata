@@ -4,7 +4,7 @@
     <Description>Autofac allows you to register metadata along with dependencies for additional resolution flexibility. This extension enables that metadata to be registered through attributes.</Description>
     <!-- VersionPrefix patched by AppVeyor -->
     <VersionPrefix>0.0.1</VersionPrefix>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <NoWarn>$(NoWarn);IDE0008</NoWarn>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -37,8 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="6.0.0-develop-01134" />
-    <PackageReference Include="Autofac.Mef" Version="6.0.0-develop-00247" />
+    <PackageReference Include="Autofac.Mef" Version="6.0.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.0">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
