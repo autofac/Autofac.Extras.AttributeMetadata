@@ -110,8 +110,15 @@ namespace Autofac.Extras.AttributeMetadata
         /// </exception>
         public override object ResolveParameter(ParameterInfo parameter, IComponentContext context)
         {
-            if (parameter == null) throw new ArgumentNullException(nameof(parameter));
-            if (context == null) throw new ArgumentNullException(nameof(context));
+            if (parameter == null)
+            {
+                throw new ArgumentNullException(nameof(parameter));
+            }
+
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
 
             context.TryResolveKeyed(Key, parameter.ParameterType, out var value);
             return value;

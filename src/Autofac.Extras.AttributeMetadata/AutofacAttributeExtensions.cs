@@ -30,7 +30,10 @@ namespace Autofac.Extras.AttributeMetadata
             WithAttributedMetadata<TLimit, TScanningActivatorData, TRegistrationStyle>(this IRegistrationBuilder<TLimit, TScanningActivatorData, TRegistrationStyle> builder)
                 where TScanningActivatorData : ScanningActivatorData
         {
-            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
 
             builder.ActivatorData.ConfigurationActions.Add(
                 (t, rb) => rb.WithMetadata(MetadataHelper.GetMetadata(t)));
@@ -52,7 +55,10 @@ namespace Autofac.Extras.AttributeMetadata
         public static IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle>
             WithAttributedMetadata<TMetadata>(this IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> builder)
         {
-            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
 
             builder.ActivatorData.ConfigurationActions.Add(
                 (t, rb) => rb.WithMetadata(MetadataHelper.GetMetadata<TMetadata>(t)));
@@ -89,7 +95,10 @@ namespace Autofac.Extras.AttributeMetadata
                 this IRegistrationBuilder<TLimit, TReflectionActivatorData, TRegistrationStyle> builder)
             where TReflectionActivatorData : ReflectionActivatorData
         {
-            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
 
 #pragma warning disable CS0618
             return builder.WithParameter(

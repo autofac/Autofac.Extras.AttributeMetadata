@@ -28,8 +28,15 @@ namespace Autofac.Extras.AttributeMetadata
         /// </exception>
         public static IEnumerable<KeyValuePair<string, object>> GetProperties(object target, Type instanceType)
         {
-            if (target == null) throw new ArgumentNullException(nameof(target));
-            if (instanceType == null) throw new ArgumentNullException(nameof(instanceType));
+            if (target == null)
+            {
+                throw new ArgumentNullException(nameof(target));
+            }
+
+            if (instanceType == null)
+            {
+                throw new ArgumentNullException(nameof(instanceType));
+            }
 
             if (target is IMetadataProvider asProvider)
             {
@@ -56,7 +63,10 @@ namespace Autofac.Extras.AttributeMetadata
         /// </exception>
         public static IEnumerable<KeyValuePair<string, object>> GetMetadata(Type targetType)
         {
-            if (targetType == null) throw new ArgumentNullException(nameof(targetType));
+            if (targetType == null)
+            {
+                throw new ArgumentNullException(nameof(targetType));
+            }
 
             var propertyList = new List<KeyValuePair<string, object>>();
 
@@ -82,7 +92,10 @@ namespace Autofac.Extras.AttributeMetadata
         /// </exception>
         public static IEnumerable<KeyValuePair<string, object>> GetMetadata<TMetadataType>(Type targetType)
         {
-            if (targetType == null) throw new ArgumentNullException(nameof(targetType));
+            if (targetType == null)
+            {
+                throw new ArgumentNullException(nameof(targetType));
+            }
 
             var attribute = (from p in targetType.GetCustomAttributes(typeof(TMetadataType), true) select p).FirstOrDefault();
 

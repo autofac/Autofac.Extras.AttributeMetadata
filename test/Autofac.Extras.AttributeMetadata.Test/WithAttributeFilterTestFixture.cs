@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Autofac Project. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -12,6 +15,14 @@ namespace Autofac.Extras.AttributeMetadata.Test
 {
     public class WithAttributeFilterTestFixture
     {
+        public interface ILogger
+        {
+        }
+
+        public interface IAdapter
+        {
+        }
+
         [Fact]
         public void Multiple_filter_types_can_be_used_on_one_component()
         {
@@ -207,10 +218,6 @@ namespace Autofac.Extras.AttributeMetadata.Test
             Assert.Equal(2, adapterActivationCount);
         }
 
-        public interface ILogger
-        {
-        }
-
         public class ConsoleLogger : ILogger
         {
         }
@@ -220,10 +227,6 @@ namespace Autofac.Extras.AttributeMetadata.Test
         }
 
         public class SqlLogger : ILogger
-        {
-        }
-
-        public interface IAdapter
         {
         }
 
