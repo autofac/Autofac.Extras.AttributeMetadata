@@ -167,6 +167,22 @@ namespace Autofac.Extras.AttributeMetadata.Test
         }
 
         [Fact]
+        public void Verify_key_filter_can_split_multiple_identical_concrete_services()
+        {
+            var builder = new ContainerBuilder();
+            builder.Register(ctx => new IdentifiableObject { Id = "a" }).Keyed<IdentifiableObject>("First");
+            builder.Register(ctx => new IdentifiableObject { Id = "b" }).Keyed<IdentifiableObject>("Second");
+            builder.Register(ctx => new IdentifiableObject { Id = "c" }).Keyed<IdentifiableObject>("Third");
+            builder.RegisterType<ManagerWithKeyedMultiple>().WithAttributeFilter();
+
+            var container = builder.Build();
+            var resolved = container.Resolve<ManagerWithKeyedMultiple>();
+            Assert.Equal("a", resolved.First.Id);
+            Assert.Equal("b", resolved.Second.Id);
+            Assert.Equal("c", resolved.Third.Id);
+        }
+
+        [Fact]
         public void Verify_metadata_filter_is_applied_on_constructor_dependency_single()
         {
             var builder = new ContainerBuilder();
@@ -245,6 +261,11 @@ namespace Autofac.Extras.AttributeMetadata.Test
         {
         }
 
+        public class IdentifiableObject
+        {
+            public string Id { get; set; }
+        }
+
         public class ManagerWithLazySingle
         {
             public ManagerWithLazySingle([WithKey("Manager")] Lazy<ILogger> logger)
@@ -270,6 +291,22 @@ namespace Autofac.Extras.AttributeMetadata.Test
             }
 
             public Owned<ILogger> Logger { get; set; }
+        }
+
+        public class ManagerWithKeyedMultiple
+        {
+            public ManagerWithKeyedMultiple([WithKey("First")] IdentifiableObject first, [WithKey("Second")] IdentifiableObject second, [WithKey("Third")] IdentifiableObject third)
+            {
+                First = first;
+                Second = second;
+                Third = third;
+            }
+
+            public IdentifiableObject First { get; set; }
+
+            public IdentifiableObject Second { get; set; }
+
+            public IdentifiableObject Third { get; set; }
         }
 
         public class ManagerWithLazyMany
