@@ -170,6 +170,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
         public void Verify_key_filter_can_split_multiple_identical_concrete_services()
         {
             var builder = new ContainerBuilder();
+            builder.RegisterType<ConsoleLogger>().As<ILogger>();
             builder.Register(ctx => new IdentifiableObject { Id = "a" }).Keyed<IdentifiableObject>("First");
             builder.Register(ctx => new IdentifiableObject { Id = "b" }).Keyed<IdentifiableObject>("Second");
             builder.Register(ctx => new IdentifiableObject { Id = "c" }).Keyed<IdentifiableObject>("Third");
@@ -177,6 +178,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
 
             var container = builder.Build();
             var resolved = container.Resolve<ManagerWithKeyedMultiple>();
+            Assert.IsType<ConsoleLogger>(resolved.Logger);
             Assert.Equal("a", resolved.First.Id);
             Assert.Equal("b", resolved.Second.Id);
             Assert.Equal("c", resolved.Third.Id);
@@ -295,12 +297,19 @@ namespace Autofac.Extras.AttributeMetadata.Test
 
         public class ManagerWithKeyedMultiple
         {
-            public ManagerWithKeyedMultiple([WithKey("First")] IdentifiableObject first, [WithKey("Second")] IdentifiableObject second, [WithKey("Third")] IdentifiableObject third)
+            public ManagerWithKeyedMultiple(
+                ILogger logger,
+                [WithKey("First")] IdentifiableObject first,
+                [WithKey("Second")] IdentifiableObject second,
+                [WithKey("Third")] IdentifiableObject third)
             {
+                Logger = logger;
                 First = first;
                 Second = second;
                 Third = third;
             }
+
+            public ILogger Logger { get; set; }
 
             public IdentifiableObject First { get; set; }
 
