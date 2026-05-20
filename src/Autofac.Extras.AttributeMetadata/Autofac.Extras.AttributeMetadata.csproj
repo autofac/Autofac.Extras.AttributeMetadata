@@ -22,7 +22,7 @@
     <AssemblyTitle>Autofac.Extras.AttributeMetadata</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Copyright>Copyright © 2015 Autofac Contributors</Copyright>
-    <CodeAnalysisRuleSet>../../build/Analyzers.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>../../build/Source.ruleset</CodeAnalysisRuleSet>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedAllSources>true</EmbedAllSources>
