@@ -11,7 +11,7 @@ using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test
 {
-    internal class StrongTypedAttributeScenarioTestFixture
+    public class StrongTypedAttributeScenarioTestFixture
     {
         [Fact]
         public void Validate_wireup_of_typed_attributes_to_strongly_typed_metadata_on_resolve()

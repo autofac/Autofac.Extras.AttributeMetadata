@@ -13,7 +13,7 @@ using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test
 {
-    internal class WithAttributeFilterTestFixture
+    public class WithAttributeFilterTestFixture
     {
         internal interface ILogger
         {

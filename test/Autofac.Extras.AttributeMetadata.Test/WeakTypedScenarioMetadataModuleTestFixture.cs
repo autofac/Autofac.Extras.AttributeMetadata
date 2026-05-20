@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test
 {
-    internal class WeakTypedScenarioMetadataModuleTestFixture
+    public class WeakTypedScenarioMetadataModuleTestFixture
     {
         [Fact]
         public void Verify_single_attribute_scan_results_from_test_fixture()

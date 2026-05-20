@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test
 {
-    internal class AttributeMetadataModuleTestFixture
+    public class AttributeMetadataModuleTestFixture
     {
         [Fact]
         public void Does_not_throw_in_nested_lifetimeScope_builders()

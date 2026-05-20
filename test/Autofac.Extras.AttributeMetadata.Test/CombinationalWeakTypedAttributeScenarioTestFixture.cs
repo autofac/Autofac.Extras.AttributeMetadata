@@ -12,7 +12,7 @@ using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test
 {
-    internal class CombinationalWeakTypedAttributeScenarioTestFixture
+    public class CombinationalWeakTypedAttributeScenarioTestFixture
     {
         /// <summary>
         /// This is a test that demonstrates the ability to combine multiple weak-typed attributes to

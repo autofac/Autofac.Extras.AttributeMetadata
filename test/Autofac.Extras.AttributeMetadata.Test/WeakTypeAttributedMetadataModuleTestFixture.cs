@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test
 {
-    internal class WeakTypeAttributedMetadataModuleTestFixture
+    public class WeakTypeAttributedMetadataModuleTestFixture
     {
         [Fact]
         public void Verify_automatic_scanning_with_the_attributed_metadata_module()

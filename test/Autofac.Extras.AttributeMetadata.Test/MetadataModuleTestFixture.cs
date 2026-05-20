@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test
 {
-    internal class MetadataModuleTestFixture
+    public class MetadataModuleTestFixture
     {
         [Fact]
         public void Metadata_module_scenario_validate_registration_content()
