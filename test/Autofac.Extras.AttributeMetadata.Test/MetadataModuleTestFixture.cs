@@ -23,12 +23,12 @@ namespace Autofac.Extras.AttributeMetadata.Test
             var items = builder.Build().Resolve<IEnumerable<Lazy<IMetadataModuleScenario, IMetadataModuleScenarioMetadata>>>();
 
             // assert
-            Assert.Single(items.Where(p => p.Metadata.Name == "sid"));
-            Assert.Single(items.Where(p => p.Metadata.Name == "nancy"));
-            Assert.Single(items.Where(p => p.Metadata.Name == "the-cats"));
+            Assert.Single(items, p => p.Metadata.Name == "sid");
+            Assert.Single(items, p => p.Metadata.Name == "nancy");
+            Assert.Single(items, p => p.Metadata.Name == "the-cats");
 
             // the following was not registered
-            Assert.Empty(items.Where(p => p.Metadata.Name == "the-dogs"));
+            Assert.DoesNotContain(items, p => p.Metadata.Name == "the-dogs");
         }
 
         [Fact]
@@ -43,12 +43,12 @@ namespace Autofac.Extras.AttributeMetadata.Test
             var items = builder.Build().Resolve<IEnumerable<Lazy<IMetadataModuleScenario, IMetadataModuleScenarioMetadata>>>();
 
             // assert
-            Assert.Single(items.Where(p => p.Metadata.Name == "sid"));
-            Assert.Single(items.Where(p => p.Metadata.Name == "nancy"));
-            Assert.Single(items.Where(p => p.Metadata.Name == "the-cats"));
+            Assert.Single(items, p => p.Metadata.Name == "sid");
+            Assert.Single(items, p => p.Metadata.Name == "nancy");
+            Assert.Single(items, p => p.Metadata.Name == "the-cats");
 
             // the following was not registered
-            Assert.Empty(items.Where(p => p.Metadata.Name == "the-dogs"));
+            Assert.DoesNotContain(items, p => p.Metadata.Name == "the-dogs");
         }
     }
 }

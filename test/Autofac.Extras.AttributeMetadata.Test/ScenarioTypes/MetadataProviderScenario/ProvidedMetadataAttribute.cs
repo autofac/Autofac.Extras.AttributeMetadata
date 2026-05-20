@@ -9,7 +9,7 @@ namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.MetadataProviderSc
 {
     [MetadataAttribute]
     [AttributeUsage(AttributeTargets.Class)]
-    public class ProvidedMetadataAttribute : Attribute, IMetadataProvider
+    public sealed class ProvidedMetadataAttribute : Attribute, IMetadataProvider
     {
         public IDictionary<string, object> GetMetadata(Type targetType)
         {

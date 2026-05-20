@@ -394,7 +394,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
         }
 
         [MetadataAttribute]
-        public class AdapterAttribute : Attribute
+        public sealed class AdapterAttribute : Attribute
         {
             public AdapterAttribute(string target)
             {
@@ -406,11 +406,11 @@ namespace Autofac.Extras.AttributeMetadata.Test
                 Target = (string)metadata["Target"];
             }
 
-            public string Target { get; set; }
+            public string Target { get; internal set; }
         }
 
         [MetadataAttribute]
-        public class EmptyMetadataAttribute : Attribute
+        public sealed class EmptyMetadataAttribute : Attribute
         {
         }
     }

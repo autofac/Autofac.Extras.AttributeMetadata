@@ -29,8 +29,8 @@ namespace Autofac.Extras.AttributeMetadata.Test
 
             // assert
             Assert.Equal(2, items.Count());
-            Assert.Single(items.Where(p => p.Metadata.Name == "Hello" && p.Metadata.Age == 42));
-            Assert.Single(items.Where(p => p.Metadata.Name == "Goodbye" && p.Metadata.Age == 24));
+            Assert.Single(items, p => p.Metadata.Name == "Hello" && p.Metadata.Age == 42);
+            Assert.Single(items, p => p.Metadata.Name == "Goodbye" && p.Metadata.Age == 24);
 
             Assert.IsType<StrongTypedScenario>(items.Where(p => p.Metadata.Name == "Hello" && p.Metadata.Age == 42).First().Value);
             Assert.IsType<AlternateStrongTypedScenario>(items.Where(p => p.Metadata.Name == "Goodbye" && p.Metadata.Age == 24).First().Value);
