@@ -7,7 +7,7 @@ using System.ComponentModel.Composition;
 namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.CombinationalWeakTypedAttributeScenario
 {
     [MetadataAttribute]
-    internal sealed class CombinationalWeakAgeMetadataAttribute : Attribute
+    public sealed class CombinationalWeakAgeMetadataAttribute : Attribute
     {
         public CombinationalWeakAgeMetadataAttribute(int age)
         {
