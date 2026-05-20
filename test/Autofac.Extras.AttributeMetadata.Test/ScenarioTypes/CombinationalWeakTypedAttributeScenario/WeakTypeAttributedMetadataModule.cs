@@ -6,7 +6,7 @@ using Autofac.Integration.Mef;
 
 namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.CombinationalWeakTypedAttributeScenario
 {
-    internal class WeakTypeAttributedMetadataModule : AttributedMetadataModule
+    public class WeakTypeAttributedMetadataModule : AttributedMetadataModule
     {
         protected override void Load(ContainerBuilder builder)
         {

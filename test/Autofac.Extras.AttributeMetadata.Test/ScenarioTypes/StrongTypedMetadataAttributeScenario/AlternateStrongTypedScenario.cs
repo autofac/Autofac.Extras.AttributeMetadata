@@ -4,7 +4,7 @@
 namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.StrongTypedMetadataAttributeScenario
 {
     [StrongTypedScenarioMetadata("Goodbye", 24)]
-    internal class AlternateStrongTypedScenario : IStrongTypedScenario
+    public class AlternateStrongTypedScenario : IStrongTypedScenario
     {
     }
 }

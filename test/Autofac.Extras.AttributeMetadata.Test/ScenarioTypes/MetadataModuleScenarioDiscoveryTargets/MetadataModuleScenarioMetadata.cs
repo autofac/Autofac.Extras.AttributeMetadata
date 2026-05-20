@@ -3,7 +3,7 @@
 
 namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.MetadataModuleScenarioDiscoveryTargets
 {
-    internal class MetadataModuleScenarioMetadata : IMetadataModuleScenarioMetadata
+    public class MetadataModuleScenarioMetadata : IMetadataModuleScenarioMetadata
     {
         public MetadataModuleScenarioMetadata(string name)
         {

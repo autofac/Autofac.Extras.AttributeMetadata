@@ -7,7 +7,7 @@ namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.WeakTypedMetadataA
     /// This class demonstrates the ability to search for metadata based on metadata attributes instead of
     /// providing the metadata directly.
     /// </summary>
-    internal class WeakTypedScenarioMetadataModule : MetadataModule<IWeakTypedScenario, IWeakTypedScenarioMetadata>
+    public class WeakTypedScenarioMetadataModule : MetadataModule<IWeakTypedScenario, IWeakTypedScenarioMetadata>
     {
         private readonly bool _useGeneric;
 

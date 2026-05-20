@@ -3,7 +3,7 @@
 
 namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.NestedLifetimeScopeRegistrationScenario
 {
-    internal interface ILifetimeScopeRegistrationInstance
+    public interface ILifetimeScopeRegistrationInstance
     {
     }
 }

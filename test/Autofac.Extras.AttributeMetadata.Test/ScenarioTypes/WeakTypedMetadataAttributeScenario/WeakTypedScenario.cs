@@ -4,7 +4,7 @@
 namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.WeakTypedMetadataAttributeScenario
 {
     [WeakTypedScenarioMetadata("Hello")]
-    internal class WeakTypedScenario : IWeakTypedScenario
+    public class WeakTypedScenario : IWeakTypedScenario
     {
     }
 }

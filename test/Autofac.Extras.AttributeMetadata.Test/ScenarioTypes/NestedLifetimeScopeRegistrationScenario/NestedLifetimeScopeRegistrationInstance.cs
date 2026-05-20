@@ -4,7 +4,7 @@
 namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.NestedLifetimeScopeRegistrationScenario
 {
     [NestedLifetimeScopeRegistrationMetadataAttribute(Value = "ParentLifetime")]
-    internal class NestedLifetimeScopeRegistrationInstance : ILifetimeScopeRegistrationInstance
+    public class NestedLifetimeScopeRegistrationInstance : ILifetimeScopeRegistrationInstance
     {
     }
 }

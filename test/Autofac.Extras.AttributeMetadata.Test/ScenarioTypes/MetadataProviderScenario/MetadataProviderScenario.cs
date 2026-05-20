@@ -4,7 +4,7 @@
 namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.MetadataProviderScenarioTypes
 {
     [ProvidedMetadata]
-    internal class MetadataProviderScenario : IMetadataProviderScenario
+    public class MetadataProviderScenario : IMetadataProviderScenario
     {
     }
 }

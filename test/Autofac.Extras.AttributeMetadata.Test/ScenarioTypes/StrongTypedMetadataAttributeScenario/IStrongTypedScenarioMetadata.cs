@@ -3,7 +3,7 @@
 
 namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.StrongTypedMetadataAttributeScenario
 {
-    internal interface IStrongTypedScenarioMetadata
+    public interface IStrongTypedScenarioMetadata
     {
         int Age { get; }
 
