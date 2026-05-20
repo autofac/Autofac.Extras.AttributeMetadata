@@ -3,7 +3,7 @@
 
 namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.MetadataProviderScenarioTypes
 {
-    public interface IMetadataProviderScenario
+    internal interface IMetadataProviderScenario
     {
     }
 }

@@ -3,7 +3,7 @@
 
 namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.WeakTypedMetadataAttributeScenario
 {
-    public interface IWeakTypedScenario
+    internal interface IWeakTypedScenario
     {
     }
 }

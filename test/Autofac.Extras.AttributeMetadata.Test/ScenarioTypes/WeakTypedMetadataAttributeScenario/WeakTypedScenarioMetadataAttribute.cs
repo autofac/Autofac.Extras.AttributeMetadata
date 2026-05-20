@@ -7,7 +7,7 @@ using System.ComponentModel.Composition;
 namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.WeakTypedMetadataAttributeScenario
 {
     [MetadataAttribute]
-    public class WeakTypedScenarioMetadataAttribute : Attribute
+    internal sealed class WeakTypedScenarioMetadataAttribute : Attribute
     {
         public WeakTypedScenarioMetadataAttribute(string name)
         {

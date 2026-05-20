@@ -3,7 +3,7 @@
 
 namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.MetadataProviderScenarioTypes
 {
-    public class ProvidedMetadata
+    internal class ProvidedMetadata
     {
         public string Key1 { get; set; }
 

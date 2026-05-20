@@ -12,7 +12,7 @@ using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test
 {
-    public class CombinationalWeakTypedAttributeScenarioTestFixture
+    internal class CombinationalWeakTypedAttributeScenarioTestFixture
     {
         /// <summary>
         /// This is a test that demonstrates the ability to combine multiple weak-typed attributes to
@@ -34,8 +34,8 @@ namespace Autofac.Extras.AttributeMetadata.Test
 
             // assert
             Assert.Single(items);
-            Assert.Single(items.Where(p => p.Metadata.Name == "Hello"));
-            Assert.Single(items.Where(p => p.Metadata.Age == 42));
+            Assert.Single(items, p => p.Metadata.Name == "Hello");
+            Assert.Single(items, p => p.Metadata.Age == 42);
         }
     }
 }

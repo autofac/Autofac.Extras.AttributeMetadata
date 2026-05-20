@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test
 {
-    public class MetadataProviderTestFixture
+    internal class MetadataProviderTestFixture
     {
         [Fact]
         public void Load_provided_into_weak_metadata()

@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test
 {
-    public class WeakTypedScenarioMetadataModuleTestFixture
+    internal class WeakTypedScenarioMetadataModuleTestFixture
     {
         [Fact]
         public void Verify_single_attribute_scan_results_from_test_fixture()
@@ -24,7 +24,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
 
             // assert
             Assert.Single(items);
-            Assert.Single(items.Where(p => p.Metadata.Name == "Hello"));
+            Assert.Single(items, p => p.Metadata.Name == "Hello");
         }
 
         [Fact]
@@ -40,7 +40,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
 
             // assert
             Assert.Single(items);
-            Assert.Single(items.Where(p => p.Metadata.Name == "Hello"));
+            Assert.Single(items, p => p.Metadata.Name == "Hello");
         }
     }
 }

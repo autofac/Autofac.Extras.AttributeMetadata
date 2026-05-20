@@ -8,7 +8,7 @@ using System.Linq;
 namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.StrongTypedMetadataAttributeScenario
 {
     [MetadataAttribute]
-    public class StrongTypedScenarioMetadataAttribute : Attribute, IStrongTypedScenarioMetadata
+    internal sealed class StrongTypedScenarioMetadataAttribute : Attribute, IStrongTypedScenarioMetadata
     {
         public StrongTypedScenarioMetadataAttribute(string name, int age)
         {

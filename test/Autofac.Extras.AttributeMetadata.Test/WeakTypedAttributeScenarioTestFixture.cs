@@ -12,7 +12,7 @@ using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test
 {
-    public class WeakTypedAttributeScenarioTestFixture
+    internal class WeakTypedAttributeScenarioTestFixture
     {
         [Fact]
         public void Validate_wireup_of_generic_attributes_to_strongly_typed_metadata_on_resolve()
@@ -30,7 +30,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
 
             // assert
             Assert.Single(items);
-            Assert.Single(items.Where(p => p.Metadata.Name == "Hello"));
+            Assert.Single(items, p => p.Metadata.Name == "Hello");
         }
     }
 }

@@ -3,7 +3,7 @@
 
 namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.CombinationalWeakTypedAttributeScenario
 {
-    public interface ICombinationalWeakTypedScenarioMetadata
+    internal interface ICombinationalWeakTypedScenarioMetadata
     {
         int Age { get; }
 

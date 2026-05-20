@@ -1,4 +1,4 @@
-// Copyright (c) Autofac Project. All rights reserved.
+﻿// Copyright (c) Autofac Project. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.NestedLifetimeScopeRegistrationScenario;
@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test
 {
-    public class AttributeMetadataModuleTestFixture
+    internal class AttributeMetadataModuleTestFixture
     {
         [Fact]
         public void Does_not_throw_in_nested_lifetimeScope_builders()

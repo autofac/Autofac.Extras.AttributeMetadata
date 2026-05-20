@@ -7,7 +7,7 @@ namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.CombinationalWeakT
 {
     [CombinationalWeakNameMetadata("Hello")]
     [CombinationalWeakAgeMetadata(42)]
-    public class CombinationalWeakTypedScenario : ICombinationalWeakTypedScenario
+    internal class CombinationalWeakTypedScenario : ICombinationalWeakTypedScenario
     {
     }
 }

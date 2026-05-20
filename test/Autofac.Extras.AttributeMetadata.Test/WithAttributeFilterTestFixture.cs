@@ -13,13 +13,13 @@ using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test
 {
-    public class WithAttributeFilterTestFixture
+    internal class WithAttributeFilterTestFixture
     {
-        public interface ILogger
+        internal interface ILogger
         {
         }
 
-        public interface IAdapter
+        internal interface IAdapter
         {
         }
 
@@ -236,39 +236,39 @@ namespace Autofac.Extras.AttributeMetadata.Test
             Assert.Equal(2, adapterActivationCount);
         }
 
-        public class ConsoleLogger : ILogger
+        internal class ConsoleLogger : ILogger
         {
         }
 
-        public class FileLogger : ILogger
+        internal class FileLogger : ILogger
         {
         }
 
-        public class SqlLogger : ILogger
-        {
-        }
-
-        [Adapter("Solution")]
-        public class MsBuildAdapter : IAdapter
+        internal class SqlLogger : ILogger
         {
         }
 
         [Adapter("Solution")]
-        public class DteAdapter : IAdapter
+        internal class MsBuildAdapter : IAdapter
+        {
+        }
+
+        [Adapter("Solution")]
+        internal class DteAdapter : IAdapter
         {
         }
 
         [Adapter("Other")]
-        public class ToolWindowAdapter : IAdapter
+        internal class ToolWindowAdapter : IAdapter
         {
         }
 
-        public class IdentifiableObject
+        internal class IdentifiableObject
         {
             public string Id { get; set; }
         }
 
-        public class ManagerWithLazySingle
+        internal class ManagerWithLazySingle
         {
             public ManagerWithLazySingle([WithKey("Manager")] Lazy<ILogger> logger)
             {
@@ -278,14 +278,14 @@ namespace Autofac.Extras.AttributeMetadata.Test
             public Lazy<ILogger> Logger { get; set; }
         }
 
-        public class ManagerWithMetaSingle
+        internal class ManagerWithMetaSingle
         {
             public ManagerWithMetaSingle([WithKey("Manager")] Meta<ILogger, EmptyMetadataAttribute> logger) => Logger = logger;
 
             public Meta<ILogger, EmptyMetadataAttribute> Logger { get; set; }
         }
 
-        public class ManagerWithOwnedSingle
+        internal class ManagerWithOwnedSingle
         {
             public ManagerWithOwnedSingle([WithKey("Manager")] Owned<ILogger> logger)
             {
@@ -295,7 +295,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
             public Owned<ILogger> Logger { get; set; }
         }
 
-        public class ManagerWithKeyedMultiple
+        internal class ManagerWithKeyedMultiple
         {
             public ManagerWithKeyedMultiple(
                 ILogger logger,
@@ -318,7 +318,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
             public IdentifiableObject Third { get; set; }
         }
 
-        public class ManagerWithLazyMany
+        internal class ManagerWithLazyMany
         {
             public ManagerWithLazyMany([WithKey("Manager")] IEnumerable<Lazy<ILogger>> loggers)
             {
@@ -328,7 +328,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
             public IEnumerable<Lazy<ILogger>> Loggers { get; set; }
         }
 
-        public class ManagerWithMetaMany
+        internal class ManagerWithMetaMany
         {
             public ManagerWithMetaMany([WithKey("Manager")] IEnumerable<Meta<ILogger, EmptyMetadataAttribute>> loggers)
             {
@@ -338,7 +338,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
             public IEnumerable<Meta<ILogger, EmptyMetadataAttribute>> Loggers { get; set; }
         }
 
-        public class ManagerWithOwnedMany
+        internal class ManagerWithOwnedMany
         {
             public ManagerWithOwnedMany([WithKey("Manager")] IEnumerable<Owned<ILogger>> loggers)
             {
@@ -348,7 +348,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
             public IEnumerable<Owned<ILogger>> Loggers { get; set; }
         }
 
-        public class SolutionExplorerKeyed
+        internal class SolutionExplorerKeyed
         {
             public SolutionExplorerKeyed(
             [WithKey("Solution")] IEnumerable<IAdapter> adapters,
@@ -363,7 +363,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
             public ILogger Logger { get; set; }
         }
 
-        public class SolutionExplorerMetadata
+        internal class SolutionExplorerMetadata
         {
             public SolutionExplorerMetadata(
             [WithMetadata("Target", "Solution")] IEnumerable<IAdapter> adapters,
@@ -378,7 +378,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
             public ILogger Logger { get; set; }
         }
 
-        public class SolutionExplorerMixed
+        internal class SolutionExplorerMixed
         {
             public SolutionExplorerMixed(
             [WithMetadata("Target", "Solution")] IEnumerable<IAdapter> adapters,
@@ -394,7 +394,7 @@ namespace Autofac.Extras.AttributeMetadata.Test
         }
 
         [MetadataAttribute]
-        public class AdapterAttribute : Attribute
+        internal sealed class AdapterAttribute : Attribute
         {
             public AdapterAttribute(string target)
             {
@@ -406,11 +406,11 @@ namespace Autofac.Extras.AttributeMetadata.Test
                 Target = (string)metadata["Target"];
             }
 
-            public string Target { get; set; }
+            public string Target { get; internal set; }
         }
 
         [MetadataAttribute]
-        public class EmptyMetadataAttribute : Attribute
+        internal sealed class EmptyMetadataAttribute : Attribute
         {
         }
     }

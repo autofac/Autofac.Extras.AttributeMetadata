@@ -11,7 +11,7 @@ using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test
 {
-    public class MetadataHelperTestFixture
+    internal class MetadataHelperTestFixture
     {
         [Fact]
         public void Scan_multiple_attributes_into_one_enumerable_set()
