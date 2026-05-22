@@ -2,8 +2,6 @@
 
   <PropertyGroup>
     <Description>Autofac allows you to register metadata along with dependencies for additional resolution flexibility. This extension enables that metadata to be registered through attributes.</Description>
-    <!-- VersionPrefix patched by AppVeyor -->
-    <VersionPrefix>0.0.1</VersionPrefix>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <NoWarn>$(NoWarn);IDE0008</NoWarn>
