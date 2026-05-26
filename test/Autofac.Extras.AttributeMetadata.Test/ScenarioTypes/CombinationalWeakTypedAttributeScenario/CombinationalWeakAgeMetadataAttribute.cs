@@ -4,16 +4,18 @@
 using System;
 using System.ComponentModel.Composition;
 
-namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.CombinationalWeakTypedAttributeScenario
-{
-    [MetadataAttribute]
-    public sealed class CombinationalWeakAgeMetadataAttribute : Attribute
-    {
-        public CombinationalWeakAgeMetadataAttribute(int age)
-        {
-            Age = age;
-        }
+namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.CombinationalWeakTypedAttributeScenario;
 
-        public int Age { get; private set; }
+[MetadataAttribute]
+public sealed class CombinationalWeakAgeMetadataAttribute : Attribute
+{
+    public CombinationalWeakAgeMetadataAttribute(int age)
+    {
+        Age = age;
+    }
+
+    public int Age
+    {
+        get; private set;
     }
 }

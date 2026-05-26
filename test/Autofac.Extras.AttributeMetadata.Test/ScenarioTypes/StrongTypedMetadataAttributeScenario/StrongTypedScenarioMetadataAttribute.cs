@@ -5,19 +5,24 @@ using System;
 using System.ComponentModel.Composition;
 using System.Linq;
 
-namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.StrongTypedMetadataAttributeScenario
+namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.StrongTypedMetadataAttributeScenario;
+
+[MetadataAttribute]
+public sealed class StrongTypedScenarioMetadataAttribute : Attribute, IStrongTypedScenarioMetadata
 {
-    [MetadataAttribute]
-    public sealed class StrongTypedScenarioMetadataAttribute : Attribute, IStrongTypedScenarioMetadata
+    public StrongTypedScenarioMetadataAttribute(string name, int age)
     {
-        public StrongTypedScenarioMetadataAttribute(string name, int age)
-        {
-            Name = name;
-            Age = age;
-        }
+        Name = name;
+        Age = age;
+    }
 
-        public string Name { get; private set; }
+    public string Name
+    {
+        get; private set;
+    }
 
-        public int Age { get; private set; }
+    public int Age
+    {
+        get; private set;
     }
 }

@@ -3,11 +3,10 @@
 
 using System;
 
-namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.CombinationalWeakTypedAttributeScenario
+namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.CombinationalWeakTypedAttributeScenario;
+
+[CombinationalWeakNameMetadata("Hello")]
+[CombinationalWeakAgeMetadata(42)]
+public class CombinationalWeakTypedScenario : ICombinationalWeakTypedScenario
 {
-    [CombinationalWeakNameMetadata("Hello")]
-    [CombinationalWeakAgeMetadata(42)]
-    public class CombinationalWeakTypedScenario : ICombinationalWeakTypedScenario
-    {
-    }
 }

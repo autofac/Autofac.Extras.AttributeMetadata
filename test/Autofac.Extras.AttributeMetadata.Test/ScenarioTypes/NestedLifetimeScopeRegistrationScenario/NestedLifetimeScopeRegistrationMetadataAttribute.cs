@@ -4,12 +4,14 @@
 using System;
 using System.ComponentModel.Composition;
 
-namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.NestedLifetimeScopeRegistrationScenario
+namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.NestedLifetimeScopeRegistrationScenario;
+
+[MetadataAttribute]
+[AttributeUsage(AttributeTargets.Class)]
+public sealed class NestedLifetimeScopeRegistrationMetadataAttribute : Attribute
 {
-    [MetadataAttribute]
-    [AttributeUsage(AttributeTargets.Class)]
-    public sealed class NestedLifetimeScopeRegistrationMetadataAttribute : Attribute
+    public string Value
     {
-        public string Value { get; set; }
+        get; set;
     }
 }

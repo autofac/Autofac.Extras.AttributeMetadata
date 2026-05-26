@@ -5,19 +5,18 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 
-namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.MetadataProviderScenarioTypes
+namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.MetadataProviderScenarioTypes;
+
+[MetadataAttribute]
+[AttributeUsage(AttributeTargets.Class)]
+public sealed class ProvidedMetadataAttribute : Attribute, IMetadataProvider
 {
-    [MetadataAttribute]
-    [AttributeUsage(AttributeTargets.Class)]
-    public sealed class ProvidedMetadataAttribute : Attribute, IMetadataProvider
+    public IDictionary<string, object> GetMetadata(Type targetType)
     {
-        public IDictionary<string, object> GetMetadata(Type targetType)
+        return new Dictionary<string, object>()
         {
-            return new Dictionary<string, object>()
-            {
-                { "Key1", "Value1" },
-                { "Key2", "Value2" },
-            };
-        }
+            { "Key1", "Value1" },
+            { "Key2", "Value2" },
+        };
     }
 }
