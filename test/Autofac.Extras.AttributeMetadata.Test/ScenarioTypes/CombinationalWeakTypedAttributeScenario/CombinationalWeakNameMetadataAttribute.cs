@@ -4,16 +4,18 @@
 using System;
 using System.ComponentModel.Composition;
 
-namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.CombinationalWeakTypedAttributeScenario
-{
-    [MetadataAttribute]
-    public sealed class CombinationalWeakNameMetadataAttribute : Attribute
-    {
-        public CombinationalWeakNameMetadataAttribute(string name)
-        {
-            Name = name;
-        }
+namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.CombinationalWeakTypedAttributeScenario;
 
-        public string Name { get; private set; }
+[MetadataAttribute]
+public sealed class CombinationalWeakNameMetadataAttribute : Attribute
+{
+    public CombinationalWeakNameMetadataAttribute(string name)
+    {
+        Name = name;
+    }
+
+    public string Name
+    {
+        get; private set;
     }
 }

@@ -10,27 +10,26 @@ using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.WeakTypedMetadataAttri
 using Autofac.Integration.Mef;
 using Xunit;
 
-namespace Autofac.Extras.AttributeMetadata.Test
+namespace Autofac.Extras.AttributeMetadata.Test;
+
+public class WeakTypedAttributeScenarioTestFixture
 {
-    public class WeakTypedAttributeScenarioTestFixture
+    [Fact]
+    public void Validate_wireup_of_generic_attributes_to_strongly_typed_metadata_on_resolve()
     {
-        [Fact]
-        public void Validate_wireup_of_generic_attributes_to_strongly_typed_metadata_on_resolve()
-        {
-            // arrange
-            var builder = new ContainerBuilder();
-            builder.RegisterMetadataRegistrationSources();
+        // arrange
+        var builder = new ContainerBuilder();
+        builder.RegisterMetadataRegistrationSources();
 
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-                .As<IWeakTypedScenario>()
-                .WithAttributedMetadata();
+        builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+            .As<IWeakTypedScenario>()
+            .WithAttributedMetadata();
 
-            // act
-            var items = builder.Build().Resolve<IEnumerable<Lazy<IWeakTypedScenario, IWeakTypedScenarioMetadata>>>();
+        // act
+        var items = builder.Build().Resolve<IEnumerable<Lazy<IWeakTypedScenario, IWeakTypedScenarioMetadata>>>();
 
-            // assert
-            Assert.Single(items);
-            Assert.Single(items, p => p.Metadata.Name == "Hello");
-        }
+        // assert
+        Assert.Single(items);
+        Assert.Single(items, p => p.Metadata.Name == "Hello");
     }
 }

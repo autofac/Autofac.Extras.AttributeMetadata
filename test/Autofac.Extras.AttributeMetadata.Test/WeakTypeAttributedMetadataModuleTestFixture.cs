@@ -6,35 +6,34 @@ using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.CombinationalWeakTyped
 using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.WeakTypedMetadataAttributeScenario;
 using Xunit;
 
-namespace Autofac.Extras.AttributeMetadata.Test
+namespace Autofac.Extras.AttributeMetadata.Test;
+
+public class WeakTypeAttributedMetadataModuleTestFixture
 {
-    public class WeakTypeAttributedMetadataModuleTestFixture
+    [Fact]
+    public void Verify_automatic_scanning_with_the_attributed_metadata_module()
     {
-        [Fact]
-        public void Verify_automatic_scanning_with_the_attributed_metadata_module()
-        {
-            var builder = new ContainerBuilder();
-            builder.RegisterModule(new WeakTypeAttributedMetadataModule());
+        var builder = new ContainerBuilder();
+        builder.RegisterModule(new WeakTypeAttributedMetadataModule());
 
-            var container = builder.Build();
+        var container = builder.Build();
 
-            var weakTyped = container.Resolve<Lazy<IWeakTypedScenario, IWeakTypedScenarioMetadata>>();
+        var weakTyped = container.Resolve<Lazy<IWeakTypedScenario, IWeakTypedScenarioMetadata>>();
 
-            Assert.Equal("Hello", weakTyped.Metadata.Name);
-        }
+        Assert.Equal("Hello", weakTyped.Metadata.Name);
+    }
 
-        [Fact]
-        public void Verify_automatic_scanning_with_the_multiple_attributions_by_the_module()
-        {
-            var builder = new ContainerBuilder();
-            builder.RegisterModule(new WeakTypeAttributedMetadataModule());
+    [Fact]
+    public void Verify_automatic_scanning_with_the_multiple_attributions_by_the_module()
+    {
+        var builder = new ContainerBuilder();
+        builder.RegisterModule(new WeakTypeAttributedMetadataModule());
 
-            var container = builder.Build();
+        var container = builder.Build();
 
-            var weakTyped = container.Resolve<Lazy<ICombinationalWeakTypedScenario, ICombinationalWeakTypedScenarioMetadata>>();
+        var weakTyped = container.Resolve<Lazy<ICombinationalWeakTypedScenario, ICombinationalWeakTypedScenarioMetadata>>();
 
-            Assert.Equal("Hello", weakTyped.Metadata.Name);
-            Assert.Equal(42, weakTyped.Metadata.Age);
-        }
+        Assert.Equal("Hello", weakTyped.Metadata.Name);
+        Assert.Equal(42, weakTyped.Metadata.Age);
     }
 }
