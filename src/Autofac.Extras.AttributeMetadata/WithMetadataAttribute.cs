@@ -187,7 +187,7 @@ public sealed class WithMetadataAttribute : ParameterFilterAttribute
 
     // Using Lazy<T> to ensure components that aren't actually used won't get activated.
     [SuppressMessage("IDE0051", "IDE0051", Justification = "Method is consumed via reflection in static member variable in this class.")]
-    private static IEnumerable<T> FilterAll<T>(IComponentContext context, string metadataKey, object metadataValue)
+    private static T[] FilterAll<T>(IComponentContext context, string metadataKey, object metadataValue)
         => context.Resolve<IEnumerable<Meta<Lazy<T>>>>()
             .Where(m => m.Metadata.ContainsKey(metadataKey) && metadataValue.Equals(m.Metadata[metadataKey]))
             .Select(m => m.Value.Value)
