@@ -71,7 +71,7 @@ public static class MetadataHelper
         var propertyList = new List<KeyValuePair<string, object>>();
 
         foreach (var attribute in targetType.GetCustomAttributes(true)
-                                            .Where(p => p.GetType().GetCustomAttributes(typeof(MetadataAttributeAttribute), true).Any()))
+                                            .Where(p => p.GetType().GetCustomAttributes(typeof(MetadataAttributeAttribute), true).Length > 0))
         {
             propertyList.AddRange(GetProperties(attribute, targetType));
         }
