@@ -445,6 +445,7 @@ public class WithAttributeFilterTestFixture
     }
 
     [MetadataAttribute]
+    [AttributeUsage(AttributeTargets.Class)]
     public sealed class AdapterAttribute : Attribute
     {
         public AdapterAttribute(string target)
@@ -466,6 +467,7 @@ public class WithAttributeFilterTestFixture
     }
 
     [MetadataAttribute]
+    [AttributeUsage(AttributeTargets.Class)]
     public sealed class EmptyMetadataAttribute : Attribute
     {
     }

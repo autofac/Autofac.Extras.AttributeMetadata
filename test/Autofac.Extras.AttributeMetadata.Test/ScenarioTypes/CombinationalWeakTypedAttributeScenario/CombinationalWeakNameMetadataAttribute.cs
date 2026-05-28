@@ -7,6 +7,7 @@ using System.ComponentModel.Composition;
 namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.CombinationalWeakTypedAttributeScenario;
 
 [MetadataAttribute]
+[AttributeUsage(AttributeTargets.Class)]
 public sealed class CombinationalWeakNameMetadataAttribute : Attribute
 {
     public CombinationalWeakNameMetadataAttribute(string name)

@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace Autofac.Extras.AttributeMetadata;
@@ -74,7 +73,7 @@ namespace Autofac.Extras.AttributeMetadata;
 /// var explorer = container.Resolve&lt;SolutionExplorer&gt;();
 /// </code>
 /// </example>
-[SuppressMessage("Microsoft.Design", "CA1018:MarkAttributesWithAttributeUsage", Justification = "Allowing the inherited AttributeUsageAttribute to be used avoids accidental override or conflict at this level.")]
+[AttributeUsage(AttributeTargets.Parameter)]
 [Obsolete("Use the Autofac.Features.AttributeFilters.KeyFilterAttribute from the core Autofac library instead.")]
 public sealed class WithKeyAttribute : ParameterFilterAttribute
 {
