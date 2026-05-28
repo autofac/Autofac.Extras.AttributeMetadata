@@ -11,6 +11,8 @@ public class StrongTypedScenarioMetadataModule : MetadataModule<IMetadataModuleS
 {
     public override void Register(IMetadataRegistrar<IMetadataModuleScenario, IMetadataModuleScenarioMetadata> registrar)
     {
+        ArgumentNullException.ThrowIfNull(registrar);
+
         registrar.RegisterType<MetadataModuleScenario>(new MetadataModuleScenarioMetadata("sid"));
         registrar.RegisterType<MetadataModuleScenario>(new MetadataModuleScenarioMetadata("nancy"));
 

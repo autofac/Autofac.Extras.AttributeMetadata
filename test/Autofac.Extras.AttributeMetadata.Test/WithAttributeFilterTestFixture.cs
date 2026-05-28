@@ -454,6 +454,8 @@ public class WithAttributeFilterTestFixture
 
         public AdapterAttribute(IDictionary<string, object> metadata)
         {
+            ArgumentNullException.ThrowIfNull(metadata);
+
             Target = (string)metadata["Target"];
         }
 

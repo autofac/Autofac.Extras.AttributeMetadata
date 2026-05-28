@@ -23,8 +23,8 @@ public class MetadataProviderTestFixture
         var withMetadata = container.Resolve<Meta<IMetadataProviderScenario>>();
 
         Assert.NotNull(withMetadata);
-        var value1 = withMetadata.Metadata.Where(kv => kv.Key == "Key1").FirstOrDefault();
-        var value2 = withMetadata.Metadata.Where(kv => kv.Key == "Key2").FirstOrDefault();
+        var value1 = withMetadata.Metadata.FirstOrDefault(kv => kv.Key == "Key1");
+        var value2 = withMetadata.Metadata.FirstOrDefault(kv => kv.Key == "Key2");
 
         Assert.Equal("Value1", value1.Value);
         Assert.Equal("Value2", value2.Value);

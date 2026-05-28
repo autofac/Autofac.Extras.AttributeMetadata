@@ -19,8 +19,8 @@ public class MetadataHelperTestFixture
         var metadata = MetadataHelper.GetMetadata(typeof(CombinationalWeakTypedScenario));
 
         Assert.Equal(2, metadata.Count());
-        Assert.Equal("Hello", metadata.Where(p => p.Key == "Name").FirstOrDefault().Value);
-        Assert.Equal(42, metadata.Where(p => p.Key == "Age").FirstOrDefault().Value);
+        Assert.Equal("Hello", metadata.FirstOrDefault(p => p.Key == "Name").Value);
+        Assert.Equal(42, metadata.FirstOrDefault(p => p.Key == "Age").Value);
     }
 
     [Fact]
@@ -29,7 +29,7 @@ public class MetadataHelperTestFixture
         var metadata = MetadataHelper.GetMetadata(typeof(WeakTypedScenario));
 
         Assert.Single(metadata);
-        Assert.Equal("Hello", metadata.Where(p => p.Key == "Name").FirstOrDefault().Value);
+        Assert.Equal("Hello", metadata.FirstOrDefault(p => p.Key == "Name").Value);
     }
 
     [Fact]
@@ -38,8 +38,8 @@ public class MetadataHelperTestFixture
         var metadata = MetadataHelper.GetMetadata<IStrongTypedScenarioMetadata>(typeof(StrongTypedScenario));
 
         Assert.Equal(2, metadata.Count());
-        Assert.Equal("Hello", metadata.Where(p => p.Key == "Name").FirstOrDefault().Value);
-        Assert.Equal(42, metadata.Where(p => p.Key == "Age").FirstOrDefault().Value);
+        Assert.Equal("Hello", metadata.FirstOrDefault(p => p.Key == "Name").Value);
+        Assert.Equal(42, metadata.FirstOrDefault(p => p.Key == "Age").Value);
     }
 
     [Fact]

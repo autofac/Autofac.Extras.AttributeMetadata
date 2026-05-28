@@ -32,7 +32,7 @@ public class StrongTypedAttributeScenarioTestFixture
         Assert.Single(items, p => p.Metadata.Name == "Hello" && p.Metadata.Age == 42);
         Assert.Single(items, p => p.Metadata.Name == "Goodbye" && p.Metadata.Age == 24);
 
-        Assert.IsType<StrongTypedScenario>(items.Where(p => p.Metadata.Name == "Hello" && p.Metadata.Age == 42).First().Value);
-        Assert.IsType<AlternateStrongTypedScenario>(items.Where(p => p.Metadata.Name == "Goodbye" && p.Metadata.Age == 24).First().Value);
+        Assert.IsType<StrongTypedScenario>(items.First(p => p.Metadata.Name == "Hello" && p.Metadata.Age == 42).Value);
+        Assert.IsType<AlternateStrongTypedScenario>(items.First(p => p.Metadata.Name == "Goodbye" && p.Metadata.Age == 24).Value);
     }
 }
