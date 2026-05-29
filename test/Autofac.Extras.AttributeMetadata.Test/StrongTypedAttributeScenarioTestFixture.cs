@@ -22,10 +22,10 @@ public class StrongTypedAttributeScenarioTestFixture
             .WithAttributedMetadata<IStrongTypedScenarioMetadata>();
 
         // act
-        var items = builder.Build().Resolve<IEnumerable<Lazy<IStrongTypedScenario, IStrongTypedScenarioMetadata>>>();
+        var items = builder.Build().Resolve<IEnumerable<Lazy<IStrongTypedScenario, IStrongTypedScenarioMetadata>>>().ToList();
 
         // assert
-        Assert.Equal(2, items.Count());
+        Assert.Equal(2, items.Count);
         Assert.Single(items, p => p.Metadata.Name == "Hello" && p.Metadata.Age == 42);
         Assert.Single(items, p => p.Metadata.Name == "Goodbye" && p.Metadata.Age == 24);
 

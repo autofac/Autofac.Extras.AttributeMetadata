@@ -14,9 +14,9 @@ public class MetadataHelperTestFixture
     [Fact]
     public void Scan_multiple_attributes_into_one_enumerable_set()
     {
-        var metadata = MetadataHelper.GetMetadata(typeof(CombinationalWeakTypedScenario));
+        var metadata = MetadataHelper.GetMetadata(typeof(CombinationalWeakTypedScenario)).ToList();
 
-        Assert.Equal(2, metadata.Count());
+        Assert.Equal(2, metadata.Count);
         Assert.Equal("Hello", metadata.FirstOrDefault(p => p.Key == "Name").Value);
         Assert.Equal(42, metadata.FirstOrDefault(p => p.Key == "Age").Value);
     }
@@ -24,7 +24,7 @@ public class MetadataHelperTestFixture
     [Fact]
     public void Scan_single_attribute_into_an_enumerable_set()
     {
-        var metadata = MetadataHelper.GetMetadata(typeof(WeakTypedScenario));
+        var metadata = MetadataHelper.GetMetadata(typeof(WeakTypedScenario)).ToList();
 
         Assert.Single(metadata);
         Assert.Equal("Hello", metadata.FirstOrDefault(p => p.Key == "Name").Value);
@@ -33,9 +33,9 @@ public class MetadataHelperTestFixture
     [Fact]
     public void Scan_strongly_typed_attribute_into_an_enumerable_set()
     {
-        var metadata = MetadataHelper.GetMetadata<IStrongTypedScenarioMetadata>(typeof(StrongTypedScenario));
+        var metadata = MetadataHelper.GetMetadata<IStrongTypedScenarioMetadata>(typeof(StrongTypedScenario)).ToList();
 
-        Assert.Equal(2, metadata.Count());
+        Assert.Equal(2, metadata.Count);
         Assert.Equal("Hello", metadata.FirstOrDefault(p => p.Key == "Name").Value);
         Assert.Equal(42, metadata.FirstOrDefault(p => p.Key == "Age").Value);
     }
@@ -43,7 +43,7 @@ public class MetadataHelperTestFixture
     [Fact]
     public void Verify_that_unfound_strong_typed_attribute_results_in_empty_property_set()
     {
-        var metadata = MetadataHelper.GetMetadata<IMetadataModuleScenarioMetadata>(typeof(MetadataModuleScenario));
+        var metadata = MetadataHelper.GetMetadata<IMetadataModuleScenarioMetadata>(typeof(MetadataModuleScenario)).ToList();
 
         Assert.Empty(metadata);
     }
@@ -51,7 +51,7 @@ public class MetadataHelperTestFixture
     [Fact]
     public void Verify_that_unfound_weakly_typed_attribute_results_in_empty_property_set()
     {
-        var metadata = MetadataHelper.GetMetadata(typeof(MetadataModuleScenario));
+        var metadata = MetadataHelper.GetMetadata(typeof(MetadataModuleScenario)).ToList();
 
         Assert.Empty(metadata);
     }
