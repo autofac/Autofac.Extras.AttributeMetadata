@@ -18,6 +18,8 @@ public class WeakTypedScenarioMetadataModule : MetadataModule<IWeakTypedScenario
 
     public override void Register(IMetadataRegistrar<IWeakTypedScenario, IWeakTypedScenarioMetadata> registrar)
     {
+        ArgumentNullException.ThrowIfNull(registrar);
+
         if (_useGeneric)
         {
             registrar.RegisterAttributedType<WeakTypedScenario>();

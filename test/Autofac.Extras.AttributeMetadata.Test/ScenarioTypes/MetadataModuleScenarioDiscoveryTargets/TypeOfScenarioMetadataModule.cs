@@ -7,6 +7,8 @@ public class TypeOfScenarioMetadataModule : MetadataModule<IMetadataModuleScenar
 {
     public override void Register(IMetadataRegistrar<IMetadataModuleScenario, IMetadataModuleScenarioMetadata> registrar)
     {
+        ArgumentNullException.ThrowIfNull(registrar);
+
         registrar.RegisterType(typeof(MetadataModuleScenario), new MetadataModuleScenarioMetadata("sid"));
         registrar.RegisterType(typeof(MetadataModuleScenario), new MetadataModuleScenarioMetadata("nancy"));
 

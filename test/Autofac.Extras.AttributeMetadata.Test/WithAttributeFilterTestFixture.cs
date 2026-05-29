@@ -1,10 +1,8 @@
 ﻿// Copyright (c) Autofac Project. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
-using System.Linq;
 using Autofac.Features.Metadata;
 using Autofac.Features.OwnedInstances;
 using Xunit;
@@ -387,13 +385,13 @@ public class WithAttributeFilterTestFixture
         [WithKey("Solution")] IEnumerable<IAdapter> adapters,
         [WithKey("Solution")] ILogger logger)
         {
-            Adapters = adapters.ToList();
+            Adapters = new Collection<IAdapter>(adapters.ToList());
             Logger = logger;
         }
 
-        public List<IAdapter> Adapters
+        public Collection<IAdapter> Adapters
         {
-            get; set;
+            get;
         }
 
         public ILogger Logger
@@ -408,13 +406,13 @@ public class WithAttributeFilterTestFixture
         [WithMetadata("Target", "Solution")] IEnumerable<IAdapter> adapters,
         [WithMetadata("LoggerName", "Solution")] ILogger logger)
         {
-            Adapters = adapters.ToList();
+            Adapters = new Collection<IAdapter>(adapters.ToList());
             Logger = logger;
         }
 
-        public List<IAdapter> Adapters
+        public Collection<IAdapter> Adapters
         {
-            get; set;
+            get;
         }
 
         public ILogger Logger
@@ -429,13 +427,13 @@ public class WithAttributeFilterTestFixture
         [WithMetadata("Target", "Solution")] IEnumerable<IAdapter> adapters,
         [WithKey("Solution")] ILogger logger)
         {
-            Adapters = adapters.ToList();
+            Adapters = new Collection<IAdapter>(adapters.ToList());
             Logger = logger;
         }
 
-        public List<IAdapter> Adapters
+        public Collection<IAdapter> Adapters
         {
-            get; set;
+            get;
         }
 
         public ILogger Logger
@@ -445,6 +443,7 @@ public class WithAttributeFilterTestFixture
     }
 
     [MetadataAttribute]
+    [AttributeUsage(AttributeTargets.Class)]
     public sealed class AdapterAttribute : Attribute
     {
         public AdapterAttribute(string target)
@@ -454,6 +453,8 @@ public class WithAttributeFilterTestFixture
 
         public AdapterAttribute(IDictionary<string, object> metadata)
         {
+            ArgumentNullException.ThrowIfNull(metadata);
+
             Target = (string)metadata["Target"];
         }
 
@@ -461,9 +462,15 @@ public class WithAttributeFilterTestFixture
         {
             get; internal set;
         }
+
+        public IDictionary<string, object> Metadata
+        {
+            get;
+        }
     }
 
     [MetadataAttribute]
+    [AttributeUsage(AttributeTargets.Class)]
     public sealed class EmptyMetadataAttribute : Attribute
     {
     }

@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Autofac Project. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
 using Autofac.Builder;
 using Autofac.Integration.Mef;
 
@@ -43,19 +42,6 @@ public abstract class MetadataModule<TInterface, TMetadata> : Module, IMetadataR
             MetadataHelper.GetProperties(metadata, typeof(TInstance)));
 
     /// <summary>
-    /// Registers the provided concrete instance and scans it for generic metadata attribute data.
-    /// </summary>
-    /// <typeparam name="TInstance">Concrete instance type.</typeparam>
-    /// <returns>
-    /// The registration for continued configuration.
-    /// </returns>
-    public IRegistrationBuilder<TInstance, ConcreteReflectionActivatorData, SingleRegistrationStyle>
-        RegisterAttributedType<TInstance>()
-        where TInstance : TInterface
-        => ContainerBuilder.RegisterType<TInstance>().As<TInterface>().WithMetadata(
-            MetadataHelper.GetMetadata(typeof(TInstance)));
-
-    /// <summary>
     /// registers provided metadata on the declared type.
     /// </summary>
     /// <param name="instanceType">Type of the instance.</param>
@@ -67,6 +53,19 @@ public abstract class MetadataModule<TInterface, TMetadata> : Module, IMetadataR
         Type instanceType, TMetadata metadata)
         => ContainerBuilder.RegisterType(instanceType).As<TInterface>().WithMetadata(
             MetadataHelper.GetProperties(metadata, instanceType));
+
+    /// <summary>
+    /// Registers the provided concrete instance and scans it for generic metadata attribute data.
+    /// </summary>
+    /// <typeparam name="TInstance">Concrete instance type.</typeparam>
+    /// <returns>
+    /// The registration for continued configuration.
+    /// </returns>
+    public IRegistrationBuilder<TInstance, ConcreteReflectionActivatorData, SingleRegistrationStyle>
+        RegisterAttributedType<TInstance>()
+        where TInstance : TInterface
+        => ContainerBuilder.RegisterType<TInstance>().As<TInterface>().WithMetadata(
+            MetadataHelper.GetMetadata(typeof(TInstance)));
 
     /// <summary>
     /// Registers the provided concrete instance type and scans it for generate metadata data.
