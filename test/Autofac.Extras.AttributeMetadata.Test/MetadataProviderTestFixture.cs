@@ -1,8 +1,6 @@
 ﻿// Copyright (c) Autofac Project. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System.Linq;
-using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
 using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.MetadataProviderScenarioTypes;
 using Autofac.Features.Metadata;
 using Xunit;
