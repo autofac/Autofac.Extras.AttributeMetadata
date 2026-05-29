@@ -3,6 +3,7 @@
     {
       "args": [
         "build",
+        "Autofac.Extras.AttributeMetadata.sln",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
