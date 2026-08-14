@@ -63,4 +63,40 @@ public static class AutofacAttributeExtensions
 
         return builder;
     }
+
+    /// <summary>
+    /// Registers metadata that is declared loosely using attributes marked with the
+    /// MetadataAttributeAttribute for an individual type registration. All of the marked
+    /// attributes are used together to create a common set of dictionary values that
+    /// constitute the metadata on the type.
+    /// </summary>
+    /// <typeparam name="TLimit">The type of the registration limit.</typeparam>
+    /// <param name="builder">The registration builder containing registration data.</param>
+    /// <returns>Registration builder allowing the registration to be configured.</returns>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown if <paramref name="builder" /> is <see langword="null" />.
+    /// </exception>
+    /// <remarks>
+    /// <para>
+    /// This is the individual registration counterpart to the assembly scanning overload, so
+    /// <c>RegisterType</c> and <c>RegisterAssemblyTypes</c> can both opt in to attributed metadata
+    /// the same way. It applies to reflection-based registrations, where the implementation type is
+    /// known at registration time; for delegate registrations, use the
+    /// <see cref="AttributedMetadataModule"/> instead.
+    /// </para>
+    /// <para>
+    /// This can safely be combined with the <see cref="AttributedMetadataModule"/>. The module does
+    /// not overwrite metadata keys that are already present, so metadata is applied once.
+    /// </para>
+    /// </remarks>
+    public static IRegistrationBuilder<TLimit, ConcreteReflectionActivatorData, SingleRegistrationStyle>
+        WithAttributedMetadata<TLimit>(this IRegistrationBuilder<TLimit, ConcreteReflectionActivatorData, SingleRegistrationStyle> builder)
+    {
+        if (builder == null)
+        {
+            throw new ArgumentNullException(nameof(builder));
+        }
+
+        return builder.WithMetadata(MetadataHelper.GetMetadata(builder.ActivatorData.ImplementationType));
+    }
 }
