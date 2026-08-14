@@ -4,7 +4,6 @@
 using System.Reflection;
 using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.CombinationalWeakTypedAttributeScenario;
 using Autofac.Integration.Mef;
-using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test;
 

@@ -3,7 +3,6 @@
 
 using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.MetadataProviderScenarioTypes;
 using Autofac.Features.Metadata;
-using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test;
 

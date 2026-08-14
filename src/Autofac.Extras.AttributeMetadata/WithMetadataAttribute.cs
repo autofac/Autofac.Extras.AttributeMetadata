@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Autofac Project. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Autofac.Features.Metadata;
 
@@ -82,13 +81,13 @@ public sealed class WithMetadataAttribute : ParameterFilterAttribute
     /// Reference to the <see cref="FilterOne{T}"/>
     /// method used in creating a closed generic reference during registration.
     /// </summary>
-    private static readonly MethodInfo _filterOneInfo = typeof(WithMetadataAttribute).GetMethod("FilterOne", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.InvokeMethod);
+    private static readonly MethodInfo _filterOneInfo = typeof(WithMetadataAttribute).GetMethod("FilterOne", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.InvokeMethod)!;
 
     /// <summary>
     /// Reference to the <see cref="FilterAll{T}"/>
     /// method used in creating a closed generic reference during registration.
     /// </summary>
-    private static readonly MethodInfo _filterAllInfo = typeof(WithMetadataAttribute).GetMethod("FilterAll", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.InvokeMethod);
+    private static readonly MethodInfo _filterAllInfo = typeof(WithMetadataAttribute).GetMethod("FilterAll", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.InvokeMethod)!;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="WithMetadataAttribute"/> class,
@@ -145,7 +144,7 @@ public sealed class WithMetadataAttribute : ParameterFilterAttribute
     /// <exception cref="ArgumentNullException">
     /// Thrown if <paramref name="parameter" /> or <paramref name="context" /> is <see langword="null" />.
     /// </exception>
-    public override object ResolveParameter(ParameterInfo parameter, IComponentContext context)
+    public override object? ResolveParameter(ParameterInfo parameter, IComponentContext context)
     {
         if (parameter == null)
         {
@@ -176,7 +175,7 @@ public sealed class WithMetadataAttribute : ParameterFilterAttribute
 
     // Using Lazy<T> to ensure components that aren't actually used won't get activated.
     [SuppressMessage("IDE0051", "IDE0051", Justification = "Method is consumed via reflection in static member variable in this class.")]
-    private static T FilterOne<T>(IComponentContext context, string metadataKey, object metadataValue)
+    private static T? FilterOne<T>(IComponentContext context, string metadataKey, object metadataValue)
         => context.Resolve<IEnumerable<Meta<Lazy<T>>>>()
             .Where(m => m.Metadata.ContainsKey(metadataKey) && metadataValue.Equals(m.Metadata[metadataKey]))
             .Select(m => m.Value.Value)

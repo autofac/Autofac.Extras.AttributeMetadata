@@ -23,7 +23,7 @@ public static class MetadataHelper
     /// <exception cref="System.ArgumentNullException">
     /// Thrown if <paramref name="target" /> or <paramref name="instanceType"/> is <see langword="null" />.
     /// </exception>
-    public static IEnumerable<KeyValuePair<string, object>> GetProperties(object target, Type instanceType)
+    public static IEnumerable<KeyValuePair<string, object?>> GetProperties(object target, Type instanceType)
     {
         if (target == null)
         {
@@ -47,7 +47,7 @@ public static class MetadataHelper
                             propertyInfo.DeclaringType != null &&
                             propertyInfo.DeclaringType.Name != typeof(Attribute).Name)
                      .Select(propertyInfo =>
-                              new KeyValuePair<string, object>(propertyInfo.Name, propertyInfo.GetValue(target, null)));
+                              new KeyValuePair<string, object?>(propertyInfo.Name, propertyInfo.GetValue(target, null)));
     }
 
     /// <summary>
@@ -58,14 +58,14 @@ public static class MetadataHelper
     /// <exception cref="System.ArgumentNullException">
     /// Thrown if <paramref name="targetType" /> is <see langword="null" />.
     /// </exception>
-    public static IEnumerable<KeyValuePair<string, object>> GetMetadata(Type targetType)
+    public static IEnumerable<KeyValuePair<string, object?>> GetMetadata(Type targetType)
     {
         if (targetType == null)
         {
             throw new ArgumentNullException(nameof(targetType));
         }
 
-        var propertyList = new List<KeyValuePair<string, object>>();
+        var propertyList = new List<KeyValuePair<string, object?>>();
 
         foreach (var attribute in targetType.GetCustomAttributes(true)
                                             .Where(p => p.GetType().GetCustomAttributes(typeof(MetadataAttributeAttribute), true).Length > 0))
@@ -87,7 +87,7 @@ public static class MetadataHelper
     /// <exception cref="ArgumentNullException">
     /// Thrown if <paramref name="targetType" /> is <see langword="null" />.
     /// </exception>
-    public static IEnumerable<KeyValuePair<string, object>> GetMetadata<TMetadataType>(Type targetType)
+    public static IEnumerable<KeyValuePair<string, object?>> GetMetadata<TMetadataType>(Type targetType)
     {
         if (targetType == null)
         {
@@ -96,6 +96,6 @@ public static class MetadataHelper
 
         var attribute = (from p in targetType.GetCustomAttributes(typeof(TMetadataType), true) select p).FirstOrDefault();
 
-        return attribute != null ? GetProperties(attribute, targetType) : new List<KeyValuePair<string, object>>();
+        return attribute != null ? GetProperties(attribute, targetType) : new List<KeyValuePair<string, object?>>();
     }
 }

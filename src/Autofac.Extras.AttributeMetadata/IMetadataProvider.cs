@@ -49,5 +49,5 @@ public interface IMetadataProvider
     /// </summary>
     /// <param name="targetType">Target <see cref="Type"/> for which metadata should be retrieved.</param>
     /// <returns>Metadata dictionary to merge with existing metadata.</returns>
-    IDictionary<string, object> GetMetadata(Type targetType);
+    IDictionary<string, object?> GetMetadata(Type targetType);
 }

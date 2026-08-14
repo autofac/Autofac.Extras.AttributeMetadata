@@ -3,7 +3,6 @@
 
 using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.CombinationalWeakTypedAttributeScenario;
 using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.WeakTypedMetadataAttributeScenario;
-using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test;
 

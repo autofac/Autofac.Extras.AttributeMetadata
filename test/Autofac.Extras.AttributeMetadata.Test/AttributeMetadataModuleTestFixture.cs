@@ -3,7 +3,6 @@
 
 using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.NestedLifetimeScopeRegistrationScenario;
 using Autofac.Features.Metadata;
-using Xunit;
 
 namespace Autofac.Extras.AttributeMetadata.Test;
 
@@ -17,7 +16,7 @@ public class AttributeMetadataModuleTestFixture
         builder.RegisterType<NestedLifetimeScopeRegistrationInstance>().As<ILifetimeScopeRegistrationInstance>();
         var container = builder.Build();
 
-        using (var lifetimeScope = container.BeginLifetimeScope(x => builder.RegisterType<int>()))
+        using (var lifetimeScope = container.BeginLifetimeScope(x => x.RegisterType<NestedLifetimeScopeRegistrationInstance>()))
         {
             var ex = Record.Exception(() => lifetimeScope.Resolve<Meta<ILifetimeScopeRegistrationInstance, NestedLifetimeScopeRegistrationMetadataAttribute>>());
             Assert.Null(ex);

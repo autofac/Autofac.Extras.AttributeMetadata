@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using Autofac.Features.Metadata;
 using Autofac.Features.OwnedInstances;
-using Xunit;
 
 #pragma warning disable CS0618
 
@@ -263,7 +262,7 @@ public class WithAttributeFilterTestFixture
 
     public class IdentifiableObject
     {
-        public string Id
+        public string? Id
         {
             get; set;
         }
@@ -463,7 +462,7 @@ public class WithAttributeFilterTestFixture
             get; internal set;
         }
 
-        public IDictionary<string, object> Metadata
+        public IDictionary<string, object>? Metadata
         {
             get;
         }
