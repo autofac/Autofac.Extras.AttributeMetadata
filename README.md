@@ -13,42 +13,50 @@ Please file issues and pull requests for this package in this repository rather 
 
 ## Quick Start
 
-Once you've added a reference to the `Autofac.Extras.AttributeMetadata` package, you can start by creating your aggregate service interface. The idea is that, instead of injecting several individual services into a consumer, you have a single aggregate that gets injected, where each property is one of the dependencies:
+First, create a metadata attribute - any `System.Attribute` that has MEF's `[MetadataAttribute]` applied. Every publicly readable property becomes one metadata name/value pair, so the attribute below provides `Age` metadata:
 
 ```csharp
-public interface IMyAggregateService
+[MetadataAttribute]
+public class AgeMetadataAttribute : Attribute
 {
-  IFirstService FirstService { get; }
-  ISecondService SecondService { get; }
-}
-```
+  public int Age { get; private set; }
 
-Update your consumer to take in the aggregate:
-
-```csharp
-public class SomeController
-{
-  private readonly IMyAggregateService _aggregateService;
-
-  public SomeController(IMyAggregateService aggregateService)
+  public AgeMetadataAttribute(int age)
   {
-    _aggregateService = aggregateService;
+    Age = age;
   }
 }
 ```
 
-Finally, make sure you register the individual dependencies, the aggregate service interface, and your consumer.
+Apply it to the component implementation rather than to the service interface:
+
+```csharp
+public interface IArtwork
+{
+  void Display();
+}
+
+[AgeMetadata(100)]
+public class CenturyArtwork : IArtwork
+{
+  public void Display() { ... }
+}
+```
+
+Then register the `AttributedMetadataModule` so the container reads those attributes, and consume the metadata as you would any other:
 
 ```csharp
 var builder = new ContainerBuilder();
-builder.RegisterAggregateService<IMyAggregateService>();
-builder.Register(/*...*/).As<IFirstService>();
-builder.Register(/*...*/).As<ISecondService>();
-builder.RegisterType<SomeController>();
+builder.RegisterModule<AttributedMetadataModule>();
+builder.RegisterType<CenturyArtwork>().As<IArtwork>();
 var container = builder.Build();
+
+var artwork = container.Resolve<IEnumerable<Meta<IArtwork>>>()
+                       .First(a => a.Metadata["Age"].Equals(100));
+artwork.Value.Display();
 ```
 
-When you resolve the consumer, the aggregate service will be injected and you can use the properties on that. This allows you to add new dependencies to the interface without changing all of your consumers.
+[You can read more details in the documentation.](https://autofac.readthedocs.io/en/latest/advanced/metadata.html)
 
 ## Get Help
 
