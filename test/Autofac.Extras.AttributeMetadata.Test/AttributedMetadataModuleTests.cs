@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using Autofac.Core;
-using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
+using Autofac.Extras.AttributeMetadata.Test.Stubs;
 using Autofac.Features.Metadata;
 
 namespace Autofac.Extras.AttributeMetadata.Test;
@@ -45,7 +45,7 @@ public class AttributedMetadataModuleTests
     {
     }
 
-    [NameMetadata("ParentLifetime")]
+    [Data("ParentLifetime")]
     private sealed class NestedScopeComponent : INestedScopeComponent
     {
     }

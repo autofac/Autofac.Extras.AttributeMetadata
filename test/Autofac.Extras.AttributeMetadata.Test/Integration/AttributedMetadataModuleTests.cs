@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Autofac Project. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
+using Autofac.Extras.AttributeMetadata.Test.Stubs;
 using Autofac.Integration.Mef;
 
 namespace Autofac.Extras.AttributeMetadata.Test.Integration;
@@ -9,26 +9,26 @@ namespace Autofac.Extras.AttributeMetadata.Test.Integration;
 public class AttributedMetadataModuleTests
 {
     [Fact]
-    public void MetadataFromMultipleAttributes()
+    public void MetadataFromCombinedAttributes()
     {
         var builder = new ContainerBuilder();
         builder.RegisterModule(new ScanningModule());
 
-        var weakTyped = builder.Build().Resolve<Lazy<ICombinationalWeakTypedScenario, INameAndAgeMetadata>>();
+        var component = builder.Build().Resolve<Lazy<ICombinedComponent, IDataAndCountView>>();
 
-        Assert.Equal("Hello", weakTyped.Metadata.Name);
-        Assert.Equal(42, weakTyped.Metadata.Age);
+        Assert.Equal("Hello", component.Metadata.Data);
+        Assert.Equal(42, component.Metadata.Count);
     }
 
     [Fact]
-    public void MetadataFromSingleAttribute()
+    public void MetadataFromReflectedAttribute()
     {
         var builder = new ContainerBuilder();
         builder.RegisterModule(new ScanningModule());
 
-        var weakTyped = builder.Build().Resolve<Lazy<IWeakTypedScenario, INameMetadata>>();
+        var component = builder.Build().Resolve<Lazy<IReflectedComponent, IDataView>>();
 
-        Assert.Equal("Hello", weakTyped.Metadata.Name);
+        Assert.Equal("Hello", component.Metadata.Data);
     }
 
     /// <summary>
@@ -40,8 +40,8 @@ public class AttributedMetadataModuleTests
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterMetadataRegistrationSources();
-            builder.RegisterType<WeakTypedScenario>().As<IWeakTypedScenario>();
-            builder.RegisterType<CombinationalWeakTypedScenario>().As<ICombinationalWeakTypedScenario>();
+            builder.RegisterType<ReflectedComponent>().As<IReflectedComponent>();
+            builder.RegisterType<CombinedComponent>().As<ICombinedComponent>();
         }
     }
 }

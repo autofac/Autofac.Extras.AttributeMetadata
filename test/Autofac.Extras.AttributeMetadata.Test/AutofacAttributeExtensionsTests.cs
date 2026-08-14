@@ -3,7 +3,7 @@
 
 using System.Reflection;
 using Autofac.Builder;
-using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
+using Autofac.Extras.AttributeMetadata.Test.Stubs;
 using Autofac.Features.Metadata;
 using Autofac.Features.Scanning;
 using Autofac.Integration.Mef;
@@ -18,34 +18,34 @@ public class AutofacAttributeExtensionsTests
         // The single registration overload must not make the assembly scanning overload ambiguous.
         var builder = new ContainerBuilder();
         builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-            .As<IWeakTypedScenario>()
+            .As<IReflectedComponent>()
             .WithAttributedMetadata();
 
-        var item = builder.Build().Resolve<Meta<IWeakTypedScenario>>();
+        var item = builder.Build().Resolve<Meta<IReflectedComponent>>();
 
-        Assert.Equal("Hello", item.Metadata["Name"]);
+        Assert.Equal("Hello", item.Metadata["Data"]);
     }
 
     [Fact]
     public void WithAttributedMetadata_GenericTypeRegistration()
     {
         var builder = new ContainerBuilder();
-        builder.RegisterType<WeakTypedScenario>().As<IWeakTypedScenario>().WithAttributedMetadata();
+        builder.RegisterType<ReflectedComponent>().As<IReflectedComponent>().WithAttributedMetadata();
 
-        var item = builder.Build().Resolve<Meta<IWeakTypedScenario>>();
+        var item = builder.Build().Resolve<Meta<IReflectedComponent>>();
 
-        Assert.Equal("Hello", item.Metadata["Name"]);
+        Assert.Equal("Hello", item.Metadata["Data"]);
     }
 
     [Fact]
     public void WithAttributedMetadata_NonGenericTypeRegistration()
     {
         var builder = new ContainerBuilder();
-        builder.RegisterType(typeof(WeakTypedScenario)).As<IWeakTypedScenario>().WithAttributedMetadata();
+        builder.RegisterType(typeof(ReflectedComponent)).As<IReflectedComponent>().WithAttributedMetadata();
 
-        var item = builder.Build().Resolve<Meta<IWeakTypedScenario>>();
+        var item = builder.Build().Resolve<Meta<IReflectedComponent>>();
 
-        Assert.Equal("Hello", item.Metadata["Name"]);
+        Assert.Equal("Hello", item.Metadata["Data"]);
     }
 
     [Fact]
@@ -59,31 +59,31 @@ public class AutofacAttributeExtensionsTests
     [Fact]
     public void WithAttributedMetadata_NullSingleRegistrationBuilder()
     {
-        IRegistrationBuilder<WeakTypedScenario, ConcreteReflectionActivatorData, SingleRegistrationStyle> builder = null!;
+        IRegistrationBuilder<ReflectedComponent, ConcreteReflectionActivatorData, SingleRegistrationStyle> builder = null!;
 
         Assert.Throws<ArgumentNullException>(() => { builder.WithAttributedMetadata(); });
     }
 
     [Fact]
-    public void WithAttributedMetadata_NullTypedMetadataBuilder()
+    public void WithAttributedMetadata_NullTypedViewBuilder()
     {
         IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> builder = null!;
 
-        Assert.Throws<ArgumentNullException>(() => { builder.WithAttributedMetadata<INameAndAgeMetadata>(); });
+        Assert.Throws<ArgumentNullException>(() => { builder.WithAttributedMetadata<IDataAndCountView>(); });
     }
 
     [Fact]
-    public void WithAttributedMetadata_TypedMetadataAssemblyScanning()
+    public void WithAttributedMetadata_TypedViewAssemblyScanning()
     {
         var builder = new ContainerBuilder();
         builder.RegisterMetadataRegistrationSources();
         builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-            .As<IStrongTypedScenario>()
-            .WithAttributedMetadata<INameAndAgeMetadata>();
+            .As<ITypedComponent>()
+            .WithAttributedMetadata<IDataAndCountView>();
 
-        var items = builder.Build().Resolve<IEnumerable<Lazy<IStrongTypedScenario, INameAndAgeMetadata>>>();
+        var items = builder.Build().Resolve<IEnumerable<Lazy<ITypedComponent, IDataAndCountView>>>();
 
-        Assert.Single(items, p => p.Metadata.Name == "Hello" && p.Metadata.Age == 42);
+        Assert.Single(items, p => p.Metadata.Data == "Hello" && p.Metadata.Count == 42);
     }
 
     [Fact]
@@ -93,10 +93,10 @@ public class AutofacAttributeExtensionsTests
         // both the module and the extension target the same registration.
         var builder = new ContainerBuilder();
         builder.RegisterModule<AttributedMetadataModule>();
-        builder.RegisterType<WeakTypedScenario>().As<IWeakTypedScenario>().WithAttributedMetadata();
+        builder.RegisterType<ReflectedComponent>().As<IReflectedComponent>().WithAttributedMetadata();
 
-        var item = builder.Build().Resolve<Meta<IWeakTypedScenario>>();
+        var item = builder.Build().Resolve<Meta<IReflectedComponent>>();
 
-        Assert.Equal("Hello", item.Metadata["Name"]);
+        Assert.Equal("Hello", item.Metadata["Data"]);
     }
 }

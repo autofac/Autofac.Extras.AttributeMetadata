@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Autofac Project. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
+using Autofac.Extras.AttributeMetadata.Test.Stubs;
 using Autofac.Features.Metadata;
 
 namespace Autofac.Extras.AttributeMetadata.Test.Integration;
@@ -9,11 +9,11 @@ namespace Autofac.Extras.AttributeMetadata.Test.Integration;
 public class MetadataProviderTests
 {
     [Fact]
-    public void MetadataFromProviderStrongTyped()
+    public void MetadataFromProviderTypedView()
     {
         var container = BuildContainer();
 
-        var withMetadata = container.Resolve<Meta<IMetadataProviderScenario, ProvidedMetadata>>();
+        var withMetadata = container.Resolve<Meta<IProvidedComponent, ProvidedDataView>>();
 
         Assert.NotNull(withMetadata);
         Assert.NotNull(withMetadata.Metadata);
@@ -22,11 +22,11 @@ public class MetadataProviderTests
     }
 
     [Fact]
-    public void MetadataFromProviderWeakTyped()
+    public void MetadataFromProviderUntypedView()
     {
         var container = BuildContainer();
 
-        var withMetadata = container.Resolve<Meta<IMetadataProviderScenario>>();
+        var withMetadata = container.Resolve<Meta<IProvidedComponent>>();
 
         Assert.NotNull(withMetadata);
         Assert.Equal("Value1", withMetadata.Metadata.FirstOrDefault(kv => kv.Key == "Key1").Value);
@@ -37,7 +37,7 @@ public class MetadataProviderTests
     {
         var builder = new ContainerBuilder();
         builder.RegisterModule<AttributedMetadataModule>();
-        builder.RegisterType<MetadataProviderScenario>().As<IMetadataProviderScenario>();
+        builder.RegisterType<ProvidedComponent>().As<IProvidedComponent>();
 
         return builder.Build();
     }

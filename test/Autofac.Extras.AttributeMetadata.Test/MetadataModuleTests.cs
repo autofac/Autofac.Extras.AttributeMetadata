@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Autofac Project. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
+using Autofac.Extras.AttributeMetadata.Test.Stubs;
 
 namespace Autofac.Extras.AttributeMetadata.Test;
 
@@ -20,7 +20,7 @@ public class MetadataModuleTests
     {
         var module = new UnloadedMetadataModule();
 
-        Assert.Throws<InvalidOperationException>(() => { module.RegisterAttributedType<MetadataModuleScenario>(); });
+        Assert.Throws<InvalidOperationException>(() => { module.RegisterAttributedType<ProgrammaticComponent>(); });
     }
 
     [Fact]
@@ -28,7 +28,7 @@ public class MetadataModuleTests
     {
         var module = new UnloadedMetadataModule();
 
-        Assert.Throws<InvalidOperationException>(() => { module.RegisterAttributedType(typeof(MetadataModuleScenario)); });
+        Assert.Throws<InvalidOperationException>(() => { module.RegisterAttributedType(typeof(ProgrammaticComponent)); });
     }
 
     [Fact]
@@ -36,7 +36,7 @@ public class MetadataModuleTests
     {
         var module = new UnloadedMetadataModule();
 
-        Assert.Throws<InvalidOperationException>(() => { module.RegisterType<MetadataModuleScenario>(new NameMetadata("sid")); });
+        Assert.Throws<InvalidOperationException>(() => { module.RegisterType<ProgrammaticComponent>(new DataView("sid")); });
     }
 
     [Fact]
@@ -44,7 +44,7 @@ public class MetadataModuleTests
     {
         var module = new UnloadedMetadataModule();
 
-        Assert.Throws<InvalidOperationException>(() => { module.RegisterType(typeof(MetadataModuleScenario), new NameMetadata("sid")); });
+        Assert.Throws<InvalidOperationException>(() => { module.RegisterType(typeof(ProgrammaticComponent), new DataView("sid")); });
     }
 
     [Fact]
@@ -52,7 +52,7 @@ public class MetadataModuleTests
     {
         var module = new UnloadedMetadataModule();
 
-        Assert.Throws<ArgumentNullException>(() => { module.RegisterType(null!, new NameMetadata("sid")); });
+        Assert.Throws<ArgumentNullException>(() => { module.RegisterType(null!, new DataView("sid")); });
     }
 
     [Fact]
@@ -60,7 +60,7 @@ public class MetadataModuleTests
     {
         var module = new UnloadedMetadataModule();
 
-        Assert.Throws<ArgumentNullException>(() => { module.RegisterType<MetadataModuleScenario>(null!); });
+        Assert.Throws<ArgumentNullException>(() => { module.RegisterType<ProgrammaticComponent>(null!); });
     }
 
     [Fact]
@@ -68,16 +68,16 @@ public class MetadataModuleTests
     {
         var module = new UnloadedMetadataModule();
 
-        Assert.Throws<ArgumentNullException>(() => { module.RegisterType(typeof(MetadataModuleScenario), null!); });
+        Assert.Throws<ArgumentNullException>(() => { module.RegisterType(typeof(ProgrammaticComponent), null!); });
     }
 
     /// <summary>
     /// A module that is never registered in a container, so the builder it hands to registrar
     /// callers is still unset.
     /// </summary>
-    private sealed class UnloadedMetadataModule : MetadataModule<IMetadataModuleScenario, INameMetadata>
+    private sealed class UnloadedMetadataModule : MetadataModule<IProgrammaticComponent, IDataView>
     {
-        public override void Register(IMetadataRegistrar<IMetadataModuleScenario, INameMetadata> registrar)
+        public override void Register(IMetadataRegistrar<IProgrammaticComponent, IDataView> registrar)
         {
         }
     }

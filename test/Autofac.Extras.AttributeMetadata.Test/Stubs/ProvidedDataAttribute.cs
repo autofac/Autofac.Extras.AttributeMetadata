@@ -3,12 +3,16 @@
 
 using System.ComponentModel.Composition;
 
-namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
+namespace Autofac.Extras.AttributeMetadata.Test.Stubs;
 
-// Supplies its own metadata rather than having its properties reflected over.
+/// <summary>
+/// A metadata attribute that computes its own dictionary through <see cref="IMetadataProvider"/>
+/// instead of having its properties reflected, so the keys it supplies need not correspond to any
+/// property on it.
+/// </summary>
 [MetadataAttribute]
 [AttributeUsage(AttributeTargets.Class)]
-public sealed class ProvidedMetadataAttribute : Attribute, IMetadataProvider
+public sealed class ProvidedDataAttribute : Attribute, IMetadataProvider
 {
     public IDictionary<string, object?> GetMetadata(Type targetType)
     {
