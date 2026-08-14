@@ -63,49 +63,4 @@ public static class AutofacAttributeExtensions
 
         return builder;
     }
-
-    /// <summary>
-    /// Applies attribute-based filtering on constructor dependencies for use with attributes
-    /// derived from the <see cref="ParameterFilterAttribute"/>.
-    /// </summary>
-    /// <typeparam name="TLimit">The type of the registration limit.</typeparam>
-    /// <typeparam name="TReflectionActivatorData">Activator data type.</typeparam>
-    /// <typeparam name="TRegistrationStyle">Registration style type.</typeparam>
-    /// <param name="builder">The registration builder containing registration data.</param>
-    /// <returns>Registration builder allowing the registration to be configured.</returns>
-    /// <exception cref="ArgumentNullException">
-    /// Thrown if <paramref name="builder" /> is <see langword="null" />.
-    /// </exception>
-    /// <remarks>
-    /// <para>
-    /// Apply this extension to component registrations that use attributes
-    /// that derive from the <see cref="ParameterFilterAttribute"/>
-    /// like the <see cref="WithMetadataAttribute"/>
-    /// in their constructors. Doing so will allow the attribute-based filtering to occur. See
-    /// <see cref="WithMetadataAttribute"/> for an
-    /// example on how to use the filter and attribute together.
-    /// </para>
-    /// </remarks>
-    /// <seealso cref="WithMetadataAttribute"/>
-    [Obsolete("Use Autofac.Features.AttributeFilters.RegistrationExtensions.WithAttributeFiltering from the core Autofac library instead.")]
-    public static IRegistrationBuilder<TLimit, TReflectionActivatorData, TRegistrationStyle>
-        WithAttributeFilter<TLimit, TReflectionActivatorData, TRegistrationStyle>(
-            this IRegistrationBuilder<TLimit, TReflectionActivatorData, TRegistrationStyle> builder)
-        where TReflectionActivatorData : ReflectionActivatorData
-    {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
-
-#pragma warning disable CS0618
-        return builder.WithParameter(
-            (p, c) => p.GetCustomAttributes(true).OfType<ParameterFilterAttribute>().Any(),
-            (p, c) =>
-            {
-                var filter = p.GetCustomAttributes(true).OfType<ParameterFilterAttribute>().First();
-                return filter.ResolveParameter(p, c);
-            });
-#pragma warning restore CS0618
-    }
 }

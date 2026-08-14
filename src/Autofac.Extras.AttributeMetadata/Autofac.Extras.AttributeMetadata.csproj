@@ -39,9 +39,6 @@
     <CoreCompileDependsOn>PrepareResources;$(CompileDependsOn)</CoreCompileDependsOn>
   </PropertyGroup>
   <ItemGroup>
-    <Using Include="System.Diagnostics.CodeAnalysis" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\..\build\icon.png" Pack="true" PackagePath="\" />
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
