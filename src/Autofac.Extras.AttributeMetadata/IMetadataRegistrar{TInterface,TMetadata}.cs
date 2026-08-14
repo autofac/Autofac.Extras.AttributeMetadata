@@ -15,7 +15,7 @@ public interface IMetadataRegistrar<in TInterface, in TMetadata>
     /// <summary>
     /// Gets the builder used to build an <see cref="IContainer"/> from component registrations.
     /// </summary>
-    ContainerBuilder ContainerBuilder
+    ContainerBuilder? ContainerBuilder
     {
         get;
     }

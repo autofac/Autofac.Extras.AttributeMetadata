@@ -48,5 +48,5 @@ public abstract class ParameterFilterAttribute : Attribute
     /// <param name="parameter">The specific parameter being resolved that is marked with this attribute.</param>
     /// <param name="context">The component context under which the parameter is being resolved.</param>
     /// <returns>The instance of the object that should be used for the parameter value.</returns>
-    public abstract object ResolveParameter(ParameterInfo parameter, IComponentContext context);
+    public abstract object? ResolveParameter(ParameterInfo parameter, IComponentContext context);
 }

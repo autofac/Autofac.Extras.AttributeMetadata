@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using Autofac.Features.Metadata;
 using Autofac.Features.OwnedInstances;
-using Xunit;
 
 #pragma warning disable CS0618
 

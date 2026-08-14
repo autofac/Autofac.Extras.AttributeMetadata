@@ -109,7 +109,7 @@ public sealed class WithKeyAttribute : ParameterFilterAttribute
     /// <exception cref="System.ArgumentNullException">
     /// Thrown if <paramref name="parameter" /> or <paramref name="context" /> is <see langword="null" />.
     /// </exception>
-    public override object ResolveParameter(ParameterInfo parameter, IComponentContext context)
+    public override object? ResolveParameter(ParameterInfo parameter, IComponentContext context)
     {
         if (parameter == null)
         {

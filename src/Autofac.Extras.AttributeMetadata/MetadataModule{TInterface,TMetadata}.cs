@@ -12,13 +12,18 @@ namespace Autofac.Extras.AttributeMetadata;
 /// <typeparam name="TInterface">Interface used on concrete types of metadata decorated instances.</typeparam>
 /// <typeparam name="TMetadata">Strongly typed metadata definition.</typeparam>
 public abstract class MetadataModule<TInterface, TMetadata> : Module, IMetadataRegistrar<TInterface, TMetadata>
+    where TInterface : notnull
 {
     /// <summary>
     /// Gets the builder used to build an <see cref="IContainer"/> from component registrations.
     /// </summary>
-    public ContainerBuilder ContainerBuilder
+    /// <value>
+    /// The builder used during <see cref="Load"/> that can be used to register types and metadata.
+    /// </value>
+    public ContainerBuilder? ContainerBuilder
     {
-        get; private set;
+        get;
+        private set;
     }
 
     /// <summary>
@@ -35,11 +40,22 @@ public abstract class MetadataModule<TInterface, TMetadata> : Module, IMetadataR
     /// <returns>
     /// The registration for continued configuration.
     /// </returns>
-    public IRegistrationBuilder<TInstance, ConcreteReflectionActivatorData, SingleRegistrationStyle>
-        RegisterType<TInstance>(TMetadata metadata)
+    public IRegistrationBuilder<TInstance, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterType<TInstance>(TMetadata metadata)
         where TInstance : TInterface
-        => ContainerBuilder.RegisterType<TInstance>().As<TInterface>().WithMetadata(
+    {
+        if (metadata is null)
+        {
+            throw new ArgumentNullException(nameof(metadata));
+        }
+
+        if (ContainerBuilder is null)
+        {
+            throw new InvalidOperationException(MetadataModuleResources.ContainerBuilderNotInitialized);
+        }
+
+        return ContainerBuilder.RegisterType<TInstance>().As<TInterface>().WithMetadata(
             MetadataHelper.GetProperties(metadata, typeof(TInstance)));
+    }
 
     /// <summary>
     /// registers provided metadata on the declared type.
@@ -49,10 +65,26 @@ public abstract class MetadataModule<TInterface, TMetadata> : Module, IMetadataR
     /// <returns>
     /// The registration for continued configuration.
     /// </returns>
-    public IRegistrationBuilder<object, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterType(
-        Type instanceType, TMetadata metadata)
-        => ContainerBuilder.RegisterType(instanceType).As<TInterface>().WithMetadata(
+    public IRegistrationBuilder<object, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterType(Type instanceType, TMetadata metadata)
+    {
+        if (instanceType is null)
+        {
+            throw new ArgumentNullException(nameof(instanceType));
+        }
+
+        if (metadata is null)
+        {
+            throw new ArgumentNullException(nameof(metadata));
+        }
+
+        if (ContainerBuilder is null)
+        {
+            throw new InvalidOperationException(MetadataModuleResources.ContainerBuilderNotInitialized);
+        }
+
+        return ContainerBuilder.RegisterType(instanceType).As<TInterface>().WithMetadata(
             MetadataHelper.GetProperties(metadata, instanceType));
+    }
 
     /// <summary>
     /// Registers the provided concrete instance and scans it for generic metadata attribute data.
@@ -61,11 +93,17 @@ public abstract class MetadataModule<TInterface, TMetadata> : Module, IMetadataR
     /// <returns>
     /// The registration for continued configuration.
     /// </returns>
-    public IRegistrationBuilder<TInstance, ConcreteReflectionActivatorData, SingleRegistrationStyle>
-        RegisterAttributedType<TInstance>()
+    public IRegistrationBuilder<TInstance, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterAttributedType<TInstance>()
         where TInstance : TInterface
-        => ContainerBuilder.RegisterType<TInstance>().As<TInterface>().WithMetadata(
+    {
+        if (ContainerBuilder is null)
+        {
+            throw new InvalidOperationException(MetadataModuleResources.ContainerBuilderNotInitialized);
+        }
+
+        return ContainerBuilder.RegisterType<TInstance>().As<TInterface>().WithMetadata(
             MetadataHelper.GetMetadata(typeof(TInstance)));
+    }
 
     /// <summary>
     /// Registers the provided concrete instance type and scans it for generate metadata data.
@@ -74,10 +112,16 @@ public abstract class MetadataModule<TInterface, TMetadata> : Module, IMetadataR
     /// <returns>
     /// The registration for continued configuration.
     /// </returns>
-    public IRegistrationBuilder<object, ConcreteReflectionActivatorData, SingleRegistrationStyle>
-        RegisterAttributedType(Type instanceType)
-        => ContainerBuilder.RegisterType(instanceType).As<TInterface>().WithMetadata(
+    public IRegistrationBuilder<object, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterAttributedType(Type instanceType)
+    {
+        if (ContainerBuilder is null)
+        {
+            throw new InvalidOperationException(MetadataModuleResources.ContainerBuilderNotInitialized);
+        }
+
+        return ContainerBuilder.RegisterType(instanceType).As<TInterface>().WithMetadata(
             MetadataHelper.GetMetadata(instanceType));
+    }
 
     /// <summary>
     /// Standard module method being overridden and sealed to provide wrapped metadata registration.
