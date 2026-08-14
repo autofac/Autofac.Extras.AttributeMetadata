@@ -3,24 +3,26 @@
 
 using System.ComponentModel.Composition;
 
-namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.StrongTypedMetadataAttributeScenario;
+namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
 
+// Implements the metadata view directly, which is what lets the typed WithAttributedMetadata
+// overload find it.
 [MetadataAttribute]
 [AttributeUsage(AttributeTargets.Class)]
-public sealed class StrongTypedScenarioMetadataAttribute : Attribute, IStrongTypedScenarioMetadata
+public sealed class NameAndAgeMetadataAttribute : Attribute, INameAndAgeMetadata
 {
-    public StrongTypedScenarioMetadataAttribute(string name, int age)
+    public NameAndAgeMetadataAttribute(string name, int age)
     {
         Name = name;
         Age = age;
     }
 
-    public string Name
+    public int Age
     {
         get; private set;
     }
 
-    public int Age
+    public string Name
     {
         get; private set;
     }

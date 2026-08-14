@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Autofac Project. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.MetadataModuleScenarioDiscoveryTargets;
+using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
 
 namespace Autofac.Extras.AttributeMetadata.Test;
 
@@ -36,7 +36,7 @@ public class MetadataModuleTests
     {
         var module = new UnloadedMetadataModule();
 
-        Assert.Throws<InvalidOperationException>(() => { module.RegisterType<MetadataModuleScenario>(new MetadataModuleScenarioMetadata("sid")); });
+        Assert.Throws<InvalidOperationException>(() => { module.RegisterType<MetadataModuleScenario>(new NameMetadata("sid")); });
     }
 
     [Fact]
@@ -44,7 +44,7 @@ public class MetadataModuleTests
     {
         var module = new UnloadedMetadataModule();
 
-        Assert.Throws<InvalidOperationException>(() => { module.RegisterType(typeof(MetadataModuleScenario), new MetadataModuleScenarioMetadata("sid")); });
+        Assert.Throws<InvalidOperationException>(() => { module.RegisterType(typeof(MetadataModuleScenario), new NameMetadata("sid")); });
     }
 
     [Fact]
@@ -52,7 +52,7 @@ public class MetadataModuleTests
     {
         var module = new UnloadedMetadataModule();
 
-        Assert.Throws<ArgumentNullException>(() => { module.RegisterType(null!, new MetadataModuleScenarioMetadata("sid")); });
+        Assert.Throws<ArgumentNullException>(() => { module.RegisterType(null!, new NameMetadata("sid")); });
     }
 
     [Fact]
@@ -75,9 +75,9 @@ public class MetadataModuleTests
     /// A module that is never registered in a container, so the builder it hands to registrar
     /// callers is still unset.
     /// </summary>
-    private sealed class UnloadedMetadataModule : MetadataModule<IMetadataModuleScenario, IMetadataModuleScenarioMetadata>
+    private sealed class UnloadedMetadataModule : MetadataModule<IMetadataModuleScenario, INameMetadata>
     {
-        public override void Register(IMetadataRegistrar<IMetadataModuleScenario, IMetadataModuleScenarioMetadata> registrar)
+        public override void Register(IMetadataRegistrar<IMetadataModuleScenario, INameMetadata> registrar)
         {
         }
     }

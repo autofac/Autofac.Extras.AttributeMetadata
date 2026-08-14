@@ -3,8 +3,9 @@
 
 using System.ComponentModel.Composition;
 
-namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.MetadataProviderScenarioTypes;
+namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
 
+// Supplies its own metadata rather than having its properties reflected over.
 [MetadataAttribute]
 [AttributeUsage(AttributeTargets.Class)]
 public sealed class ProvidedMetadataAttribute : Attribute, IMetadataProvider

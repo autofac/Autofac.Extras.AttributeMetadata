@@ -1,10 +1,10 @@
 ﻿// Copyright (c) Autofac Project. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.CombinationalWeakTypedAttributeScenario;
+namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
 
-[CombinationalWeakNameMetadata("Hello")]
-[CombinationalWeakAgeMetadata(42)]
+[NameMetadata("Hello")]
+[AgeMetadata(42)]
 public class CombinationalWeakTypedScenario : ICombinationalWeakTypedScenario
 {
 }

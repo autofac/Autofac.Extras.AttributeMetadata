@@ -3,13 +3,13 @@
 
 using System.ComponentModel.Composition;
 
-namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.WeakTypedMetadataAttributeScenario;
+namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
 
 [MetadataAttribute]
 [AttributeUsage(AttributeTargets.Class)]
-public sealed class WeakTypedScenarioMetadataAttribute : Attribute
+public sealed class NameMetadataAttribute : Attribute
 {
-    public WeakTypedScenarioMetadataAttribute(string name)
+    public NameMetadataAttribute(string name)
     {
         Name = name;
     }

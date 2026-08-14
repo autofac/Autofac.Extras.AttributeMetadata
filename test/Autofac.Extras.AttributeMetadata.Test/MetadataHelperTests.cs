@@ -2,11 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System.ComponentModel.Composition;
-using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.CombinationalWeakTypedAttributeScenario;
-using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.MetadataModuleScenarioDiscoveryTargets;
-using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.MetadataProviderScenarioTypes;
-using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.StrongTypedMetadataAttributeScenario;
-using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.WeakTypedMetadataAttributeScenario;
+using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
 
 namespace Autofac.Extras.AttributeMetadata.Test;
 
@@ -48,7 +44,7 @@ public class MetadataHelperTests
     [Fact]
     public void GetMetadata_TypedMetadataNotFound()
     {
-        var metadata = MetadataHelper.GetMetadata<IMetadataModuleScenarioMetadata>(typeof(MetadataModuleScenario)).ToList();
+        var metadata = MetadataHelper.GetMetadata<INameMetadata>(typeof(MetadataModuleScenario)).ToList();
 
         Assert.Empty(metadata);
     }
@@ -56,13 +52,13 @@ public class MetadataHelperTests
     [Fact]
     public void GetMetadata_TypedMetadataNullTargetType()
     {
-        Assert.Throws<ArgumentNullException>(() => MetadataHelper.GetMetadata<IStrongTypedScenarioMetadata>(null!));
+        Assert.Throws<ArgumentNullException>(() => MetadataHelper.GetMetadata<INameAndAgeMetadata>(null!));
     }
 
     [Fact]
     public void GetMetadata_TypedMetadataOnType()
     {
-        var metadata = MetadataHelper.GetMetadata<IStrongTypedScenarioMetadata>(typeof(StrongTypedScenario)).ToList();
+        var metadata = MetadataHelper.GetMetadata<INameAndAgeMetadata>(typeof(StrongTypedScenario)).ToList();
 
         Assert.Equal(2, metadata.Count);
         Assert.Equal("Hello", metadata.FirstOrDefault(p => p.Key == "Name").Value);
@@ -84,7 +80,7 @@ public class MetadataHelperTests
     [Fact]
     public void GetProperties_NullInstanceType()
     {
-        Assert.Throws<ArgumentNullException>(() => MetadataHelper.GetProperties(new WeakTypedScenarioMetadataAttribute("Hello"), null!));
+        Assert.Throws<ArgumentNullException>(() => MetadataHelper.GetProperties(new NameMetadataAttribute("Hello"), null!));
     }
 
     [Fact]

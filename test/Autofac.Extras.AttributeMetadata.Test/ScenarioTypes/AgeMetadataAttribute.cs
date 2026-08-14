@@ -3,18 +3,18 @@
 
 using System.ComponentModel.Composition;
 
-namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.CombinationalWeakTypedAttributeScenario;
+namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
 
 [MetadataAttribute]
 [AttributeUsage(AttributeTargets.Class)]
-public sealed class CombinationalWeakNameMetadataAttribute : Attribute
+public sealed class AgeMetadataAttribute : Attribute
 {
-    public CombinationalWeakNameMetadataAttribute(string name)
+    public AgeMetadataAttribute(int age)
     {
-        Name = name;
+        Age = age;
     }
 
-    public string Name
+    public int Age
     {
         get; private set;
     }

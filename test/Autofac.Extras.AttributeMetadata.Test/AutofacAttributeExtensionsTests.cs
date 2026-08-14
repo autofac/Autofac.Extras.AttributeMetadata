@@ -3,8 +3,7 @@
 
 using System.Reflection;
 using Autofac.Builder;
-using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.StrongTypedMetadataAttributeScenario;
-using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.WeakTypedMetadataAttributeScenario;
+using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes;
 using Autofac.Features.Metadata;
 using Autofac.Features.Scanning;
 using Autofac.Integration.Mef;
@@ -70,7 +69,7 @@ public class AutofacAttributeExtensionsTests
     {
         IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> builder = null!;
 
-        Assert.Throws<ArgumentNullException>(() => { builder.WithAttributedMetadata<IStrongTypedScenarioMetadata>(); });
+        Assert.Throws<ArgumentNullException>(() => { builder.WithAttributedMetadata<INameAndAgeMetadata>(); });
     }
 
     [Fact]
@@ -80,9 +79,9 @@ public class AutofacAttributeExtensionsTests
         builder.RegisterMetadataRegistrationSources();
         builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
             .As<IStrongTypedScenario>()
-            .WithAttributedMetadata<IStrongTypedScenarioMetadata>();
+            .WithAttributedMetadata<INameAndAgeMetadata>();
 
-        var items = builder.Build().Resolve<IEnumerable<Lazy<IStrongTypedScenario, IStrongTypedScenarioMetadata>>>();
+        var items = builder.Build().Resolve<IEnumerable<Lazy<IStrongTypedScenario, INameAndAgeMetadata>>>();
 
         Assert.Single(items, p => p.Metadata.Name == "Hello" && p.Metadata.Age == 42);
     }
