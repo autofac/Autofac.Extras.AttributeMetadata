@@ -4,34 +4,30 @@
 using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.CombinationalWeakTypedAttributeScenario;
 using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.WeakTypedMetadataAttributeScenario;
 
-namespace Autofac.Extras.AttributeMetadata.Test;
+namespace Autofac.Extras.AttributeMetadata.Test.Integration;
 
-public class WeakTypeAttributedMetadataModuleTestFixture
+public class AttributedMetadataModuleTests
 {
     [Fact]
-    public void Verify_automatic_scanning_with_the_attributed_metadata_module()
+    public void MetadataFromMultipleAttributes()
     {
         var builder = new ContainerBuilder();
         builder.RegisterModule(new WeakTypeAttributedMetadataModule());
 
-        var container = builder.Build();
-
-        var weakTyped = container.Resolve<Lazy<IWeakTypedScenario, IWeakTypedScenarioMetadata>>();
-
-        Assert.Equal("Hello", weakTyped.Metadata.Name);
-    }
-
-    [Fact]
-    public void Verify_automatic_scanning_with_the_multiple_attributions_by_the_module()
-    {
-        var builder = new ContainerBuilder();
-        builder.RegisterModule(new WeakTypeAttributedMetadataModule());
-
-        var container = builder.Build();
-
-        var weakTyped = container.Resolve<Lazy<ICombinationalWeakTypedScenario, ICombinationalWeakTypedScenarioMetadata>>();
+        var weakTyped = builder.Build().Resolve<Lazy<ICombinationalWeakTypedScenario, ICombinationalWeakTypedScenarioMetadata>>();
 
         Assert.Equal("Hello", weakTyped.Metadata.Name);
         Assert.Equal(42, weakTyped.Metadata.Age);
+    }
+
+    [Fact]
+    public void MetadataFromSingleAttribute()
+    {
+        var builder = new ContainerBuilder();
+        builder.RegisterModule(new WeakTypeAttributedMetadataModule());
+
+        var weakTyped = builder.Build().Resolve<Lazy<IWeakTypedScenario, IWeakTypedScenarioMetadata>>();
+
+        Assert.Equal("Hello", weakTyped.Metadata.Name);
     }
 }

@@ -5,14 +5,13 @@ using System.Reflection;
 using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.WeakTypedMetadataAttributeScenario;
 using Autofac.Integration.Mef;
 
-namespace Autofac.Extras.AttributeMetadata.Test;
+namespace Autofac.Extras.AttributeMetadata.Test.Integration;
 
-public class WeakTypedAttributeScenarioTestFixture
+public class WeakTypedAttributeTests
 {
     [Fact]
-    public void Validate_wireup_of_generic_attributes_to_strongly_typed_metadata_on_resolve()
+    public void MetadataFromWeakTypedAttributes()
     {
-        // arrange
         var builder = new ContainerBuilder();
         builder.RegisterMetadataRegistrationSources();
 
@@ -20,10 +19,8 @@ public class WeakTypedAttributeScenarioTestFixture
             .As<IWeakTypedScenario>()
             .WithAttributedMetadata();
 
-        // act
         var items = builder.Build().Resolve<IEnumerable<Lazy<IWeakTypedScenario, IWeakTypedScenarioMetadata>>>();
 
-        // assert
         Assert.Single(items);
         Assert.Single(items, p => p.Metadata.Name == "Hello");
     }

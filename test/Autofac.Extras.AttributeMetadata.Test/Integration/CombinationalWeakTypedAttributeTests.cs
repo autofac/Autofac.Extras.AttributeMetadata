@@ -5,18 +5,14 @@ using System.Reflection;
 using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.CombinationalWeakTypedAttributeScenario;
 using Autofac.Integration.Mef;
 
-namespace Autofac.Extras.AttributeMetadata.Test;
+namespace Autofac.Extras.AttributeMetadata.Test.Integration;
 
-public class CombinationalWeakTypedAttributeScenarioTestFixture
+public class CombinationalWeakTypedAttributeTests
 {
-    /// <summary>
-    /// This is a test that demonstrates the ability to combine multiple weak-typed attributes to
-    /// constitute a single strongly-typed metadata instance resolved from the container.
-    /// </summary>
     [Fact]
-    public void Validate_wireup_of_generic_attributes_to_strongly_typed_metadata_on_resolve()
+    public void MetadataFromMultipleAttributes()
     {
-        // arrange
+        // Several separate weak-typed attributes combine into one strongly-typed metadata instance.
         var builder = new ContainerBuilder();
         builder.RegisterMetadataRegistrationSources();
 
@@ -24,10 +20,8 @@ public class CombinationalWeakTypedAttributeScenarioTestFixture
             .As<ICombinationalWeakTypedScenario>()
             .WithAttributedMetadata();
 
-        // act
         var items = builder.Build().Resolve<IEnumerable<Lazy<ICombinationalWeakTypedScenario, ICombinationalWeakTypedScenarioMetadata>>>();
 
-        // assert
         Assert.Single(items);
         Assert.Single(items, p => p.Metadata.Name == "Hello");
         Assert.Single(items, p => p.Metadata.Age == 42);

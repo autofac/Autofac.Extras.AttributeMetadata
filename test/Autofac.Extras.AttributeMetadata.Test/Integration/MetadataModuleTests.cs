@@ -2,48 +2,61 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.MetadataModuleScenarioDiscoveryTargets;
+using Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.WeakTypedMetadataAttributeScenario;
 
-namespace Autofac.Extras.AttributeMetadata.Test;
+namespace Autofac.Extras.AttributeMetadata.Test.Integration;
 
-public class MetadataModuleTestFixture
+public class MetadataModuleTests
 {
     [Fact]
-    public void Metadata_module_scenario_validate_registration_content()
+    public void MetadataFromAttributedTypeGeneric()
     {
-        // arrange
         var builder = new ContainerBuilder();
+        builder.RegisterModule(new WeakTypedScenarioMetadataModule(true));
 
+        var items = builder.Build().Resolve<IEnumerable<Lazy<IWeakTypedScenario, IWeakTypedScenarioMetadata>>>();
+
+        Assert.Single(items);
+        Assert.Single(items, p => p.Metadata.Name == "Hello");
+    }
+
+    [Fact]
+    public void MetadataFromAttributedTypeNonGeneric()
+    {
+        var builder = new ContainerBuilder();
+        builder.RegisterModule(new WeakTypedScenarioMetadataModule(false));
+
+        var items = builder.Build().Resolve<IEnumerable<Lazy<IWeakTypedScenario, IWeakTypedScenarioMetadata>>>();
+
+        Assert.Single(items);
+        Assert.Single(items, p => p.Metadata.Name == "Hello");
+    }
+
+    [Fact]
+    public void MetadataFromGenericRegistration()
+    {
+        var builder = new ContainerBuilder();
         builder.RegisterModule(new StrongTypedScenarioMetadataModule());
 
-        // act
         var items = builder.Build().Resolve<IEnumerable<Lazy<IMetadataModuleScenario, IMetadataModuleScenarioMetadata>>>();
 
-        // assert
         Assert.Single(items, p => p.Metadata.Name == "sid");
         Assert.Single(items, p => p.Metadata.Name == "nancy");
         Assert.Single(items, p => p.Metadata.Name == "the-cats");
-
-        // the following was not registered
         Assert.DoesNotContain(items, p => p.Metadata.Name == "the-dogs");
     }
 
     [Fact]
-    public void Metadata_module_scenario_using_typeof_registration()
+    public void MetadataFromTypeOfRegistration()
     {
-        // arrange
         var builder = new ContainerBuilder();
-
         builder.RegisterModule(new TypeOfScenarioMetadataModule());
 
-        // act
         var items = builder.Build().Resolve<IEnumerable<Lazy<IMetadataModuleScenario, IMetadataModuleScenarioMetadata>>>();
 
-        // assert
         Assert.Single(items, p => p.Metadata.Name == "sid");
         Assert.Single(items, p => p.Metadata.Name == "nancy");
         Assert.Single(items, p => p.Metadata.Name == "the-cats");
-
-        // the following was not registered
         Assert.DoesNotContain(items, p => p.Metadata.Name == "the-dogs");
     }
 }
