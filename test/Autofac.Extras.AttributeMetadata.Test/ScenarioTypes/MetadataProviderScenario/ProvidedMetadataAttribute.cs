@@ -9,9 +9,9 @@ namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.MetadataProviderSc
 [AttributeUsage(AttributeTargets.Class)]
 public sealed class ProvidedMetadataAttribute : Attribute, IMetadataProvider
 {
-    public IDictionary<string, object> GetMetadata(Type targetType)
+    public IDictionary<string, object?> GetMetadata(Type targetType)
     {
-        return new Dictionary<string, object>()
+        return new Dictionary<string, object?>()
         {
             { "Key1", "Value1" },
             { "Key2", "Value2" },

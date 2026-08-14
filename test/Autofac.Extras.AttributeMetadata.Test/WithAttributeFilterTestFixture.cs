@@ -262,7 +262,7 @@ public class WithAttributeFilterTestFixture
 
     public class IdentifiableObject
     {
-        public string Id
+        public string? Id
         {
             get; set;
         }
@@ -462,7 +462,7 @@ public class WithAttributeFilterTestFixture
             get; internal set;
         }
 
-        public IDictionary<string, object> Metadata
+        public IDictionary<string, object>? Metadata
         {
             get;
         }

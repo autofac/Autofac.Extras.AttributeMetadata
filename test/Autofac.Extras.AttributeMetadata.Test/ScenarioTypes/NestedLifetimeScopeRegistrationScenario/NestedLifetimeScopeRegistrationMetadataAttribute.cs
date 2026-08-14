@@ -9,7 +9,7 @@ namespace Autofac.Extras.AttributeMetadata.Test.ScenarioTypes.NestedLifetimeScop
 [AttributeUsage(AttributeTargets.Class)]
 public sealed class NestedLifetimeScopeRegistrationMetadataAttribute : Attribute
 {
-    public string Value
+    public string? Value
     {
         get; set;
     }
